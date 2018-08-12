@@ -11,6 +11,8 @@
         position: relative;
         padding: 0;
         background-color: lighten($color: $menu-color, $amount: 20%);
+        height:$header-height;
+        line-height: $header-height;
         .trigger {
             position: absolute;
             left: 0;
@@ -18,7 +20,7 @@
             bottom: 0;
             width: 50px;
             cursor: pointer;
-            line-height: 64px;
+            line-height: $header-height;
             color: #fff;
             font-size: 20px;
             background-color: $togger-color;
@@ -68,9 +70,13 @@
                 background-color: lighten($color:$menu-color, $amount: 5%);
                 color: #fff;
                 text-align: center;
-                min-width: 50px;
+                min-width: 80px;
+                max-width: 140px;
                 height: 100%;
-                border: 1px solid #eee;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                border-left: 1px solid darken($color:$menu-color, $amount: 15%);
+                border-right: 1px solid darken($color:$menu-color, $amount: 15%);
                 box-sizing: border-box;
                 cursor: pointer;
                 &:hover {
@@ -84,6 +90,7 @@
                     top: 0;
                     right: 0;
                     color: #ccc;
+                    border-radius: 10px;
                     &:hover {
                         background-color: red;
                     }
@@ -93,7 +100,6 @@
                 }
                 &.active {
                     background-color: darken($color:$menu-color, $amount: 15%);
-                    border-color: rgb(56, 167, 231);
                     &:hover {
                         background-color: darken($color:$menu-color, $amount: 15%);
                     }
@@ -112,7 +118,7 @@
                 right: 0;
                 bottom: 0;
                 width: 40px;
-                line-height: 64px;
+                line-height: $header-height;
                 color: #fff;
                 cursor: pointer;
                 &:hover {

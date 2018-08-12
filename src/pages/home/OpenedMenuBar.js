@@ -1,9 +1,10 @@
 import React from 'react'
-import { Icon, Modal, Popover } from 'antd'
+import { Icon, Modal, Popover, message } from 'antd'
 import { connect } from 'react-redux'
 import { openMenu, closeMenu } from '../../redux/menu.redux'
 import { resetBenchState } from '../../redux/bench.redux'
 
+const stepWidth = 100//步调的像素值
 @connect(
     state => state.menu,
     { openMenu, closeMenu, resetBenchState }
@@ -14,30 +15,21 @@ class OpenedMenuBar extends React.PureComponent {
         this.handleLeft = this.handleLeft.bind(this)
         this.handleRight = this.handleRight.bind(this)
         this.state = {
-            leftEnable: false,
-            rightEnable: false,
             left: 0,
-            menuBarWrap_width:0,
-            menus_width:0,
+            menuBarWrap_width: 0,
+            menus_width: 0,
         }
     }
     componentDidUpdate() {
         //在这里计算菜单总宽度、菜单外容器宽度、菜单内容器left值
-        //当left<0时，left按钮可以使用
-        //菜单总宽度+left值，仍大于菜单外宽度时，right按钮可用
-        let leftEnable, rightEnable
         let menuBarWrap = document.getElementsByClassName('menu-bar-wrap')[0]
         let menuBarWrap_width = menuBarWrap.offsetWidth
-        let menuBarContainer = menuBarWrap.firstChild
-        let left = menuBarContainer.offsetLeft
-        let menus = menuBarContainer.childNodes
+        let menus = menuBarWrap.firstChild.childNodes
         let menus_width = Array.prototype.reduce.call(menus, (total, item) => {
             return total + item.offsetWidth
         }, 0)
-        leftEnable = left < 0
-        rightEnable = menus_width + left > menuBarWrap_width
         this.setState({
-            leftEnable, rightEnable,menuBarWrap_width,menus_width
+            menuBarWrap_width, menus_width
         })
     }
     /**
@@ -87,34 +79,34 @@ class OpenedMenuBar extends React.PureComponent {
         })
     }
     handleLeft() {
-        let { leftEnable, left } = this.state
-        if (leftEnable) {
-            if (left < -100) {
-                left += 100
-                leftEnable = true
-            } else {
-                left = 0
-                leftEnable = false
-            }
-            this.setState({ left,leftEnable })
+        let { left } = this.state
+        if (left === 0) {
+            message.info('左侧已无更多菜单')
+            return
         }
+        if (left < -stepWidth * 1.5) {
+            left += stepWidth
+        } else {
+            left = 0
+        }
+        this.setState({ left })
     }
     handleRight() {
-        let { rightEnable, left ,menuBarWrap_width,menus_width} = this.state
-        if (rightEnable) {
-            let right = menus_width+left-menuBarWrap_width
-            if(right>100){
-                left -=100
-                rightEnable = true
-            }else{
-                left -=right
-                rightEnable = false
-            }
-            this.setState({ left,rightEnable })
+        let { left, menuBarWrap_width, menus_width } = this.state
+        let right = menus_width + left - menuBarWrap_width
+        if (right <= 0) {
+            message.info('右侧已无更多菜单')
+            return
         }
+        if (right > stepWidth * 1.5) {
+            left -= stepWidth
+        } else {
+            left -= right
+        }
+        this.setState({ left })
     }
     render() {
-        const { leftEnable, rightEnable, left } = this.state
+        const { left } = this.state
         return (
             <div className="menu-bar">
                 <div className="menu-bar-wrap">
@@ -126,7 +118,7 @@ class OpenedMenuBar extends React.PureComponent {
                 </div>
                 <div className="menu-bar-ctrl">
                     <Icon type="caret-left"
-                        className={leftEnable ? 'ctrl-enable' : 'ctrl-disable'}
+                        className="ctrl-enable"
                         onClick={this.handleLeft} />
                     <Popover
                         trigger="click"
@@ -136,7 +128,7 @@ class OpenedMenuBar extends React.PureComponent {
                         <Icon type="bars" className="ctrl-enable" />
                     </Popover>
                     <Icon type="caret-right"
-                        className={rightEnable ? 'ctrl-enable' : 'ctrl-disable'}
+                        className="ctrl-enable"
                         onClick={this.handleRight} />
                 </div>
             </div>

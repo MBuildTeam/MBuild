@@ -30,5 +30,10 @@ config.module.rules[1].use[0] = {
 }
 config.plugins.push(new webpack.HotModuleReplacementPlugin())
 config.plugins.push(new webpack.NamedModulesPlugin())
+config.plugins.push(new webpack.DefinePlugin({
+    'process.env': {
+        NODE_ENV: 'mock'
+    }
+}))
 
 module.exports = config

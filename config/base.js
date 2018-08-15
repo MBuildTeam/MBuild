@@ -13,7 +13,8 @@ let config = {
     output: {
         path: path.join(__dirname, '../dist'),
         filename: '[name].[hash].js',
-        chunkFilename: "[name].[hash].js"
+        chunkFilename: "[name].[hash].js",
+        publicPath:''
     },
     optimization: {
         runtimeChunk: {

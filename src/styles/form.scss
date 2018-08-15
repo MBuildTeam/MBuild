@@ -1,0 +1,70 @@
+.flex-form{
+    display:flex;
+    padding: 10px;
+    border-bottom:1px solid #ccc;
+    flex-wrap: wrap;
+    align-items: center;
+    .field{
+        position: relative;
+        display: flex;
+        padding: 5px 10px 20px 5px;
+        align-items: center;
+        .label{
+            width: 70px;
+            font-size: 14px;
+            text-align: right;
+            padding-right:10px;
+            &::after{
+                content:':';
+            }
+        }
+        .input{
+        }
+        .error{
+            position: absolute;
+            bottom:0;
+            left:70px;
+            color:red;
+            font-size: 12px;
+        }
+        .btn{
+            margin: 0 5px;
+        }
+    }
+    .required{
+        .label::before{
+            content:'*';
+            color:red;
+        }
+    }
+    .width-1{
+        flex:0 0 10%;
+    }
+    .width-2{
+        flex:0 0 20%;
+    }
+    .width-3{
+        flex:0 0 30%;
+    }
+    .width-4{
+        flex:0 0 40%;
+    }
+    .width-5{
+        flex:0 0 50%;
+    }
+    .width-6{
+        flex:0 0 60%;
+    }
+    .width-7{
+        flex:0 0 70%;
+    }
+    .width-8{
+        flex:0 0 80%;
+    }
+    .width-9{
+        flex:0 0 90%;
+    }
+    .width-10{
+        flex:0 0 100%;
+    }
+}

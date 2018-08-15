@@ -8,12 +8,8 @@ class Role extends PureComponent {
     render() {
         return (
             <div>
-                <div>
-                    <AddForm />
-                </div>
-                <div>
-                    <RoleTable />
-                </div>
+                <AddForm />
+                <RoleTable />
             </div>
         )
     }

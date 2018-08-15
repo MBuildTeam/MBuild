@@ -92,85 +92,14 @@ export function getMenuList() {
         code: 'bench'
     },
     {
-        icon: 'car',
-        text: 'JSON',
+        icon: 'user',
+        text: '用户管理',
         children: [{
             text: '编辑器',
             code: 'jsoneditor'
         }]
     },
-    {
-        icon: 'coffee',
-        text: 'Demo',
-        children: [{
-            text: '表格',
-            code: 'table'
-        },
-        {
-            text: '树',
-            code: 'tree'
-        },
-        {
-            text: '对话框',
-            code: 'modal'
-        }
-        ]
-    },
-    {
-        icon: 'rocket',
-        text: '动画',
-        children: [{
-            text: '官方教程',
-            code: 'official-animation'
-        },
-        {
-            text: '基础动画',
-            code: 'base-animation'
-        },
-        {
-            text: '动画案例',
-            code: 'example-animation'
-        }
-        ]
-    },
-    {
-        icon: 'compass',
-        text: '拖拽',
-        children: [{
-            text: 'Chess',
-            code: 'chess'
-        },
-        {
-            text: 'Dustbin',
-            code: 'dustbin'
-        },
-        {
-            text: 'DragAround',
-            code: 'dragaround'
-        },
-        {
-            text: 'Nesting',
-            code: 'nesting'
-        },
-        {
-            text: 'Sortable',
-            code: 'sortable'
-        },
-        {
-            text: 'Customize',
-            code: 'customize'
-        },
-        {
-            text: 'Other',
-            code: 'other'
-        }
-        ]
-    },
-    {
-        icon: 'exception',
-        text: '关于',
-        code: 'about'
-    }
+    
     ]
     return dispatch => {
         dispatch(menuList(menus))

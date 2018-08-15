@@ -95,8 +95,8 @@ export function getMenuList() {
         icon: 'user',
         text: '用户管理',
         children: [{
-            text: '编辑器',
-            code: 'jsoneditor'
+            text: '角色',
+            code: 'role'
         }]
     },
     

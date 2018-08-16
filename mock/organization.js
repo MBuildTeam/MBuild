@@ -1,9 +1,15 @@
 let Mock = require('mockjs')
 
-Mock.mock('/orga/list',{
-    "data":[
+Mock.mock('/api/orga/list',{
+    "data|3":[
         {
-            "orga1":"orga1"
+            "ID":"@id",
+            "Name":"@name",
+            "Status|1":[1,2],
+            "Creator":"System",
+            "CreateTime":"@date",
+            "IsManagerPlatform|1":true,
+            "KeyWord":"KeyWord",
         }
     ]
 })

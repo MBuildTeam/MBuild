@@ -1,29 +1,66 @@
 import React, { PureComponent } from 'react'
 import { Table, Divider } from 'antd'
 import { connect } from 'react-redux'
+import { getList } from '../../redux/organization.redux'
 
-class MenuTable extends PureComponent {
-
+@connect(
+  state => state.organization,
+  { getList }
+)
+class OrgaTable extends PureComponent {
+  componentDidMount() {
+    //this.props.getList()
+  }
   render() {
-    const dataSource = [];
     const columns = [{
       title: '名称',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'Name',
+      key: 'Name',
     }, {
-      title: '年龄',
-      dataIndex: 'age',
-      key: 'age',
+      title: '状态',
+      dataIndex: 'Status',
+      key: 'Status',
+      render:text=>{
+        if(text == 1){
+          return (<div>启用</div>)
+        }else
+        if(text == 2){
+          return (<div>不启用</div>)
+        }else{
+          return null
+        }
+      }
     }, {
-      title: '住址',
-      dataIndex: 'address',
-      key: 'address',
+      title: '创建者',
+      dataIndex: 'Creator',
+      key: 'Creator',
+    }, {
+      title: '创建时间',
+      dataIndex: 'CreateTime',
+      key: 'CreateTime',
+    }, {
+      title: '管理平台',
+      dataIndex: 'IsManagerPlatform',
+      key: 'IsManagerPlatform',
+      render:text=>{
+        if(text){
+          return (<div>是</div>)
+        }else{
+          return (<div>否</div>)
+        }
+      }
+    }, {
+      title: '关键字',
+      dataIndex: 'KeyWord',
+      key: 'KeyWord',
     }];
-
-
     return (
-      <Table dataSource={dataSource} columns={columns} pagination={{ pageSize: 10 }} />
+      <Table
+        rowKey={record => record.ID}
+        dataSource={this.props.orgaList}
+        columns={columns}
+        pagination={{ pageSize: 10 }} />
     )
   }
 }
-export default MenuTable
+export default OrgaTable

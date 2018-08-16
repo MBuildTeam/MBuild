@@ -10,6 +10,7 @@ import { getList } from '../../redux/organization.redux'
 class OrgaTable extends PureComponent {
   componentDidMount() {
     //this.props.getList()
+    console.log(1)
   }
   render() {
     const columns = [{

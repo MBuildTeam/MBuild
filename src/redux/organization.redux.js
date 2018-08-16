@@ -9,7 +9,7 @@ const initState = {
 export function organization(state = initState, action) {
     switch (action.type) {
         case GET_LIST: {
-            return { ...state, orgaList: JSON.parse(JSON.stringify(action.payload ))}
+            return { ...state, orgaList: action.payload}
         }
         default:
             return state
@@ -24,7 +24,7 @@ export function getList(params) {
                 dispatch({ type: GET_LIST, payload: res.data.data })
             })
             .catch(e => {
-                //dispatch({ type: GET_LIST, payload: [] })
+                
             })
     }
 }

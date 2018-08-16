@@ -21,15 +21,15 @@ class OrgaTable extends PureComponent {
       title: '状态',
       dataIndex: 'Status',
       key: 'Status',
-      render:text=>{
-        if(text == 1){
+      render: text => {
+        if (text == 1) {
           return (<div>启用</div>)
-        }else
-        if(text == 2){
-          return (<div>不启用</div>)
-        }else{
-          return null
-        }
+        } else
+          if (text == 2) {
+            return (<div>不启用</div>)
+          } else {
+            return null
+          }
       }
     }, {
       title: '创建者',
@@ -43,10 +43,10 @@ class OrgaTable extends PureComponent {
       title: '管理平台',
       dataIndex: 'IsManagerPlatform',
       key: 'IsManagerPlatform',
-      render:text=>{
-        if(text){
+      render: text => {
+        if (text) {
           return (<div>是</div>)
-        }else{
+        } else {
           return (<div>否</div>)
         }
       }
@@ -54,8 +54,22 @@ class OrgaTable extends PureComponent {
       title: '关键字',
       dataIndex: 'KeyWord',
       key: 'KeyWord',
-    }];
+    }, {
+    title: (<div>操作<Divider type="vertical" />
+    <a href="javascript:;">新增</a></div>),
+      key: 'action',
+      render: (text, record) => (
+        <span>
+          <a href="javascript:;">编辑</a>
+          <Divider type="vertical" />
+          <a href="javascript:;">删除</a>
+        </span>
+      )
+    }
+
+    ];
     return (
+
       <Table
         rowKey={record => record.ID}
         dataSource={this.props.orgaList}

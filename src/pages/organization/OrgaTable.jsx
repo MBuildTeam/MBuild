@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Table, Divider } from 'antd'
+import { Table, Divider,Popconfirm } from 'antd'
 import { connect } from 'react-redux'
 import { getList } from '../../redux/organization.redux'
 
@@ -8,9 +8,11 @@ import { getList } from '../../redux/organization.redux'
   { getList }
 )
 class OrgaTable extends PureComponent {
-  componentDidMount() {
-    //this.props.getList()
-    console.log(1)
+  handleAdd = () => {
+
+  }
+  handleDelete = () => {
+
   }
   render() {
     const columns = [{
@@ -55,14 +57,16 @@ class OrgaTable extends PureComponent {
       dataIndex: 'KeyWord',
       key: 'KeyWord',
     }, {
-    title: (<div>操作<Divider type="vertical" />
-    <a href="javascript:;">新增</a></div>),
+      title: (<div>操作<Divider type="vertical" />
+        <a href="javascript:;" onClick={this.handleAdd}>新增</a></div>),
       key: 'action',
       render: (text, record) => (
         <span>
-          <a href="javascript:;">编辑</a>
+          <a href="javascript:;" >编辑</a>
           <Divider type="vertical" />
-          <a href="javascript:;">删除</a>
+          <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(record.key)}>
+            <a href="javascript:;">删除</a>
+          </Popconfirm>
         </span>
       )
     }

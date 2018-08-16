@@ -99,6 +99,11 @@ export function getMenuList() {
         code: 'menu'
     },
     {
+        icon: 'bars',
+        text: '组织机构',
+        code: 'organization'
+    },
+    {
         icon: 'user',
         text: '用户管理',
         children: [{

@@ -1,8 +1,2 @@
 @import '../../styles/var.scss';
-.ant-form {
-    padding: 10px;
-    .ant-form-item {
-        display: flex;
-        justify-content: center;
-    }
-}
+@import '../../styles/search-form.scss';

@@ -19,7 +19,10 @@ class AddForm extends PureComponent {
             <div className="flex-form">
                 <div className="field required width-3">
                     <div className="label">角色名</div>
-                    <Input className="input" value={roleName.value} onChange={e => this.handleChange('roleName', e.target.value)} />
+                    <Input
+                        className={roleName.error?'input input-error':'input'}
+                        value={roleName.value}
+                        onChange={e => this.handleChange('roleName', e.target.value)} />
                     <div className="error">{roleName.error}</div>
                 </div>
                 <div className="field width-5">

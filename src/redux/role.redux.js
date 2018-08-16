@@ -8,7 +8,7 @@ const initState = {
     addForm: {
         roleName: {
             value: '',
-            error: '不能为空',
+            error: '角色名不能为空',
             required: true,
         },
         rights: {

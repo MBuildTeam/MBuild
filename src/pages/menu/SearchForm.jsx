@@ -13,7 +13,6 @@ class SearchForm extends PureComponent {
         });
     }
     handleReset = () => {
-        console.log(this.props.form)
         this.props.form.resetFields();
     }
     render() {

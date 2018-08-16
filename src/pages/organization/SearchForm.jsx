@@ -9,39 +9,48 @@ class SearchForm extends PureComponent {
     handleSearch = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-            console.log('Received values of form: ', values);
-        });
+            console.log('Received values of form: ', values)
+        })
     }
     handleReset = () => {
-        console.log(this.props.form)
-        this.props.form.resetFields();
+        this.props.form.resetFields()
     }
     render() {
-        const { getFieldDecorator } = this.props.form;
+        const { getFieldDecorator } = this.props.form
         return (
             <Form className="search-form" onSubmit={this.handleSearch}>
                 <Row gutter={16}>
-                    <Col span={8}>
-                        <Item label="菜单名">
+                    <Col span={6}>
+                        <Item label="名称">
                             {getFieldDecorator('Name')(
                                 <Input />
                             )}
                         </Item>
                     </Col>
-                    <Col span={8}>
-                        <Item label="URL">
-                            {getFieldDecorator('Url')(
-                                <Input />
-                            )}
-                        </Item>
-                    </Col>
-                    <Col span={8}>
+                    <Col span={6}>
                         <Item label="状态">
                             {getFieldDecorator('Status')(
                                 <RadioGroup>
                                     <Radio value="1">启用</Radio>
                                     <Radio value="2">不启用</Radio>
                                 </RadioGroup>
+                            )}
+                        </Item>
+                    </Col>
+                    <Col span={6}>
+                        <Item label="管理平台">
+                            {getFieldDecorator('IsManagerPlatform')(
+                                <RadioGroup>
+                                    <Radio value={true}>是</Radio>
+                                    <Radio value={false}>否</Radio>
+                                </RadioGroup>
+                            )}
+                        </Item>
+                    </Col>
+                    <Col span={6}>
+                        <Item label="关键字">
+                            {getFieldDecorator('KeyWord')(
+                                <Input />
                             )}
                         </Item>
                     </Col>

@@ -1,0 +1,21 @@
+@import '../../styles/var.scss';
+@import '../../styles/antd-adjust.scss';
+
+.search-form {
+    .field{
+        display:flex;
+        align-items: center;
+        height:48px;
+        .label{
+            min-width:60px;
+            text-align: right;
+            &::after{
+                content:':';
+                padding:0 5px;
+            }
+        }
+        .input{
+
+        }
+    }
+}

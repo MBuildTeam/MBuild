@@ -92,6 +92,11 @@ export function getMenuList() {
         code: 'bench'
     },
     {
+        icon: 'bars',
+        text: '菜单',
+        code: 'menu'
+    },
+    {
         icon: 'user',
         text: '用户管理',
         children: [{

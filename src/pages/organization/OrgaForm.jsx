@@ -1,10 +1,31 @@
 import React, { PureComponent } from 'react'
 import { Form, Input, Radio } from 'antd'
-// import { connect } from 'react-redux'
 
 const RadioGroup = Radio.Group
 const { Item, create } = Form
-@create()
+@create({
+    mapPropsToFields(props) {
+        if (props.formType === 'edit') {
+            return {
+                ID: Form.createFormField({
+                    value: props.formData.ID
+                }),
+                Name: Form.createFormField({
+                    value: props.formData.Name
+                }),
+                Status: Form.createFormField({
+                    value: props.formData.Status
+                }),
+                IsManagerPlatform: Form.createFormField({
+                    value: props.formData.IsManagerPlatform
+                }),
+                KeyWord: Form.createFormField({
+                    value: props.formData.KeyWord
+                }),
+            }
+        }
+    }
+})
 class OrgaForm extends PureComponent {
     render() {
         const formItemLayout = {
@@ -17,9 +38,17 @@ class OrgaForm extends PureComponent {
                 sm: { span: 18 },
             },
         }
-        const { getFieldDecorator } = this.props.form
+        const { formType,form } = this.props
+        const { getFieldDecorator } = form
         return (
             <Form>
+                {
+                    formType === 'edit' ? <Item>
+                        {getFieldDecorator('ID')(
+                            <Input type="hidden" />
+                        )}
+                    </Item> : null
+                }
                 <Item
                     {...formItemLayout}
                     label="名称"
@@ -44,8 +73,8 @@ class OrgaForm extends PureComponent {
                         }],
                     })(
                         <RadioGroup>
-                            <Radio value="1">启用</Radio>
-                            <Radio value="2">不启用</Radio>
+                            <Radio value={1}>启用</Radio>
+                            <Radio value={2}>不启用</Radio>
                         </RadioGroup>
                     )}
                 </Item>

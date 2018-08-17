@@ -11,11 +11,11 @@ import OrgaForm from './OrgaForm'
 )
 class OrgaModal extends PureComponent {
     handleSubmit = () => {
-        let form=this.refs.orgaForm
+        let form = this.refs.orgaForm
         form.validateFields((err, values) => {
-          if(!err){
-            console.log(values)
-          }
+            if (!err) {
+                console.log(values)
+            }
         })
     }
     render() {
@@ -30,7 +30,7 @@ class OrgaModal extends PureComponent {
                 onOk={this.handleSubmit}
                 onCancel={() => { this.props.handleModalForm(formType, false) }}
             >
-                <OrgaForm formType={formType} formData={formData} ref="orgaForm"/>
+                <OrgaForm formType={formType} formData={formData} ref="orgaForm" />
             </Modal>
         )
     }

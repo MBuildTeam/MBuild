@@ -6,23 +6,13 @@ const { Item, create } = Form
 @create({
     mapPropsToFields(props) {
         if (props.formType === 'edit') {
-            return {
-                ID: Form.createFormField({
-                    value: props.formData.ID
-                }),
-                Name: Form.createFormField({
-                    value: props.formData.Name
-                }),
-                Status: Form.createFormField({
-                    value: props.formData.Status
-                }),
-                IsManagerPlatform: Form.createFormField({
-                    value: props.formData.IsManagerPlatform
-                }),
-                KeyWord: Form.createFormField({
-                    value: props.formData.KeyWord
-                }),
+            let fields = {}
+            for (let key in props.formData) {
+                fields[key] = Form.createFormField({
+                    value: props.formData[key]
+                })
             }
+            return fields
         }
     }
 })
@@ -38,7 +28,7 @@ class OrgaForm extends PureComponent {
                 sm: { span: 18 },
             },
         }
-        const { formType,form } = this.props
+        const { formType, form } = this.props
         const { getFieldDecorator } = form
         return (
             <Form>

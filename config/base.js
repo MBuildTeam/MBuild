@@ -40,7 +40,7 @@ let config = {
                     presets: [['env'], "stage-0", 'react'],
                     plugins: [
                         'react-hot-loader/babel',
-                        "syntax-dynamic-import",
+                        //"syntax-dynamic-import",
                         'transform-decorators-legacy',
                         'lodash',
                         [

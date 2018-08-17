@@ -12,4 +12,6 @@ config.plugins.push(new CleanWebpackPlugin(path.resolve(__dirname, '../dist'), {
     verbose: true
 }))
 
+config.module.rules[0].options.plugins.push("syntax-dynamic-import")
+
 module.exports = config

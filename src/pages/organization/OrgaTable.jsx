@@ -1,15 +1,15 @@
 import React, { PureComponent } from 'react'
-import { Table, Divider,Popconfirm } from 'antd'
+import { Table, Divider, Popconfirm } from 'antd'
 import { connect } from 'react-redux'
-import { getList } from '../../redux/organization.redux'
+import { getList, handleModalForm } from '../../redux/organization.redux'
 
 @connect(
   state => state.organization,
-  { getList }
+  { getList, handleModalForm }
 )
 class OrgaTable extends PureComponent {
-  handleAdd = () => {
-
+  handleInfo = (type, open, data) => {
+    this.props.handleModalForm(type, open, data)
   }
   handleDelete = () => {
 
@@ -58,11 +58,11 @@ class OrgaTable extends PureComponent {
       key: 'KeyWord',
     }, {
       title: (<div>操作<Divider type="vertical" />
-        <a href="javascript:;" onClick={this.handleAdd}>新增</a></div>),
+        <a href="javascript:;" onClick={() => this.handleInfo('add', true)}>新增</a></div>),
       key: 'action',
       render: (text, record) => (
         <span>
-          <a href="javascript:;" >编辑</a>
+          <a href="javascript:;" onClick={() => this.handleInfo('edit', true, record)}>编辑</a>
           <Divider type="vertical" />
           <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(record.key)}>
             <a href="javascript:;">删除</a>
@@ -73,7 +73,6 @@ class OrgaTable extends PureComponent {
 
     ];
     return (
-
       <Table
         rowKey={record => record.ID}
         dataSource={this.props.orgaList}

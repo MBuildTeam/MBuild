@@ -4,7 +4,7 @@
 const path = require("path")
 const HTMLWebpackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-var LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 
 let config = {
     entry: {
@@ -40,7 +40,7 @@ let config = {
                     presets: [['env'], "stage-0", 'react'],
                     plugins: [
                         'react-hot-loader/babel',
-                        //"syntax-dynamic-import",
+                        "syntax-dynamic-import",
                         'transform-decorators-legacy',
                         'lodash',
                         [
@@ -105,9 +105,12 @@ let config = {
             template: path.join(__dirname, '../public/index.html')
         }),
         new MiniCssExtractPlugin({
-            filename: "[name]-[hash].css"
+            filename: "[name].[hash].css"
         }),
-        new LodashModuleReplacementPlugin(),
+        new LodashModuleReplacementPlugin({
+            'collections': true,
+            'paths': true
+          }),
     ],
     resolve: {
         modules: [

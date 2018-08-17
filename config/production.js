@@ -3,6 +3,7 @@
  */
 let config = require('./base.js')
 const path = require('path')
+const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 config.mode = 'production'
@@ -11,7 +12,8 @@ config.plugins.push(new CleanWebpackPlugin(path.resolve(__dirname, '../dist'), {
     root: path.resolve(__dirname, '../'),
     verbose: true
 }))
-
-config.module.rules[0].options.plugins.push("syntax-dynamic-import")
+config.plugins.push(new webpack.DefinePlugin({
+    'USE_MOCK':false
+}))
 
 module.exports = config

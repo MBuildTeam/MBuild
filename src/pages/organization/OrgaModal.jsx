@@ -1,20 +1,26 @@
 import React, { PureComponent } from 'react'
 import { Modal } from 'antd'
 import { connect } from 'react-redux'
-import { handleModalForm } from '../../redux/organization.redux'
+import { handleModalForm, addOrga, editOrga } from '../../redux/organization.redux'
 import OrgaForm from './OrgaForm'
 
 
 @connect(
     state => state.organization,
-    { handleModalForm }
+    { handleModalForm, addOrga, editOrga }
 )
 class OrgaModal extends PureComponent {
     handleSubmit = () => {
-        let form = this.refs.orgaForm
+        const form = this.refs.orgaForm
+        const { formType,addOrga,editOrga } = this.props
         form.validateFields((err, values) => {
             if (!err) {
                 console.log(values)
+                if (formType === 'add') {
+                    addOrga(values)
+                } else if (formType === 'edit') {
+                    editOrga(values)
+                }
             }
         })
     }

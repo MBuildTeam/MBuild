@@ -1,13 +1,21 @@
 USE_MOCK && require('../../mock/organization')
+
 import axios from 'axios'
+import _ from 'lodash'
+
 const GET_LIST = 'GET_LIST'
 const HANDLE_MODAL_FORM = 'HANDLE_MODAL_FORM'
+const ADD_INFO = 'ADD_INFO'
+const EDIT_INFO = 'EDIT_INFO'
+const DELETE_INFO = 'DELETE_INFO'
+const SHOW_MSG = 'SHOW_MSG'
 
 const initState = {
     modalOpen: false,
     formType: 'add',
     formData: {},
-    orgaList: []
+    orgaList: [],
+    msg: ''
 }
 
 export function organization(state = initState, action) {
@@ -23,17 +31,32 @@ export function organization(state = initState, action) {
                 formData: action.formData
             }
         }
+        case ADD_INFO: {
+            return {
+                ...state,
+                modalOpen: false,
+                orgaList: state.orgaList.concat(action.data)
+            }
+        }
+        case DELETE_INFO:{
+
+            return {
+                ...state,
+                //orgaList:
+            }
+        }
         default:
             return state
     }
 }
 
 export function getList(params) {
+    console.log(params)
     return dispatch => {
-        axios.get('/api/orga/list')
+        axios.post('/api/orga/list', params)
             .then(res => {
-                console.log(res.data.data)
-                dispatch({ type: GET_LIST, payload: res.data.data })
+                console.log(res.data)
+                dispatch({ type: GET_LIST, payload: res.data })
             })
             .catch(e => {
 
@@ -41,7 +64,57 @@ export function getList(params) {
     }
 }
 
-
 export function handleModalForm(formType, modalOpen, formData) {
     return { type: 'HANDLE_MODAL_FORM', formType, modalOpen, formData }
+}
+
+export function addOrga(info) {
+    return dispatch => {
+        axios.post('/api/orga/add', info)
+            .then(res => {
+                const { code, msg, data } = res.data
+                if (code == 1) {
+                    dispatch({ type: ADD_INFO, msg, data })
+                } else {
+                    dispatch({ type: SHOW_MSG, msg })
+                }
+            })
+            .catch(e => {
+
+            })
+    }
+}
+
+export function editOrga(info) {
+    return dispatch => {
+        axios.post('/api/orga/edit', info)
+            .then(res => {
+                const { code, msg, data } = res.data
+                if (code == 1) {
+                    dispatch({ type: EDIT_INFO, msg, data })
+                } else {
+                    dispatch({ type: SHOW_MSG, msg })
+                }
+            })
+            .catch(e => {
+
+            })
+    }
+}
+
+export function deleteOrga(ID) {
+    return dispatch => {
+        axios.post('/api/orga/delete', { ID })
+            .then(res => {
+                const { code, msg } = res.data
+                if (code == 1) {
+                    dispatch({ type: DELETE_INFO, msg, ID })
+                } else {
+                    dispatch({ type: SHOW_MSG, msg })
+                }
+            })
+            .catch(e => {
+
+            })
+    }
 }

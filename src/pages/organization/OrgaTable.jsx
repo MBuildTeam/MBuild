@@ -11,8 +11,8 @@ class OrgaTable extends PureComponent {
   handleInfo = (type, open, data) => {
     this.props.handleModalForm(type, open, data)
   }
-  handleDelete = () => {
-
+  handleDelete = (id) => {
+    alert(id)
   }
   render() {
     const columns = [{
@@ -64,7 +64,7 @@ class OrgaTable extends PureComponent {
         <span>
           <a href="javascript:;" onClick={() => this.handleInfo('edit', true, record)}>编辑</a>
           <Divider type="vertical" />
-          <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(record.key)}>
+          <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(record.ID)}>
             <a href="javascript:;">删除</a>
           </Popconfirm>
         </span>
@@ -77,7 +77,7 @@ class OrgaTable extends PureComponent {
         rowKey={record => record.ID}
         dataSource={this.props.orgaList}
         columns={columns}
-        pagination={{ pageSize: 10 }} />
+        pagination={{ pageSize: 2 }} />
     )
   }
 }

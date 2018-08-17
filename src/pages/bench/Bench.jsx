@@ -1,11 +1,12 @@
 import React from 'react'
-import SearchForm from './SearchForm'
+import AddForm from './AddForm'
+import './bench.scss'
 
 class Bench extends React.Component {
     render() {
         return (
             <div>
-                <SearchForm />
+                <AddForm />
             </div>
         )
     }

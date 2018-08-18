@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import SearchForm from './SearchForm'
-import OrgaTable from './OrgaTable'
-import OrgaModal from './OrgaModal'
+import DataTable from './DataTable'
+import FormModal from './FormModal'
 
 import './Organization.scss'
 
@@ -10,8 +10,8 @@ class Organization extends PureComponent {
         return (
             <div>
                 <SearchForm />
-                <OrgaTable />
-                <OrgaModal />
+                <DataTable />
+                <FormModal />
             </div>
         )
     }

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import SearchForm from './SearchForm'
-import RoleTable from './RoleTable'
-import RoleModal from './RoleModal'
+import DataTable from './DataTable'
+import FormModal from './FormModal'
 
 import './Role.scss'
 
@@ -10,8 +10,8 @@ class Role extends PureComponent {
         return (
             <div>
                 <SearchForm />
-                <RoleTable />
-                <RoleModal />
+                <DataTable />
+                <FormModal />
             </div>
         )
     }

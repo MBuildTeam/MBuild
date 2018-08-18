@@ -16,7 +16,7 @@ const { Item, create } = Form
         }
     }
 })
-class OrgaForm extends PureComponent {
+class InfoForm extends PureComponent {
     render() {
         const formItemLayout = {
             labelCol: {
@@ -101,4 +101,4 @@ class OrgaForm extends PureComponent {
         )
     }
 }
-export default OrgaForm
+export default InfoForm

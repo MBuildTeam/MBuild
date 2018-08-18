@@ -2,16 +2,16 @@ import React, { PureComponent } from 'react'
 import { Modal } from 'antd'
 import { connect } from 'react-redux'
 import { handleModalForm, addOrga, editOrga } from '../../redux/organization.redux'
-import OrgaForm from './OrgaForm'
+import InfoForm from './InfoForm'
 
 
 @connect(
     state => state.organization,
     { handleModalForm, addOrga, editOrga }
 )
-class OrgaModal extends PureComponent {
+class FormModal extends PureComponent {
     handleSubmit = () => {
-        const form = this.refs.orgaForm
+        const form = this.refs.infoForm
         const { formType,addOrga,editOrga } = this.props
         form.validateFields((err, values) => {
             if (!err) {
@@ -35,9 +35,9 @@ class OrgaModal extends PureComponent {
                 onOk={this.handleSubmit}
                 onCancel={() => { this.props.handleModalForm(formType, false) }}
             >
-                <OrgaForm formType={formType} formData={formData} ref="orgaForm" />
+                <InfoForm formType={formType} formData={formData} ref="infoForm" />
             </Modal>
         )
     }
 }
-export default OrgaModal
+export default FormModal

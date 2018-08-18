@@ -7,7 +7,7 @@ import { getList, handleModalForm,deleteOrga } from '../../redux/organization.re
   state => state.organization,
   { getList, handleModalForm,deleteOrga }
 )
-class OrgaTable extends PureComponent {
+class DataTable extends PureComponent {
   handleInfo = (type, open, data) => {
     this.props.handleModalForm(type, open, data)
   }
@@ -81,4 +81,4 @@ class OrgaTable extends PureComponent {
     )
   }
 }
-export default OrgaTable
+export default DataTable

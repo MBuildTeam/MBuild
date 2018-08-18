@@ -23,6 +23,7 @@ const initState = {
 export function organization(state = initState, action) {
     switch (action.type) {
         case SEARCH_FORM:{
+            console.log('orga')
             return {
                 ...state,
                 searchForm:action.data

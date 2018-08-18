@@ -4,7 +4,7 @@ const getParam = require('../common/common').getParam
 
 let arr = [{
     ID: Mock.Random.id(),
-    Name: "基础数据1",
+    Name: "组织1",
     Status: 1,
     Creator: "System",
     CreateTime: Mock.Random.date(),
@@ -12,7 +12,7 @@ let arr = [{
     KeyWord: "KeyWord",
 },{
     ID: Mock.Random.id(),
-    Name: "基础数据2",
+    Name: "组织2",
     Status: 1,
     Creator: "System",
     CreateTime: Mock.Random.date(),

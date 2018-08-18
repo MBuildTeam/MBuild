@@ -109,6 +109,9 @@ export function getMenuList() {
         children: [{
             text: '角色',
             code: 'role'
+        },{
+            text: '权限',
+            code: 'rights'
         }]
     },
     

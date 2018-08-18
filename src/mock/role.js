@@ -4,13 +4,13 @@ const getParam = require('../common/common').getParam
 
 let arr = [{
     ID: Mock.Random.id(),
-    Name: "基础数据1",
+    Name: "角色1",
     Creator: "System",
     CreateTime: Mock.Random.date(),
     rights:''
 },{
     ID: Mock.Random.id(),
-    Name: "基础数据2",
+    Name: "角色2",
     Creator: "System",
     CreateTime: Mock.Random.date(),
     rights:''

@@ -23,6 +23,7 @@ const initState = {
 export function rights(state = initState, action) {
     switch (action.type) {
         case SEARCH_FORM: {
+            console.log('rights')
             return {
                 ...state,
                 searchForm: action.data

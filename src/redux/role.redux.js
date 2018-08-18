@@ -23,6 +23,7 @@ const initState = {
 export function role(state = initState, action) {
     switch (action.type) {
         case SEARCH_FORM: {
+            console.log('role')
             return {
                 ...state,
                 searchForm: action.data

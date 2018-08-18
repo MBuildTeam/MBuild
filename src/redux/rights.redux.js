@@ -22,10 +22,10 @@ const initState = {
 
 export function rights(state = initState, action) {
     switch (action.type) {
-        case SEARCH_FORM:{
+        case SEARCH_FORM: {
             return {
                 ...state,
-                searchForm:action.data
+                searchForm: action.data
             }
         }
         case GET_LIST: {

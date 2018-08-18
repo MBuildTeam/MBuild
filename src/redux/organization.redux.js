@@ -3,13 +3,13 @@ USE_MOCK && require('../mock/organization')
 import axios from 'axios'
 import _ from 'lodash'
 
-const SEARCH_FORM = 'SEARCH_FORM'
-const GET_LIST = 'GET_LIST'
-const HANDLE_MODAL_FORM = 'HANDLE_MODAL_FORM'
-const ADD_INFO = 'ADD_INFO'
-const EDIT_INFO = 'EDIT_INFO'
-const DELETE_INFO = 'DELETE_INFO'
-const SHOW_MSG = 'SHOW_MSG'
+const ORGA_SEARCH_FORM = 'ORGA_SEARCH_FORM'
+const ORGA_GET_LIST = 'ORGA_GET_LIST'
+const ORGA_HANDLE_MODAL_FORM = 'ORGA_HANDLE_MODAL_FORM'
+const ORGA_ADD_INFO = 'ORGA_ADD_INFO'
+const ORGA_EDIT_INFO = 'ORGA_EDIT_INFO'
+const ORGA_DELETE_INFO = 'ORGA_DELETE_INFO'
+const ORGA_SHOW_MSG = 'ORGA_SHOW_MSG'
 
 const initState = {
     searchForm: {},
@@ -22,17 +22,16 @@ const initState = {
 
 export function organization(state = initState, action) {
     switch (action.type) {
-        case SEARCH_FORM:{
-            console.log('orga')
+        case ORGA_SEARCH_FORM:{
             return {
                 ...state,
                 searchForm:action.data
             }
         }
-        case GET_LIST: {
+        case ORGA_GET_LIST: {
             return { ...state, orgaList: action.payload }
         }
-        case HANDLE_MODAL_FORM: {
+        case ORGA_HANDLE_MODAL_FORM: {
             return {
                 ...state,
                 formType: action.formType,
@@ -40,7 +39,7 @@ export function organization(state = initState, action) {
                 formData: action.formData
             }
         }
-        case ADD_INFO: {
+        case ORGA_ADD_INFO: {
             let orgaList = _.cloneDeep(state.orgaList)
             orgaList.push(action.data)
             return {
@@ -49,7 +48,7 @@ export function organization(state = initState, action) {
                 orgaList: orgaList
             }
         }
-        case EDIT_INFO: {
+        case ORGA_EDIT_INFO: {
             let orgaList = _.cloneDeep(state.orgaList)
             let toUpdate = _.find(orgaList, item => (item.ID === action.data.ID))
             _.assign(toUpdate, action.data)
@@ -59,7 +58,7 @@ export function organization(state = initState, action) {
                 orgaList: orgaList
             }
         }
-        case DELETE_INFO: {
+        case ORGA_DELETE_INFO: {
             let orgaList = _.cloneDeep(state.orgaList)
             _.remove(orgaList, item => item.ID === action.ID)
             return {
@@ -74,10 +73,10 @@ export function organization(state = initState, action) {
 
 export function getList(params) {
     return dispatch => {
-        dispatch({ type: SEARCH_FORM, data: params })
+        dispatch({ type: ORGA_SEARCH_FORM, data: params })
         axios.get('/api/orga/list', { params })
             .then(res => {
-                dispatch({ type: GET_LIST, payload: res.data })
+                dispatch({ type: ORGA_GET_LIST, payload: res.data })
             })
             .catch(e => {
 
@@ -86,7 +85,7 @@ export function getList(params) {
 }
 
 export function handleModalForm(formType, modalOpen, formData) {
-    return { type: 'HANDLE_MODAL_FORM', formType, modalOpen, formData }
+    return { type: ORGA_HANDLE_MODAL_FORM, formType, modalOpen, formData }
 }
 
 export function addInfo(info) {
@@ -95,9 +94,9 @@ export function addInfo(info) {
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 1) {
-                    dispatch({ type: ADD_INFO, msg, data })
+                    dispatch({ type: ORGA_ADD_INFO, msg, data })
                 } else {
-                    dispatch({ type: SHOW_MSG, msg })
+                    dispatch({ type: ORGA_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -112,9 +111,9 @@ export function editInfo(info) {
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 1) {
-                    dispatch({ type: EDIT_INFO, msg, data })
+                    dispatch({ type: ORGA_EDIT_INFO, msg, data })
                 } else {
-                    dispatch({ type: SHOW_MSG, msg })
+                    dispatch({ type: ORGA_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -129,9 +128,9 @@ export function deleteInfo(ID) {
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 1) {
-                    dispatch({ type: DELETE_INFO, msg, ID })
+                    dispatch({ type: ORGA_DELETE_INFO, msg, ID })
                 } else {
-                    dispatch({ type: SHOW_MSG, msg })
+                    dispatch({ type: ORGA_SHOW_MSG, msg })
                 }
             })
             .catch(e => {

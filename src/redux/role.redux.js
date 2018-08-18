@@ -3,13 +3,13 @@ USE_MOCK && require('../mock/role')
 import axios from 'axios'
 import _ from 'lodash'
 
-const SEARCH_FORM = 'SEARCH_FORM'
-const GET_LIST = 'GET_LIST'
-const HANDLE_MODAL_FORM = 'HANDLE_MODAL_FORM'
-const ADD_INFO = 'ADD_INFO'
-const EDIT_INFO = 'EDIT_INFO'
-const DELETE_INFO = 'DELETE_INFO'
-const SHOW_MSG = 'SHOW_MSG'
+const ROLE_SEARCH_FORM = 'ROLE_SEARCH_FORM'
+const ROLE_GET_LIST = 'ROLE_GET_LIST'
+const ROLE_HANDLE_MODAL_FORM = 'ROLE_HANDLE_MODAL_FORM'
+const ROLE_ADD_INFO = 'ROLE_ADD_INFO'
+const ROLE_EDIT_INFO = 'ROLE_EDIT_INFO'
+const ROLE_DELETE_INFO = 'ROLE_DELETE_INFO'
+const ROLE_SHOW_MSG = 'ROLE_SHOW_MSG'
 
 const initState = {
     searchForm: {},
@@ -22,17 +22,16 @@ const initState = {
 
 export function role(state = initState, action) {
     switch (action.type) {
-        case SEARCH_FORM: {
-            console.log('role')
+        case ROLE_SEARCH_FORM: {
             return {
                 ...state,
                 searchForm: action.data
             }
         }
-        case GET_LIST: {
+        case ROLE_GET_LIST: {
             return { ...state, orgaList: action.payload }
         }
-        case HANDLE_MODAL_FORM: {
+        case ROLE_HANDLE_MODAL_FORM: {
             return {
                 ...state,
                 formType: action.formType,
@@ -40,7 +39,7 @@ export function role(state = initState, action) {
                 formData: action.formData
             }
         }
-        case ADD_INFO: {
+        case ROLE_ADD_INFO: {
             let orgaList = _.cloneDeep(state.orgaList)
             orgaList.push(action.data)
             return {
@@ -49,7 +48,7 @@ export function role(state = initState, action) {
                 orgaList: orgaList
             }
         }
-        case EDIT_INFO: {
+        case ROLE_EDIT_INFO: {
             let orgaList = _.cloneDeep(state.orgaList)
             let toUpdate = _.find(orgaList, item => (item.ID === action.data.ID))
             _.assign(toUpdate, action.data)
@@ -59,7 +58,7 @@ export function role(state = initState, action) {
                 orgaList: orgaList
             }
         }
-        case DELETE_INFO: {
+        case ROLE_DELETE_INFO: {
             let orgaList = _.cloneDeep(state.orgaList)
             _.remove(orgaList, item => item.ID === action.ID)
             return {
@@ -74,10 +73,10 @@ export function role(state = initState, action) {
 
 export function getList(params) {
     return dispatch => {
-        dispatch({ type: SEARCH_FORM, data: params })
+        dispatch({ type: ROLE_SEARCH_FORM, data: params })
         axios.get('/api/role/list', { params })
             .then(res => {
-                dispatch({ type: GET_LIST, payload: res.data })
+                dispatch({ type: ROLE_GET_LIST, payload: res.data })
             })
             .catch(e => {
 
@@ -86,7 +85,7 @@ export function getList(params) {
 }
 
 export function handleModalForm(formType, modalOpen, formData) {
-    return { type: 'HANDLE_MODAL_FORM', formType, modalOpen, formData }
+    return { type: ROLE_HANDLE_MODAL_FORM, formType, modalOpen, formData }
 }
 
 export function addInfo(info) {
@@ -95,9 +94,9 @@ export function addInfo(info) {
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 1) {
-                    dispatch({ type: ADD_INFO, msg, data })
+                    dispatch({ type: ROLE_ADD_INFO, msg, data })
                 } else {
-                    dispatch({ type: SHOW_MSG, msg })
+                    dispatch({ type: ROLE_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -112,9 +111,9 @@ export function editInfo(info) {
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 1) {
-                    dispatch({ type: EDIT_INFO, msg, data })
+                    dispatch({ type: ROLE_EDIT_INFO, msg, data })
                 } else {
-                    dispatch({ type: SHOW_MSG, msg })
+                    dispatch({ type: ROLE_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -129,9 +128,9 @@ export function deleteInfo(ID) {
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 1) {
-                    dispatch({ type: DELETE_INFO, msg, ID })
+                    dispatch({ type: ROLE_DELETE_INFO, msg, ID })
                 } else {
-                    dispatch({ type: SHOW_MSG, msg })
+                    dispatch({ type: ROLE_SHOW_MSG, msg })
                 }
             })
             .catch(e => {

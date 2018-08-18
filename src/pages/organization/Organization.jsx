@@ -3,9 +3,9 @@ import SearchForm from './SearchForm'
 import OrgaTable from './OrgaTable'
 import OrgaModal from './OrgaModal'
 
-import './organization.scss'
+import './Organization.scss'
 
-class Menu extends PureComponent {
+class Organization extends PureComponent {
     render() {
         return (
             <div>
@@ -17,4 +17,4 @@ class Menu extends PureComponent {
     }
 }
 
-export default Menu
+export default Organization

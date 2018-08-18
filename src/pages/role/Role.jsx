@@ -1,17 +1,20 @@
 import React, { PureComponent } from 'react'
-import AddForm from './AddForm'
+import SearchForm from './SearchForm'
 import RoleTable from './RoleTable'
+import RoleModal from './RoleModal'
+
 import './Role.scss'
 
 class Role extends PureComponent {
-
     render() {
         return (
             <div>
-                <AddForm />
+                <SearchForm />
                 <RoleTable />
+                <RoleModal />
             </div>
         )
     }
 }
+
 export default Role

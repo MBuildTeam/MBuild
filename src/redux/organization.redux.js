@@ -1,4 +1,4 @@
-USE_MOCK && require('../../mock/organization')
+USE_MOCK && require('../mock/organization')
 
 import axios from 'axios'
 import _ from 'lodash'
@@ -11,6 +11,7 @@ const DELETE_INFO = 'DELETE_INFO'
 const SHOW_MSG = 'SHOW_MSG'
 
 const initState = {
+    searchForm:{},
     modalOpen: false,
     formType: 'add',
     formData: {},
@@ -64,9 +65,8 @@ export function organization(state = initState, action) {
 }
 
 export function getList(params) {
-    console.log(params)
     return dispatch => {
-        axios.post('/api/orga/list', params)
+        axios.get('/api/orga/list', {params})
             .then(res => {
                 dispatch({ type: GET_LIST, payload: res.data })
             })

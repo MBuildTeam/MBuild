@@ -1,18 +1,5 @@
 const Mock = require('mockjs')
 const _ = require('lodash')
-// Mock.mock('/api/orga/list',{
-//     "data|3":[
-//         {
-//             "ID":"@id",
-//             "Name":"@name",
-//             "Status|1":[1,2],
-//             "Creator":"System",
-//             "CreateTime":Mock.Random.date(),
-//             "IsManagerPlatform|1":true,
-//             "KeyWord":"KeyWord",
-//         }
-//     ]
-// })
 
 let arr = [{
     ID: Mock.Random.id(),
@@ -25,7 +12,7 @@ let arr = [{
 }]
 
 //查询
-Mock.mock('/api/orga/list', 'post', function (options) {
+Mock.mock(/\/api\/orga\/list/, 'get', function (options) {
     console.log(options)
     return arr
 })

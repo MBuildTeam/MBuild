@@ -77,7 +77,7 @@ class OrgaTable extends PureComponent {
         rowKey={record => record.ID}
         dataSource={this.props.orgaList}
         columns={columns}
-        pagination={{ pageSize: 2 }} />
+        pagination={false} />
     )
   }
 }

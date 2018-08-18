@@ -6,11 +6,23 @@ import { getList } from '../../redux/organization.redux'
 const RadioGroup = Radio.Group
 const { Item, create } = Form
 
-@create()
 @connect(
     state=>state.organization,
     {getList}
 )
+@create({
+    mapPropsToFields(props) {
+        if (props.searchForm) {
+            let fields = {}
+            for (let key in props.searchForm) {
+                fields[key] = Form.createFormField({
+                    value: props.searchForm[key]
+                })
+            }
+            return fields
+        }
+    }
+})
 class SearchForm extends PureComponent {
     handleSearch = (e) => {
         e.preventDefault();
@@ -27,7 +39,7 @@ class SearchForm extends PureComponent {
     render() {
         const { getFieldDecorator } = this.props.form
         return (
-            <Form className="search-form" onSubmit={this.handleSearch}>
+            <Form onSubmit={this.handleSearch}>
                 <Row gutter={16}>
                     <Col span={6}>
                         <Item label="名称">

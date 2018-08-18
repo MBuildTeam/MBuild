@@ -3,6 +3,7 @@ USE_MOCK && require('../mock/organization')
 import axios from 'axios'
 import _ from 'lodash'
 
+const SEARCH_FORM = 'SEARCH_FORM'
 const GET_LIST = 'GET_LIST'
 const HANDLE_MODAL_FORM = 'HANDLE_MODAL_FORM'
 const ADD_INFO = 'ADD_INFO'
@@ -11,7 +12,7 @@ const DELETE_INFO = 'DELETE_INFO'
 const SHOW_MSG = 'SHOW_MSG'
 
 const initState = {
-    searchForm:{},
+    searchForm: {},
     modalOpen: false,
     formType: 'add',
     formData: {},
@@ -21,6 +22,12 @@ const initState = {
 
 export function organization(state = initState, action) {
     switch (action.type) {
+        case SEARCH_FORM:{
+            return {
+                ...state,
+                searchForm:action.data
+            }
+        }
         case GET_LIST: {
             return { ...state, orgaList: action.payload }
         }
@@ -41,22 +48,22 @@ export function organization(state = initState, action) {
                 orgaList: orgaList
             }
         }
-        case EDIT_INFO:{
-            let orgaList =  _.cloneDeep(state.orgaList)
-            let toUpdate = _.find(orgaList,item=>(item.ID === action.data.ID))
-            _.assign(toUpdate,action.data)
+        case EDIT_INFO: {
+            let orgaList = _.cloneDeep(state.orgaList)
+            let toUpdate = _.find(orgaList, item => (item.ID === action.data.ID))
+            _.assign(toUpdate, action.data)
             return {
                 ...state,
                 modalOpen: false,
-                orgaList:orgaList
+                orgaList: orgaList
             }
         }
-        case DELETE_INFO:{
-            let orgaList =  _.cloneDeep(state.orgaList)
-            _.remove(orgaList,item=>item.ID === action.ID)
+        case DELETE_INFO: {
+            let orgaList = _.cloneDeep(state.orgaList)
+            _.remove(orgaList, item => item.ID === action.ID)
             return {
                 ...state,
-                orgaList:orgaList
+                orgaList: orgaList
             }
         }
         default:
@@ -66,7 +73,8 @@ export function organization(state = initState, action) {
 
 export function getList(params) {
     return dispatch => {
-        axios.get('/api/orga/list', {params})
+        dispatch({ type: SEARCH_FORM, data: params })
+        axios.get('/api/orga/list', { params })
             .then(res => {
                 dispatch({ type: GET_LIST, payload: res.data })
             })

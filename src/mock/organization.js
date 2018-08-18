@@ -1,5 +1,6 @@
 const Mock = require('mockjs')
 const _ = require('lodash')
+const getParam = require('../common/common').getParam
 
 let arr = [{
     ID: Mock.Random.id(),
@@ -13,8 +14,12 @@ let arr = [{
 
 //查询
 Mock.mock(/\/api\/orga\/list/, 'get', function (options) {
-    console.log(options)
-    return arr
+    const Name = getParam(options.url,'Name')
+    if(Name){
+        return _.filter(arr,item=>item.Name.indexOf(Name)>-1)
+    }else{
+        return arr
+    }
 })
 
 //新增

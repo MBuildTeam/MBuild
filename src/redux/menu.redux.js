@@ -1,4 +1,4 @@
-USE_MOCK && require('../../mock/menu')
+USE_MOCK && require('../mock/menu')
 
 import axios from 'axios'
 import _ from 'lodash'

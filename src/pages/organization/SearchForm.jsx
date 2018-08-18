@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button, Radio } from 'antd'
 import {connect} from 'react-redux'
 import { getList } from '../../redux/organization.redux'
+
 const RadioGroup = Radio.Group
 const { Item, create } = Form
 
@@ -39,8 +40,8 @@ class SearchForm extends PureComponent {
                         <Item label="状态">
                             {getFieldDecorator('Status')(
                                 <RadioGroup>
-                                    <Radio value="1">启用</Radio>
-                                    <Radio value="2">不启用</Radio>
+                                    <Radio value={1}>启用</Radio>
+                                    <Radio value={2}>不启用</Radio>
                                 </RadioGroup>
                             )}
                         </Item>

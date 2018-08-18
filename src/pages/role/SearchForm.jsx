@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button } from 'antd'
 import {connect} from 'react-redux'
-import { getList } from '../../redux/organization.redux'
+import { getList } from '../../redux/rights.redux'
 
 const { Item, create } = Form
 
 @connect(
-    state=>state.organization,
+    state=>state.rights,
     {getList}
 )
 @create({

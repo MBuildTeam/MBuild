@@ -20,7 +20,7 @@ const initState = {
     msg: ''
 }
 
-export function organization(state = initState, action) {
+export function rights(state = initState, action) {
     switch (action.type) {
         case SEARCH_FORM:{
             return {

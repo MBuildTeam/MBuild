@@ -5,7 +5,7 @@ import { handleModalForm, addInfo, editInfo } from '../../redux/rights.redux'
 import InfoForm from './InfoForm'
 
 @connect(
-    state => state.organization,
+    state => state.rights,
     { handleModalForm, addInfo, editInfo }
 )
 class FormModal extends PureComponent {

@@ -1,24 +1,24 @@
 import React, { PureComponent } from 'react'
 import { Modal } from 'antd'
 import { connect } from 'react-redux'
-import { handleModalForm, addOrga, editOrga } from '../../redux/organization.redux'
+import { handleModalForm, addInfo, editInfo } from '../../redux/organization.redux'
 import InfoForm from './InfoForm'
 
 
 @connect(
     state => state.organization,
-    { handleModalForm, addOrga, editOrga }
+    { handleModalForm, addInfo, editInfo  }
 )
 class FormModal extends PureComponent {
     handleSubmit = () => {
         const form = this.refs.infoForm
-        const { formType,addOrga,editOrga } = this.props
+        const { formType,addInfo, editInfo  } = this.props
         form.validateFields((err, values) => {
             if (!err) {
                 if (formType === 'add') {
-                    addOrga(values)
+                    addInfo(values)
                 } else if (formType === 'edit') {
-                    editOrga(values)
+                    editInfo(values)
                 }
             }
         })

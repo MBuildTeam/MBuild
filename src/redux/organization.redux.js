@@ -88,7 +88,7 @@ export function handleModalForm(formType, modalOpen, formData) {
     return { type: 'HANDLE_MODAL_FORM', formType, modalOpen, formData }
 }
 
-export function addOrga(info) {
+export function addInfo(info) {
     return dispatch => {
         axios.post('/api/orga/add', info)
             .then(res => {
@@ -105,7 +105,7 @@ export function addOrga(info) {
     }
 }
 
-export function editOrga(info) {
+export function editInfo(info) {
     return dispatch => {
         axios.post('/api/orga/edit', info)
             .then(res => {
@@ -122,7 +122,7 @@ export function editOrga(info) {
     }
 }
 
-export function deleteOrga(ID) {
+export function deleteInfo(ID) {
     return dispatch => {
         axios.post('/api/orga/delete', { ID })
             .then(res => {

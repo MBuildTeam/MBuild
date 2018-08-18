@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
-import { Form, Input, Radio } from 'antd'
+import { Form, Input } from 'antd'
 
-const RadioGroup = Radio.Group
 const { Item, create } = Form
 @create({
     mapPropsToFields(props) {
@@ -46,52 +45,7 @@ class InfoForm extends PureComponent {
                 >
                     {getFieldDecorator('Name', {
                         rules: [{
-                            required: true, message: '组织机构名称不能为空',
-                        }],
-                    })(
-                        <Input />
-                    )}
-                </Item>
-                <Item
-                    {...formItemLayout}
-                    label="状态"
-                    hasFeedback
-                >
-                    {getFieldDecorator('Status', {
-                        rules: [{
-                            required: true, message: '状态不能为空',
-                        }],
-                    })(
-                        <RadioGroup>
-                            <Radio value={1}>启用</Radio>
-                            <Radio value={2}>不启用</Radio>
-                        </RadioGroup>
-                    )}
-                </Item>
-                <Item
-                    {...formItemLayout}
-                    label="管理平台"
-                    hasFeedback
-                >
-                    {getFieldDecorator('IsManagerPlatform', {
-                        rules: [{
-                            required: true, message: '管理平台不能为空',
-                        }],
-                    })(
-                        <RadioGroup>
-                            <Radio value={true}>是</Radio>
-                            <Radio value={false}>否</Radio>
-                        </RadioGroup>
-                    )}
-                </Item>
-                <Item
-                    {...formItemLayout}
-                    label="关键字"
-                    hasFeedback
-                >
-                    {getFieldDecorator('KeyWord', {
-                        rules: [{
-                            required: true, message: '关键字不能为空',
+                            required: true, message: '角色名称不能为空',
                         }],
                     })(
                         <Input />

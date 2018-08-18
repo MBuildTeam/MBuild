@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
-import { Form, Row, Col, Input, Button, Radio } from 'antd'
+import { Form, Row, Col, Input, Button } from 'antd'
 import {connect} from 'react-redux'
 import { getList } from '../../redux/organization.redux'
 
-const RadioGroup = Radio.Group
 const { Item, create } = Form
 
 @connect(
@@ -48,33 +47,7 @@ class SearchForm extends PureComponent {
                             )}
                         </Item>
                     </Col>
-                    <Col span={6}>
-                        <Item label="状态">
-                            {getFieldDecorator('Status')(
-                                <RadioGroup>
-                                    <Radio value={1}>启用</Radio>
-                                    <Radio value={2}>不启用</Radio>
-                                </RadioGroup>
-                            )}
-                        </Item>
-                    </Col>
-                    <Col span={6}>
-                        <Item label="管理平台">
-                            {getFieldDecorator('IsManagerPlatform')(
-                                <RadioGroup>
-                                    <Radio value={true}>是</Radio>
-                                    <Radio value={false}>否</Radio>
-                                </RadioGroup>
-                            )}
-                        </Item>
-                    </Col>
-                    <Col span={6}>
-                        <Item label="关键字">
-                            {getFieldDecorator('KeyWord')(
-                                <Input />
-                            )}
-                        </Item>
-                    </Col>
+                   
                 </Row>
                 <Row>
                     <Col span={24} style={{ textAlign: 'right' }}>

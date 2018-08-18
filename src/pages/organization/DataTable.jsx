@@ -1,18 +1,18 @@
 import React, { PureComponent } from 'react'
 import { Table, Divider, Popconfirm } from 'antd'
 import { connect } from 'react-redux'
-import { getList, handleModalForm,deleteOrga } from '../../redux/organization.redux'
+import { getList, handleModalForm,deleteInfo } from '../../redux/organization.redux'
 
 @connect(
   state => state.organization,
-  { getList, handleModalForm,deleteOrga }
+  { getList, handleModalForm,deleteInfo }
 )
 class DataTable extends PureComponent {
   handleInfo = (type, open, data) => {
     this.props.handleModalForm(type, open, data)
   }
   handleDelete = (id) => {
-    this.props.deleteOrga(id)
+    this.props.deleteInfo(id)
   }
   render() {
     const columns = [{

@@ -74,7 +74,7 @@ export function organization(state = initState, action) {
 export function getList(params) {
     return dispatch => {
         dispatch({ type: SEARCH_FORM, data: params })
-        axios.get('/api/orga/list', { params })
+        axios.get('/api/rights/list', { params })
             .then(res => {
                 dispatch({ type: GET_LIST, payload: res.data })
             })
@@ -90,7 +90,7 @@ export function handleModalForm(formType, modalOpen, formData) {
 
 export function addInfo(info) {
     return dispatch => {
-        axios.post('/api/orga/add', info)
+        axios.post('/api/rights/add', info)
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 1) {
@@ -107,7 +107,7 @@ export function addInfo(info) {
 
 export function editInfo(info) {
     return dispatch => {
-        axios.post('/api/orga/edit', info)
+        axios.post('/api/rights/edit', info)
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 1) {
@@ -124,7 +124,7 @@ export function editInfo(info) {
 
 export function deleteInfo(ID) {
     return dispatch => {
-        axios.post('/api/orga/delete', { ID })
+        axios.post('/api/rights/delete', { ID })
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 1) {

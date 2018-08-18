@@ -15,7 +15,6 @@ class OrgaModal extends PureComponent {
         const { formType,addOrga,editOrga } = this.props
         form.validateFields((err, values) => {
             if (!err) {
-                console.log(values)
                 if (formType === 'add') {
                     addOrga(values)
                 } else if (formType === 'edit') {

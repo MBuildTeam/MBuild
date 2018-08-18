@@ -32,17 +32,30 @@ export function organization(state = initState, action) {
             }
         }
         case ADD_INFO: {
+            let orgaList = _.cloneDeep(state.orgaList)
+            orgaList.push(action.data)
             return {
                 ...state,
                 modalOpen: false,
-                orgaList: state.orgaList.concat(action.data)
+                orgaList: orgaList
+            }
+        }
+        case EDIT_INFO:{
+            let orgaList =  _.cloneDeep(state.orgaList)
+            let toUpdate = _.find(orgaList,item=>(item.ID === action.data.ID))
+            _.assign(toUpdate,action.data)
+            return {
+                ...state,
+                modalOpen: false,
+                orgaList:orgaList
             }
         }
         case DELETE_INFO:{
-
+            let orgaList =  _.cloneDeep(state.orgaList)
+            _.remove(orgaList,item=>item.ID === action.ID)
             return {
                 ...state,
-                //orgaList:
+                orgaList:orgaList
             }
         }
         default:
@@ -55,7 +68,6 @@ export function getList(params) {
     return dispatch => {
         axios.post('/api/orga/list', params)
             .then(res => {
-                console.log(res.data)
                 dispatch({ type: GET_LIST, payload: res.data })
             })
             .catch(e => {

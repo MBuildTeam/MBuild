@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Loadable from 'react-loadable'
@@ -8,30 +8,34 @@ import Loading from '../../components/loading/Loading'
 @connect(
     state => state
 )
-class Home extends PureComponent {
+class Home extends Component {
     /**
      * 根据当前激活的菜单决定显示的页面
      */
     getPage() {
         let { activeMenuCode } = this.props.menu
-        if(!activeMenuCode){
+        if (!activeMenuCode) {
             return null
         }
-        let menuCode2CompName = activeMenuCode.slice(0, 1).toUpperCase()+activeMenuCode.slice(1)
-        return Loadable({
+        let menuCode2CompName = activeMenuCode.slice(0, 1).toUpperCase() + activeMenuCode.slice(1)
+        let Comp = Loadable({
             loader: () => import(`../${activeMenuCode}/${menuCode2CompName}`),
             loading: Loading,
-          })
+        })
+        return <Comp />
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        //解决组件页面不停的装载卸载的问题
+        return nextProps.menu.activeMenuCode !== this.props.menu.activeMenuCode
     }
     render() {
         const { redirectTo } = this.props.user
-        const Component = this.getPage()
         return (
             <Fragment>
                 {redirectTo && redirectTo !== '/home' ? <Redirect to={redirectTo} /> : null}
                 <Framework>
                     {
-                        Component?<Component/>:null
+                        this.getPage()
                     }
                 </Framework>
             </Fragment>

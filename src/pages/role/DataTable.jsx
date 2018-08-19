@@ -20,6 +20,10 @@ class DataTable extends PureComponent {
       dataIndex: 'Name',
       key: 'Name',
     }, {
+      title: '权限',
+      dataIndex: 'Rights',
+      key: 'Rights',
+    }, {
       title: '创建者',
       dataIndex: 'Creator',
       key: 'Creator',

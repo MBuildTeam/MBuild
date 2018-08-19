@@ -10,6 +10,7 @@ const ROLE_ADD_INFO = 'ROLE_ADD_INFO'
 const ROLE_EDIT_INFO = 'ROLE_EDIT_INFO'
 const ROLE_DELETE_INFO = 'ROLE_DELETE_INFO'
 const ROLE_SHOW_MSG = 'ROLE_SHOW_MSG'
+const ROLE_GET_RIGHTS_LIST = 'ROLE_GET_RIGHTS_LIST'
 
 const initState = {
     searchForm: {},
@@ -17,7 +18,8 @@ const initState = {
     formType: 'add',
     formData: {},
     orgaList: [],
-    msg: ''
+    msg: '',
+    rightsList: [],
 }
 
 export function role(state = initState, action) {
@@ -30,6 +32,9 @@ export function role(state = initState, action) {
         }
         case ROLE_GET_LIST: {
             return { ...state, orgaList: action.payload }
+        }
+        case ROLE_GET_RIGHTS_LIST: {
+            return { ...state, rightsList: action.payload }
         }
         case ROLE_HANDLE_MODAL_FORM: {
             return {
@@ -132,6 +137,19 @@ export function deleteInfo(ID) {
                 } else {
                     dispatch({ type: ROLE_SHOW_MSG, msg })
                 }
+            })
+            .catch(e => {
+
+            })
+    }
+}
+
+export function getRightsList() {
+    return dispatch => {
+        axios.get('/api/rights/list')
+            .then(res => {
+                console.log(res.data)
+                dispatch({ type: ROLE_GET_RIGHTS_LIST, payload: res.data })
             })
             .catch(e => {
 

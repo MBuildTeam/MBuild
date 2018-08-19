@@ -81,6 +81,7 @@ export function getList(params) {
         dispatch({ type: ROLE_SEARCH_FORM, data: params })
         axios.get('/api/role/list', { params })
             .then(res => {
+                console.log(res.data)
                 dispatch({ type: ROLE_GET_LIST, payload: res.data })
             })
             .catch(e => {
@@ -148,7 +149,6 @@ export function getRightsList() {
     return dispatch => {
         axios.get('/api/rights/list')
             .then(res => {
-                console.log(res.data)
                 dispatch({ type: ROLE_GET_RIGHTS_LIST, payload: res.data })
             })
             .catch(e => {

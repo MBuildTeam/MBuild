@@ -1,13 +1,14 @@
 import React, { PureComponent } from 'react'
-import { Form, Row, Col, Input, Button } from 'antd'
-import {connect} from 'react-redux'
-import { getList } from '../../redux/role.redux'
+import { Form, Row, Col, Input, Button, Select } from 'antd'
+import { connect } from 'react-redux'
+import { getList, getRightsList } from '../../redux/role.redux'
 
 const { Item, create } = Form
+const Option = Select.Option;
 
 @connect(
-    state=>state.role,
-    {getList}
+    state => state.role,
+    { getList, getRightsList }
 )
 @create({
     mapPropsToFields(props) {
@@ -23,10 +24,14 @@ const { Item, create } = Form
     }
 })
 class SearchForm extends PureComponent {
+    componentDidMount() {
+        this.props.getRightsList()
+    }
     handleSearch = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-            if(!err){
+            if (!err) {
+                 console.log(values)
                 this.props.getList(values)
             }
         })
@@ -47,7 +52,24 @@ class SearchForm extends PureComponent {
                             )}
                         </Item>
                     </Col>
-                   
+                    <Col span={18}>
+                        <Item label="权限" style={{ width: '100%' }}>
+                            {getFieldDecorator('Rights')(
+                                <Select
+                                mode="multiple"
+                                style={{ minWidth: '200px' }}
+                                >
+                                {
+                                    this.props.rightsList.map(item=>{
+                                        return (
+                                            <Option key={item.ID} value={item.ID}>{item.Name}</Option>
+                                        )
+                                    })
+                                }
+                                </Select>
+                            )}
+                        </Item>
+                    </Col>
                 </Row>
                 <Row>
                     <Col span={24} style={{ textAlign: 'right' }}>

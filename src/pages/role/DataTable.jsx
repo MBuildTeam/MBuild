@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Table, Divider, Popconfirm } from 'antd'
+import { Table, Divider, Popconfirm, Tag } from 'antd'
 import { connect } from 'react-redux'
 import { getList, handleModalForm, deleteInfo } from '../../redux/role.redux'
 
@@ -23,6 +23,13 @@ class DataTable extends PureComponent {
       title: '权限',
       dataIndex: 'Rights',
       key: 'Rights',
+      render: (text, record) => {
+        return record.Rights.map(v => {
+          return (<Tag key={v.ID}>
+            {v.Name}
+          </Tag>)
+        })
+      }
     }, {
       title: '创建者',
       dataIndex: 'Creator',

@@ -11,6 +11,7 @@ import InfoForm from './InfoForm'
 class FormModal extends PureComponent {
     handleSubmit = () => {
         const form = this.refs.infoForm
+        console.log(form)
         const { formType, addInfo, editInfo } = this.props
         form.validateFields((err, values) => {
             if (!err) {

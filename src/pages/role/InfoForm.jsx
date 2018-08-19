@@ -1,7 +1,13 @@
 import React, { PureComponent } from 'react'
-import { Form, Input } from 'antd'
+import { Form, Input, Select } from 'antd'
+import { connect } from 'react-redux'
+import _ from 'lodash'
 
 const { Item, create } = Form
+const { Option } = Select
+@connect(
+    state => state.role
+)
 @create({
     mapPropsToFields(props) {
         if (props.formType === 'edit') {
@@ -10,6 +16,14 @@ const { Item, create } = Form
                 fields[key] = Form.createFormField({
                     value: props.formData[key]
                 })
+                if (key === 'Rights') {
+                    //单独处理复杂数据的组件
+                    let rightsData = props.formData[key]
+                    let rightsIDs = _.flatMap(rightsData, v => v.ID)
+                    fields[key] = Form.createFormField({
+                        value: rightsIDs
+                    })
+                }
             }
             return fields
         }
@@ -49,6 +63,26 @@ class InfoForm extends PureComponent {
                         }],
                     })(
                         <Input />
+                    )}
+                </Item>
+                <Item
+                    {...formItemLayout}
+                    label="权限"
+                >
+                    {getFieldDecorator('Rights')(
+                        <Select
+                            mode="multiple"
+                        >
+                            {
+                                this.props.rightsList.map(v => {
+                                    return (
+                                        <Option key={v.ID} value={v.ID}>
+                                            {v.Name}
+                                        </Option>
+                                    )
+                                })
+                            }
+                        </Select>
                     )}
                 </Item>
             </Form>

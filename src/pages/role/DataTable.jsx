@@ -20,18 +20,19 @@ class DataTable extends PureComponent {
       dataIndex: 'Name',
       key: 'Name',
     },
-    {
-      title: '权限',
-      dataIndex: 'Rights',
-      key: 'Rights',
-      render: (text, record) => {
-        return record.Rights.map(v => {
-          return (<Tag key={v}>
-            {v}
-          </Tag>)
-        })
-      }
-    },
+    // {
+    //   title: '权限',
+    //   dataIndex: 'Rights',
+    //   key: 'Rights',
+    //   render: (text, record) => {
+    //     console.log(this.props.rightsList)
+    //     return record.Rights.map(v => {
+    //       return (<Tag key={v}>
+    //         {v}
+    //       </Tag>)
+    //     })
+    //   }
+    // },
     {
       title: '创建者',
       dataIndex: 'Creator',

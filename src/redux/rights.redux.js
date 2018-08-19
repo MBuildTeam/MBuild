@@ -5,6 +5,7 @@ import _ from 'lodash'
 
 const RIGHTS_SEARCH_FORM = 'RIGHTS_SEARCH_FORM'
 const RIGHTS_GET_LIST = 'RIGHTS_GET_LIST'
+const RIGHTS_GET_MENU_LIST = 'RIGHTS_GET_MENU_LIST'
 const RIGHTS_HANDLE_MODAL_FORM = 'RIGHTS_HANDLE_MODAL_FORM'
 const RIGHTS_ADD_INFO = 'RIGHTS_ADD_INFO'
 const RIGHTS_EDIT_INFO = 'RIGHTS_EDIT_INFO'
@@ -17,7 +18,8 @@ const initState = {
     formType: 'add',
     formData: {},
     dataList: [],
-    msg: ''
+    msg: '',
+    menuList:[]
 }
 
 export function rights(state = initState, action) {
@@ -30,6 +32,9 @@ export function rights(state = initState, action) {
         }
         case RIGHTS_GET_LIST: {
             return { ...state, dataList: action.payload }
+        }
+        case RIGHTS_GET_MENU_LIST: {
+            return { ...state, menuList: action.payload }
         }
         case RIGHTS_HANDLE_MODAL_FORM: {
             return {
@@ -132,6 +137,18 @@ export function deleteInfo(ID) {
                 } else {
                     dispatch({ type: RIGHTS_SHOW_MSG, msg })
                 }
+            })
+            .catch(e => {
+
+            })
+    }
+}
+
+export function getMenuList() {
+    return dispatch => {
+        axios.get('/api/menu/list')
+            .then(res => {
+                dispatch({ type: RIGHTS_GET_MENU_LIST, payload: res.data })
             })
             .catch(e => {
 

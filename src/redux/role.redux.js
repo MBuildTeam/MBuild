@@ -81,7 +81,6 @@ export function getList(params) {
         dispatch({ type: ROLE_SEARCH_FORM, data: params })
         axios.get('/api/role/list', { params })
             .then(res => {
-                console.log(res.data)
                 dispatch({ type: ROLE_GET_LIST, payload: res.data })
             })
             .catch(e => {

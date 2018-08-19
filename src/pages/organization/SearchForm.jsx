@@ -33,8 +33,12 @@ class SearchForm extends PureComponent {
         })
     }
     handleReset = () => {
-        this.props.form.resetFields()
+        //this.props.form.resetFields()
         this.props.getList()
+    }
+    componentDidMount(){
+        //todo:这里可以做一个优化，区分第一次打开和标签切换
+        this.props.getList(this.props.searchForm)
     }
     render() {
         const { getFieldDecorator } = this.props.form

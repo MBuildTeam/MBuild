@@ -6,10 +6,6 @@ import { getList } from '../../redux/organization.redux'
 const RadioGroup = Radio.Group
 const { Item, create } = Form
 
-@connect(
-    state=>state.organization,
-    {getList}
-)
 @create({
     mapPropsToFields(props) {
         if (props.searchForm) {
@@ -23,6 +19,10 @@ const { Item, create } = Form
         }
     }
 })
+@connect(
+    state=>state.organization,
+    {getList}
+)
 class SearchForm extends PureComponent {
     handleSearch = (e) => {
         e.preventDefault();
@@ -33,12 +33,12 @@ class SearchForm extends PureComponent {
         })
     }
     handleReset = () => {
-        //this.props.form.resetFields()
+        this.props.form.resetFields()
         this.props.getList()
     }
     componentDidMount(){
         //todo:这里可以做一个优化，区分第一次打开和标签切换
-        this.props.getList(this.props.searchForm)
+        this.props.getList()
     }
     render() {
         const { getFieldDecorator } = this.props.form

@@ -17,7 +17,7 @@ const initState = {
     modalOpen: false,
     formType: 'add',
     formData: {},
-    orgaList: [],
+    dataList: [],
     msg: '',
     rightsList: [],
 }
@@ -31,7 +31,7 @@ export function role(state = initState, action) {
             }
         }
         case ROLE_GET_LIST: {
-            return { ...state, orgaList: action.payload }
+            return { ...state, dataList: action.payload }
         }
         case ROLE_GET_RIGHTS_LIST: {
             return { ...state, rightsList: action.payload }
@@ -45,30 +45,30 @@ export function role(state = initState, action) {
             }
         }
         case ROLE_ADD_INFO: {
-            let orgaList = _.cloneDeep(state.orgaList)
-            orgaList.push(action.data)
+            let dataList = _.cloneDeep(state.dataList)
+            dataList.push(action.data)
             return {
                 ...state,
                 modalOpen: false,
-                orgaList: orgaList
+                dataList: dataList
             }
         }
         case ROLE_EDIT_INFO: {
-            let orgaList = _.cloneDeep(state.orgaList)
-            let toUpdate = _.find(orgaList, item => (item.ID === action.data.ID))
+            let dataList = _.cloneDeep(state.dataList)
+            let toUpdate = _.find(dataList, item => (item.ID === action.data.ID))
             _.assign(toUpdate, action.data)
             return {
                 ...state,
                 modalOpen: false,
-                orgaList: orgaList
+                dataList: dataList
             }
         }
         case ROLE_DELETE_INFO: {
-            let orgaList = _.cloneDeep(state.orgaList)
-            _.remove(orgaList, item => item.ID === action.ID)
+            let dataList = _.cloneDeep(state.dataList)
+            _.remove(dataList, item => item.ID === action.ID)
             return {
                 ...state,
-                orgaList: orgaList
+                dataList: dataList
             }
         }
         default:

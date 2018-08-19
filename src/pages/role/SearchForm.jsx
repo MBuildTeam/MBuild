@@ -1,15 +1,11 @@
 import React, { PureComponent } from 'react'
-import { Form, Row, Col, Input, Button, Select } from 'antd'
+import { Form, Row, Col, Input, Button } from 'antd'
 import { connect } from 'react-redux'
 import { getList, getRightsList } from '../../redux/role.redux'
 
 const { Item, create } = Form
-const Option = Select.Option;
 
-@connect(
-    state => state.role,
-    { getList, getRightsList }
-)
+
 @create({
     mapPropsToFields(props) {
         if (props.searchForm) {
@@ -23,6 +19,10 @@ const Option = Select.Option;
         }
     }
 })
+@connect(
+    state => state.role,
+    { getList, getRightsList }
+)
 class SearchForm extends PureComponent {
     componentDidMount() {
         this.props.getRightsList()
@@ -31,7 +31,6 @@ class SearchForm extends PureComponent {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                 console.log(values)
                 this.props.getList(values)
             }
         })
@@ -52,27 +51,7 @@ class SearchForm extends PureComponent {
                             )}
                         </Item>
                     </Col>
-                    <Col span={18}>
-                        <Item label="权限" style={{ width: '100%' }}>
-                            {getFieldDecorator('Rights')(
-                                <Select
-                                mode="multiple"
-                                style={{ minWidth: '200px' }}
-                                >
-                                {
-                                    this.props.rightsList.map(item=>{
-                                        return (
-                                            <Option key={item.ID} value={item.ID}>{item.Name}</Option>
-                                        )
-                                    })
-                                }
-                                </Select>
-                            )}
-                        </Item>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col span={24} style={{ textAlign: 'right' }}>
+                    <Col span={18} >
                         <Button type="primary" htmlType="submit">查询</Button>
                         <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>重置</Button>
                     </Col>

@@ -7,13 +7,13 @@ let arr = [{
     Name: "角色1",
     Creator: "System",
     CreateTime: Mock.Random.date(),
-    Rights:[{ID:'520000201103289947',Name:'权限1'},{ID:'810000197912255907',Name:'权限2'}]
+    Rights:['520000201103289947','810000197912255907']
 },{
     ID: Mock.Random.id(),
     Name: "角色2",
     Creator: "System",
     CreateTime: Mock.Random.date(),
-    Rights:[{ID:'520000201103289947',Name:'权限1'}]
+    Rights:['520000201103289947']
 }]
 
 //查询

@@ -75,7 +75,7 @@ class DataTable extends PureComponent {
     return (
       <Table
         rowKey={record => record.ID}
-        dataSource={this.props.orgaList}
+        dataSource={this.props.dataList}
         columns={columns}
         pagination={false} />
     )

@@ -25,8 +25,8 @@ class DataTable extends PureComponent {
       key: 'Rights',
       render: (text, record) => {
         return record.Rights.map(v => {
-          return (<Tag key={v.ID}>
-            {v.Name}
+          return (<Tag key={v}>
+            {v}
           </Tag>)
         })
       }
@@ -57,7 +57,7 @@ class DataTable extends PureComponent {
     return (
       <Table
         rowKey={record => record.ID}
-        dataSource={this.props.orgaList}
+        dataSource={this.props.dataList}
         columns={columns}
         pagination={false} />
     )

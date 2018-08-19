@@ -16,7 +16,7 @@ const initState = {
     modalOpen: false,
     formType: 'add',
     formData: {},
-    orgaList: [],
+    dataList: [],
     msg: ''
 }
 
@@ -29,7 +29,7 @@ export function organization(state = initState, action) {
             }
         }
         case ORGA_GET_LIST: {
-            return { ...state, orgaList: action.payload }
+            return { ...state, dataList: action.payload }
         }
         case ORGA_HANDLE_MODAL_FORM: {
             return {
@@ -40,30 +40,30 @@ export function organization(state = initState, action) {
             }
         }
         case ORGA_ADD_INFO: {
-            let orgaList = _.cloneDeep(state.orgaList)
-            orgaList.push(action.data)
+            let dataList = _.cloneDeep(state.dataList)
+            dataList.push(action.data)
             return {
                 ...state,
                 modalOpen: false,
-                orgaList: orgaList
+                dataList: dataList
             }
         }
         case ORGA_EDIT_INFO: {
-            let orgaList = _.cloneDeep(state.orgaList)
-            let toUpdate = _.find(orgaList, item => (item.ID === action.data.ID))
+            let dataList = _.cloneDeep(state.dataList)
+            let toUpdate = _.find(dataList, item => (item.ID === action.data.ID))
             _.assign(toUpdate, action.data)
             return {
                 ...state,
                 modalOpen: false,
-                orgaList: orgaList
+                dataList: dataList
             }
         }
         case ORGA_DELETE_INFO: {
-            let orgaList = _.cloneDeep(state.orgaList)
-            _.remove(orgaList, item => item.ID === action.ID)
+            let dataList = _.cloneDeep(state.dataList)
+            _.remove(dataList, item => item.ID === action.ID)
             return {
                 ...state,
-                orgaList: orgaList
+                dataList: dataList
             }
         }
         default:

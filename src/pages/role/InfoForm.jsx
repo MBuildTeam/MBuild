@@ -5,9 +5,7 @@ import _ from 'lodash'
 
 const { Item, create } = Form
 const { Option } = Select
-@connect(
-    state => state.role
-)
+
 @create({
     mapPropsToFields(props) {
         if (props.formType === 'edit') {
@@ -16,19 +14,14 @@ const { Option } = Select
                 fields[key] = Form.createFormField({
                     value: props.formData[key]
                 })
-                if (key === 'Rights') {
-                    //单独处理复杂数据的组件
-                    let rightsData = props.formData[key]
-                    let rightsIDs = _.flatMap(rightsData, v => v.ID)
-                    fields[key] = Form.createFormField({
-                        value: rightsIDs
-                    })
-                }
             }
             return fields
         }
     }
 })
+@connect(
+    state => state.role
+)
 class InfoForm extends PureComponent {
     render() {
         const formItemLayout = {
@@ -68,6 +61,7 @@ class InfoForm extends PureComponent {
                 <Item
                     {...formItemLayout}
                     label="权限"
+                    hasFeedback
                 >
                     {getFieldDecorator('Rights')(
                         <Select

@@ -26,6 +26,7 @@ const { Item, create } = Form
 class SearchForm extends PureComponent {
     componentDidMount() {
         this.props.getRightsList()
+        this.props.getList()
     }
     handleSearch = (e) => {
         e.preventDefault();

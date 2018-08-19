@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
 import { Table, Divider, Popconfirm, Tag } from 'antd'
 import { connect } from 'react-redux'
-import { getList, handleModalForm, deleteInfo } from '../../redux/role.redux'
+import { handleModalForm, deleteInfo } from '../../redux/role.redux'
 
 @connect(
   state => state.role,
-  { getList, handleModalForm, deleteInfo }
+  { handleModalForm, deleteInfo }
 )
 class DataTable extends PureComponent {
   handleInfo = (type, open, data) => {
@@ -19,7 +19,8 @@ class DataTable extends PureComponent {
       title: '名称',
       dataIndex: 'Name',
       key: 'Name',
-    }, {
+    },
+    {
       title: '权限',
       dataIndex: 'Rights',
       key: 'Rights',
@@ -30,7 +31,8 @@ class DataTable extends PureComponent {
           </Tag>)
         })
       }
-    }, {
+    },
+    {
       title: '创建者',
       dataIndex: 'Creator',
       key: 'Creator',

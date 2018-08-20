@@ -3,9 +3,9 @@ import SearchForm from './SearchForm'
 import DataTable from './DataTable'
 import FormModal from './FormModal'
 
-import './OrgaType.scss'
+import './Page.scss'
 
-class OrgaType extends PureComponent {
+class Page extends PureComponent {
     render() {
         return (
             <div>
@@ -17,4 +17,4 @@ class OrgaType extends PureComponent {
     }
 }
 
-export default OrgaType
+export default Page

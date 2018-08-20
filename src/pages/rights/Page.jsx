@@ -2,9 +2,10 @@ import React, { PureComponent } from 'react'
 import SearchForm from './SearchForm'
 import DataTable from './DataTable'
 import FormModal from './FormModal'
-import './Menu.scss'
 
-class Menu extends PureComponent {
+import './Page.scss'
+
+class Page extends PureComponent {
     render() {
         return (
             <div>
@@ -16,4 +17,4 @@ class Menu extends PureComponent {
     }
 }
 
-export default Menu
+export default Page

@@ -17,9 +17,8 @@ class Home extends Component {
         if (!activeMenuCode) {
             return null
         }
-        let menuCode2CompName = activeMenuCode.slice(0, 1).toUpperCase() + activeMenuCode.slice(1)
         let Comp = Loadable({
-            loader: () => import(`../${activeMenuCode}/${menuCode2CompName}`),
+            loader: () => import(`../${activeMenuCode}/Page`),
             loading: Loading,
         })
         return <Comp />

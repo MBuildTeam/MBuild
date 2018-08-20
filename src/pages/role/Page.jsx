@@ -3,9 +3,9 @@ import SearchForm from './SearchForm'
 import DataTable from './DataTable'
 import FormModal from './FormModal'
 
-import './User.scss'
+import './Page.scss'
 
-class User extends PureComponent {
+class Page extends PureComponent {
     render() {
         return (
             <div>
@@ -17,4 +17,4 @@ class User extends PureComponent {
     }
 }
 
-export default User
+export default Page

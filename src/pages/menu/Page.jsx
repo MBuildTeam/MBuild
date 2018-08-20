@@ -2,10 +2,9 @@ import React, { PureComponent } from 'react'
 import SearchForm from './SearchForm'
 import DataTable from './DataTable'
 import FormModal from './FormModal'
+import './Page.scss'
 
-import './Organization.scss'
-
-class Organization extends PureComponent {
+class Page extends PureComponent {
     render() {
         return (
             <div>
@@ -17,4 +16,4 @@ class Organization extends PureComponent {
     }
 }
 
-export default Organization
+export default Page

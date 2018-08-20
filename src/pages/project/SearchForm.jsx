@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button, Radio } from 'antd'
 import { connect } from 'react-redux'
-import { getList } from '../../redux/menu.redux'
+import { getList,getProjManagerList } from '../../redux/project.redux'
 
 const { Item, create } = Form
 const RadioGroup = Radio.Group
@@ -21,8 +21,8 @@ const RadioGroup = Radio.Group
     }
 })
 @connect(
-    state => state.menu,
-    { getList }
+    state => state.project,
+    { getList,getProjManagerList }
 )
 class SearchForm extends PureComponent {
     handleSearch = (e) => {
@@ -38,6 +38,7 @@ class SearchForm extends PureComponent {
         this.props.getList()
     }
     componentDidMount() {
+        this.props.getProjManagerList()
         this.props.getList()
     }
     render() {
@@ -48,13 +49,6 @@ class SearchForm extends PureComponent {
                     <Col span={6}>
                         <Item label='名称'>
                             {getFieldDecorator('Name')(
-                                <Input />
-                            )}
-                        </Item>
-                    </Col>
-                    <Col span={6}>
-                        <Item label='Url'>
-                            {getFieldDecorator('Url')(
                                 <Input />
                             )}
                         </Item>

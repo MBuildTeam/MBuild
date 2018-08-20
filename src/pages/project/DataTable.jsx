@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
 import { Table, Divider, Popconfirm } from 'antd'
 import { connect } from 'react-redux'
-import { getList, handleModalForm, deleteInfo } from '../../redux/menu.redux'
+import { getList, handleModalForm, deleteInfo } from '../../redux/project.redux'
 
 @connect(
-  state => state.menu,
+  state => state.project,
   { getList, handleModalForm, deleteInfo }
 )
 class DataTable extends PureComponent {
@@ -19,11 +19,6 @@ class DataTable extends PureComponent {
       title: '名称',
       dataIndex: 'Name',
       key: 'Name',
-    }, 
-    {
-      title: 'Url',
-      dataIndex: 'Url',
-      key: 'Url',
     }, 
     {
       title: '状态',

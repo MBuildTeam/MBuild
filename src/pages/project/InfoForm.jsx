@@ -18,7 +18,7 @@ const RadioGroup = Radio.Group
     }
 })
 @connect(
-    state=>state.menu
+    state=>state.project
 )
 class InfoForm extends PureComponent {
     render() {
@@ -58,19 +58,6 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label="Url"
-                    hasFeedback
-                >
-                    {getFieldDecorator('Url', {
-                        rules: [{
-                            required: true, message: 'Url不能为空',
-                        }],
-                    })(
-                        <Input />
-                    )}
-                </Item>
-                <Item
-                    {...formItemLayout}
                     label="状态"
                     hasFeedback
                 >
@@ -83,6 +70,27 @@ class InfoForm extends PureComponent {
                             <Radio value={1}>启用</Radio>
                             <Radio value={2}>不启用</Radio>
                         </RadioGroup>
+                    )}
+                </Item>
+                <Item
+                    {...formItemLayout}
+                    label="项目经理"
+                    hasFeedback
+                >
+                    {getFieldDecorator('ProjectManager')(
+                        <Select
+                            mode="multiple"
+                        >
+                            {
+                                this.props.projManagerList.map(v => {
+                                    return (
+                                        <Option key={v.ID} value={v.ID}>
+                                            {v.Name}
+                                        </Option>
+                                    )
+                                })
+                            }
+                        </Select>
                     )}
                 </Item>
             </Form>

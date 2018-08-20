@@ -1,16 +1,15 @@
-USE_MOCK && require('../mock/project')
+USE_MOCK && require('../mock/projManager')
 
 import axios from 'axios'
 import _ from 'lodash'
 
-const PROJECT_SEARCH_FORM = 'PROJECT_SEARCH_FORM'
-const PROJECT_GET_LIST = 'PROJECT_GET_LIST'
-const PROJECT_HANDLE_MODAL_FORM = 'PROJECT_HANDLE_MODAL_FORM'
-const PROJECT_ADD_INFO = 'PROJECT_ADD_INFO'
-const PROJECT_EDIT_INFO = 'PROJECT_EDIT_INFO'
-const PROJECT_DELETE_INFO = 'PROJECT_DELETE_INFO'
-const PROJECT_SHOW_MSG = 'PROJECT_SHOW_MSG'
-const PROJECT_GET_PROJMANAGER_LIST = 'PROJECT_GET_PROJMANAGER_LIST'
+const PROJMANAGER_SEARCH_FORM = 'PROJMANAGER_SEARCH_FORM'
+const PROJMANAGER_GET_LIST = 'PROJMANAGER_GET_LIST'
+const PROJMANAGER_HANDLE_MODAL_FORM = 'PROJMANAGER_HANDLE_MODAL_FORM'
+const PROJMANAGER_ADD_INFO = 'PROJMANAGER_ADD_INFO'
+const PROJMANAGER_EDIT_INFO = 'PROJMANAGER_EDIT_INFO'
+const PROJMANAGER_DELETE_INFO = 'PROJMANAGER_DELETE_INFO'
+const PROJMANAGER_SHOW_MSG = 'PROJMANAGER_SHOW_MSG'
 
 const initState = {
     searchForm: {},
@@ -19,24 +18,20 @@ const initState = {
     formData: {},
     dataList: [],
     msg: '',
-    projManagerList: [],
 }
 
-export function project(state = initState, action) {
+export function projManager(state = initState, action) {
     switch (action.type) {
-        case PROJECT_SEARCH_FORM: {
+        case PROJMANAGER_SEARCH_FORM: {
             return {
                 ...state,
                 searchForm: action.data
             }
         }
-        case PROJECT_GET_LIST: {
+        case PROJMANAGER_GET_LIST: {
             return { ...state, dataList: action.payload }
         }
-        case PROJECT_GET_PROJMANAGER_LIST: {
-            return { ...state, projManagerList: action.payload }
-        }
-        case PROJECT_HANDLE_MODAL_FORM: {
+        case PROJMANAGER_HANDLE_MODAL_FORM: {
             return {
                 ...state,
                 formType: action.formType,
@@ -44,7 +39,7 @@ export function project(state = initState, action) {
                 formData: action.formData
             }
         }
-        case PROJECT_ADD_INFO: {
+        case PROJMANAGER_ADD_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             dataList.push(action.data)
             return {
@@ -53,7 +48,7 @@ export function project(state = initState, action) {
                 dataList: dataList
             }
         }
-        case PROJECT_EDIT_INFO: {
+        case PROJMANAGER_EDIT_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             let toUpdate = _.find(dataList, item => (item.ID === action.data.ID))
             _.assign(toUpdate, action.data)
@@ -63,7 +58,7 @@ export function project(state = initState, action) {
                 dataList: dataList
             }
         }
-        case PROJECT_DELETE_INFO: {
+        case PROJMANAGER_DELETE_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             _.remove(dataList, item => item.ID === action.ID)
             return {
@@ -78,10 +73,10 @@ export function project(state = initState, action) {
 
 export function getList(params) {
     return dispatch => {
-        dispatch({ type: PROJECT_SEARCH_FORM, data: params })
-        axios.get('/api/project/list', { params })
+        dispatch({ type: PROJMANAGER_SEARCH_FORM, data: params })
+        axios.get('/api/projManager/list', { params })
             .then(res => {
-                dispatch({ type: PROJECT_GET_LIST, payload: res.data })
+                dispatch({ type: PROJMANAGER_GET_LIST, payload: res.data })
             })
             .catch(e => {
 
@@ -90,18 +85,18 @@ export function getList(params) {
 }
 
 export function handleModalForm(formType, modalOpen, formData) {
-    return { type: PROJECT_HANDLE_MODAL_FORM, formType, modalOpen, formData }
+    return { type: PROJMANAGER_HANDLE_MODAL_FORM, formType, modalOpen, formData }
 }
 
 export function addInfo(info) {
     return dispatch => {
-        axios.post('/api/project/add', info)
+        axios.post('/api/projManager/add', info)
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 1) {
-                    dispatch({ type: PROJECT_ADD_INFO, msg, data })
+                    dispatch({ type: PROJMANAGER_ADD_INFO, msg, data })
                 } else {
-                    dispatch({ type: PROJECT_SHOW_MSG, msg })
+                    dispatch({ type: PROJMANAGER_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -112,13 +107,13 @@ export function addInfo(info) {
 
 export function editInfo(info) {
     return dispatch => {
-        axios.post('/api/project/edit', info)
+        axios.post('/api/projManager/edit', info)
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 1) {
-                    dispatch({ type: PROJECT_EDIT_INFO, msg, data })
+                    dispatch({ type: PROJMANAGER_EDIT_INFO, msg, data })
                 } else {
-                    dispatch({ type: PROJECT_SHOW_MSG, msg })
+                    dispatch({ type: PROJMANAGER_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -129,13 +124,13 @@ export function editInfo(info) {
 
 export function deleteInfo(ID) {
     return dispatch => {
-        axios.post('/api/project/delete', { ID })
+        axios.post('/api/projManager/delete', { ID })
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 1) {
-                    dispatch({ type: PROJECT_DELETE_INFO, msg, ID })
+                    dispatch({ type: PROJMANAGER_DELETE_INFO, msg, ID })
                 } else {
-                    dispatch({ type: PROJECT_SHOW_MSG, msg })
+                    dispatch({ type: PROJMANAGER_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -144,14 +139,3 @@ export function deleteInfo(ID) {
     }
 }
 
-export function getProjManagerList() {
-    return dispatch => {
-        axios.get('/api/projManager/list')
-            .then(res => {
-                dispatch({ type: PROJECT_GET_PROJMANAGER_LIST, payload: res.data })
-            })
-            .catch(e => {
-
-            })
-    }
-}

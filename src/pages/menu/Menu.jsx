@@ -1,14 +1,16 @@
 import React, { PureComponent } from 'react'
 import SearchForm from './SearchForm'
-import MenuTable from './MenuTable'
-import './menu.scss'
+import DataTable from './DataTable'
+import FormModal from './FormModal'
+import './Menu.scss'
 
 class Menu extends PureComponent {
     render() {
         return (
             <div>
                 <SearchForm />
-                <MenuTable />
+                <DataTable />
+                <FormModal />
             </div>
         )
     }

@@ -104,17 +104,41 @@ export function getMenuList() {
         code: 'organization'
     },
     {
-        icon: 'user',
-        text: '用户管理',
-        children: [{
-            text: '角色',
-            code: 'role'
-        },{
-            text: '权限',
-            code: 'rights'
-        }]
+        icon: 'bars',
+        text: '用户',
+        code: 'user'
     },
-    
+    {
+        icon: 'bars',
+        text: '用户组',
+        code: 'userGroup'
+    },
+    {
+        icon: 'bars',
+        text: '项目',
+        code: 'project'
+    },
+    {
+        icon: 'bars',
+        text: '角色',
+        code: 'role'
+    },
+    {
+        icon: 'bars',
+        text: '权限',
+        code: 'rights'
+    },
+    // {
+    //     icon: 'user',
+    //     text: '用户管理',
+    //     children: [{
+    //         text: '角色',
+    //         code: 'role'
+    //     },{
+    //         text: '权限',
+    //         code: 'rights'
+    //     }]
+    // },
     ]
     return dispatch => {
         dispatch(menuList(menus))

@@ -19,7 +19,7 @@ const initState = {
     formData: {},
     dataList: [],
     msg: '',
-    rightsList: [],
+    orgaList: [],
 }
 
 export function user(state = initState, action) {
@@ -34,7 +34,7 @@ export function user(state = initState, action) {
             return { ...state, dataList: action.payload }
         }
         case USER_GET_ORGA_LIST: {
-            return { ...state, rightsList: action.payload }
+            return { ...state, orgaList: action.payload }
         }
         case USER_HANDLE_MODAL_FORM: {
             return {

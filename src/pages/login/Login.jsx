@@ -5,10 +5,10 @@ import React from "react";
 import { Icon, Input, Button, Checkbox, message } from "antd";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { login, changeInput } from "../../redux/user.redux";
+import { login, changeInput } from "../../redux/auth.redux";
 import "./login.scss";
 @connect(
-  state => state.user,
+  state => state.auth,
   { login, changeInput }
 )
 class Login extends React.Component {

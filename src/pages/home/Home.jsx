@@ -29,7 +29,7 @@ class Home extends Component {
         return nextProps.framework.activeMenuCode !== this.props.framework.activeMenuCode
     }
     render() {
-        const { redirectTo } = this.props.user
+        const { redirectTo } = this.props.auth
         return (
             <Fragment>
                 {redirectTo && redirectTo !== '/home' ? <Redirect to={redirectTo} /> : null}

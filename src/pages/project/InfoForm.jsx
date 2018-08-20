@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
-import { Form, Input, Radio } from 'antd'
+import { Form, Input, Radio ,Select} from 'antd'
 import {connect} from 'react-redux'
 
 const { Item, create } = Form
-const RadioGroup = Radio.Group
+const {Option} = Select
 @create({
     mapPropsToFields(props) {
         if (props.formType === 'edit') {
@@ -66,10 +66,10 @@ class InfoForm extends PureComponent {
                             required: true, message: '状态不能为空',
                         }],
                     })(
-                        <RadioGroup>
+                        <Radio.Group>
                             <Radio value={1}>启用</Radio>
                             <Radio value={2}>不启用</Radio>
-                        </RadioGroup>
+                        </Radio.Group>
                     )}
                 </Item>
                 <Item

@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getOrgaList } from '../../redux/user.redux'
+import { getList, getUserList, getRoleList } from '../../redux/userGroup.redux'
 
 const { Item, create } = Form
-
 
 @create({
     mapPropsToFields(props) {
@@ -20,12 +19,13 @@ const { Item, create } = Form
     }
 })
 @connect(
-    state => state.user,
-    { getList, getOrgaList }
+    state => state.userGroup,
+    { getList, getUserList, getRoleList }
 )
 class SearchForm extends PureComponent {
     componentDidMount() {
-        this.props.getOrgaList()
+        this.props.getUserList()
+        this.props.getRoleList()
         this.props.getList()
     }
     handleSearch = (e) => {
@@ -53,15 +53,8 @@ class SearchForm extends PureComponent {
                         </Item>
                     </Col>
                     <Col span={6}>
-                        <Item label="姓名">
-                            {getFieldDecorator('NameCN')(
-                                <Input />
-                            )}
-                        </Item>
-                    </Col>
-                    <Col span={6}>
-                        <Item label="性别">
-                            {getFieldDecorator('Sex')(
+                        <Item label="描述">
+                            {getFieldDecorator('Description')(
                                 <Input />
                             )}
                         </Item>

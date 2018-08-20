@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
 import { Table, Divider, Popconfirm, Tag } from 'antd'
 import { connect } from 'react-redux'
-import { handleModalForm, deleteInfo } from '../../redux/user.redux'
+import { handleModalForm, deleteInfo } from '../../redux/userGroup.redux'
 
 @connect(
-  state => state.user,
+  state => state.userGroup,
   { handleModalForm, deleteInfo }
 )
 class DataTable extends PureComponent {
@@ -16,44 +16,14 @@ class DataTable extends PureComponent {
   }
   render() {
     const columns = [{
-      title: '用户名',
+      title: '名称',
       dataIndex: 'Name',
       key: 'Name',
     },
     {
-      title: '姓名',
-      dataIndex: 'NameCN',
-      key: 'NameCN',
-    },
-    {
-      title: '性别',
-      dataIndex: 'Sex',
-      key: 'Sex',
-      render: text => {
-        if (text == 1) {
-          return (<div>男</div>)
-        } else
-          if (text == 0) {
-            return (<div>女</div>)
-          } else {
-            return null
-          }
-      }
-    },
-    {
-      title: '年龄',
-      dataIndex: 'Age',
-      key: 'Age',
-    },
-    {
-      title: '生日',
-      dataIndex: 'Birthday',
-      key: 'Birthday',
-    },
-    {
-      title: '岗位',
-      dataIndex: 'Post',
-      key: 'Post',
+      title: '描述',
+      dataIndex: 'Description',
+      key: 'Description',
     },
     {
       title: '创建者',

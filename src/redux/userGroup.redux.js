@@ -24,7 +24,7 @@ const initState = {
     roleList:[],
 }
 
-export function userGroupGroup(state = initState, action) {
+export function userGroup(state = initState, action) {
     switch (action.type) {
         case USERGROUP_SEARCH_FORM: {
             return {

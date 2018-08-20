@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
 import { Modal } from 'antd'
 import { connect } from 'react-redux'
-import { handleModalForm, addInfo, editInfo } from '../../redux/user.redux'
+import { handleModalForm, addInfo, editInfo } from '../../redux/userGroup.redux'
 import InfoForm from './InfoForm'
 
 @connect(
-    state => state.user,
+    state => state.userGroup,
     { handleModalForm, addInfo, editInfo }
 )
 class FormModal extends PureComponent {
@@ -14,7 +14,6 @@ class FormModal extends PureComponent {
         const { formType, addInfo, editInfo } = this.props
         form.validateFields((err, values) => {
             if (!err) {
-                values.Birthday = values.Birthday.format('YYYY-MM-DD')
                 if (formType === 'add') {
                     addInfo(values)
                 } else if (formType === 'edit') {

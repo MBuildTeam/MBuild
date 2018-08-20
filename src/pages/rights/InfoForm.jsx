@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react'
-import { Form, Input } from 'antd'
+import { Form, Input, Radio, Select } from 'antd'
+import {connect} from 'react-redux'
 
 const { Item, create } = Form
+const RadioGroup = Radio.Group
+const { Option } = Select
 @create({
     mapPropsToFields(props) {
         if (props.formType === 'edit') {
@@ -15,6 +18,9 @@ const { Item, create } = Form
         }
     }
 })
+@connect(
+    state=>state.rights
+)
 class InfoForm extends PureComponent {
     render() {
         const formItemLayout = {
@@ -49,6 +55,43 @@ class InfoForm extends PureComponent {
                         }],
                     })(
                         <Input />
+                    )}
+                </Item>
+                <Item
+                    {...formItemLayout}
+                    label="菜单"
+                    hasFeedback
+                >
+                    {getFieldDecorator('Rights')(
+                        <Select
+                            mode="multiple"
+                        >
+                            {
+                                this.props.menuList.map(v => {
+                                    return (
+                                        <Option key={v.ID} value={v.ID}>
+                                            {v.Name}
+                                        </Option>
+                                    )
+                                })
+                            }
+                        </Select>
+                    )}
+                </Item>
+                <Item
+                    {...formItemLayout}
+                    label="权限类型"
+                    hasFeedback
+                >
+                    {getFieldDecorator('RightType', {
+                        rules: [{
+                            required: true, message: '权限类型不能为空',
+                        }],
+                    })(
+                        <RadioGroup>
+                            <Radio value={1}>菜单权限</Radio>
+                            <Radio value={2}>功能权限</Radio>
+                        </RadioGroup>
                     )}
                 </Item>
             </Form>

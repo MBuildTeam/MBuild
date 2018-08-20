@@ -3,16 +3,55 @@ const _ = require('lodash')
 const getParam = require('../common/common').getParam
 
 let arr = [{
-    ID: '520000201103289947',
-    Name: "菜单1",
+    ID: '111',
+    Name: "组织机构",
+    Url:'organization',
     Creator: "System",
     CreateTime: Mock.Random.date(),
-},{
-    ID: '810000197912255907',
-    Name: "菜单2",
+},
+{
+    ID: '222',
+    Name: "权限",
+    Url:'rights',
     Creator: "System",
     CreateTime: Mock.Random.date(),
-}]
+},
+{
+    ID: '333',
+    Name: "角色",
+    Url:'role',
+    Creator: "System",
+    CreateTime: Mock.Random.date(),
+},
+{
+    ID: '444',
+    Name: "用户",
+    Url:'user',
+    Creator: "System",
+    CreateTime: Mock.Random.date(),
+},
+{
+    ID: '555',
+    Name: "用户组",
+    Url:'userGroup',
+    Creator: "System",
+    CreateTime: Mock.Random.date(),
+},
+{
+    ID: '666',
+    Name: "组织机构分类",
+    Url:'orgaType',
+    Creator: "System",
+    CreateTime: Mock.Random.date(),
+},
+{
+    ID: '777',
+    Name: "项目",
+    Url:'project',
+    Creator: "System",
+    CreateTime: Mock.Random.date(),
+},
+]
 
 //查询
 Mock.mock(/\/api\/menu\/list/, 'get', function (options) {

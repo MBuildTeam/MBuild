@@ -7,11 +7,15 @@ let arr = [{
     Name: "权限1",
     Creator: "System",
     CreateTime: Mock.Random.date(),
+    Menus:[],
+    RightType:1
 },{
     ID: '810000197912255907',
     Name: "权限2",
     Creator: "System",
     CreateTime: Mock.Random.date(),
+    Menus:[],
+    RightType:2
 }]
 
 //查询

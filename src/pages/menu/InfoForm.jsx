@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react'
-import { Form, Input, Radio, Select } from 'antd'
+import { Form, Input, Radio } from 'antd'
 import {connect} from 'react-redux'
 
 const { Item, create } = Form
 const RadioGroup = Radio.Group
-const { Option } = Select
 @create({
     mapPropsToFields(props) {
         if (props.formType === 'edit') {
@@ -51,7 +50,7 @@ class InfoForm extends PureComponent {
                 >
                     {getFieldDecorator('Name', {
                         rules: [{
-                            required: true, message: '角色名称不能为空',
+                            required: true, message: '名称不能为空',
                         }],
                     })(
                         <Input />
@@ -59,38 +58,30 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label="菜单"
+                    label="Url"
                     hasFeedback
                 >
-                    {getFieldDecorator('Rights')(
-                        <Select
-                            mode="multiple"
-                        >
-                            {
-                                this.props.menuList.map(v => {
-                                    return (
-                                        <Option key={v.ID} value={v.ID}>
-                                            {v.Name}
-                                        </Option>
-                                    )
-                                })
-                            }
-                        </Select>
+                    {getFieldDecorator('Url', {
+                        rules: [{
+                            required: true, message: 'Url不能为空',
+                        }],
+                    })(
+                        <Input />
                     )}
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label="权限类型"
+                    label="状态"
                     hasFeedback
                 >
-                    {getFieldDecorator('RightType', {
+                    {getFieldDecorator('Status', {
                         rules: [{
-                            required: true, message: '权限类型不能为空',
+                            required: true, message: '状态不能为空',
                         }],
                     })(
                         <RadioGroup>
-                            <Radio value={1}>菜单权限</Radio>
-                            <Radio value={2}>功能权限</Radio>
+                            <Radio value={1}>启用</Radio>
+                            <Radio value={2}>不启用</Radio>
                         </RadioGroup>
                     )}
                 </Item>

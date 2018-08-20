@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon, Modal, Popover, message } from 'antd'
 import { connect } from 'react-redux'
-import { openMenu, closeMenu } from '../../redux/menu.redux'
+import { openMenu, closeMenu } from '../../redux/framework.redux'
 import { resetBenchState } from '../../redux/bench.redux'
 
 const stepWidth = 100//步调的像素值

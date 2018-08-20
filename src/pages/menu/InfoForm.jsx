@@ -18,7 +18,7 @@ const RadioGroup = Radio.Group
     }
 })
 @connect(
-    state=>state.rights
+    state=>state.menu
 )
 class InfoForm extends PureComponent {
     render() {

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button, Radio } from 'antd'
 import { connect } from 'react-redux'
-import { getList } from '../../redux/framework.redux'
+import { getList } from '../../redux/menu.redux'
 
 const { Item, create } = Form
 const RadioGroup = Radio.Group
@@ -21,7 +21,7 @@ const RadioGroup = Radio.Group
     }
 })
 @connect(
-    state => state.rights,
+    state => state.menu,
     { getList }
 )
 class SearchForm extends PureComponent {

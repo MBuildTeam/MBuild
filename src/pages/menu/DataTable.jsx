@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
 import { Table, Divider, Popconfirm } from 'antd'
 import { connect } from 'react-redux'
-import { getList, handleModalForm, deleteInfo } from '../../redux/rights.redux'
+import { getList, handleModalForm, deleteInfo } from '../../redux/menu.redux'
 
 @connect(
-  state => state.rights,
+  state => state.menu,
   { getList, handleModalForm, deleteInfo }
 )
 class DataTable extends PureComponent {
@@ -21,15 +21,20 @@ class DataTable extends PureComponent {
       key: 'Name',
     }, 
     {
-      title: '权限类型',
-      dataIndex: 'RightType',
-      key: 'RightType',
+      title: 'Url',
+      dataIndex: 'Url',
+      key: 'Url',
+    }, 
+    {
+      title: '状态',
+      dataIndex: 'Status',
+      key: 'Status',
       render: text => {
         if (text == 1) {
-          return (<div>菜单权限</div>)
+          return (<div>启用</div>)
         } else
           if (text == 2) {
-            return (<div>功能权限</div>)
+            return (<div>不启用</div>)
           } else {
             return null
           }

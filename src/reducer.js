@@ -8,6 +8,7 @@ import { bench } from './redux/bench.redux'
 import { role } from './redux/role.redux'
 import { rights } from './redux/rights.redux'
 import { organization } from './redux/organization.redux'
+import { orgaType } from './redux/orgaType.redux'
 
 export default combineReducers({
     auth,
@@ -18,5 +19,6 @@ export default combineReducers({
     bench,
     role,
     rights,
-    organization
+    organization,
+    orgaType,
 })

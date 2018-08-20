@@ -11,6 +11,7 @@ const RadioGroup = Radio.Group
 @create({
     mapPropsToFields(props) {
         if (props.formType === 'edit') {
+            console.log(props.formData)
             let fields = {}
             for (let key in props.formData) {
                 fields[key] = Form.createFormField({
@@ -125,28 +126,34 @@ class InfoForm extends PureComponent {
                         </Item>
                     </Col>
                 </Row>
-                <Item
-                    {...formItemLayout}
-                    label="生日"
-                    hasFeedback
-                >
-                    {getFieldDecorator('Brithday', {
-                        rules: [{
-                            required: true, message: '生日不能为空',
-                        }],
-                    })(
-                        <DatePicker locale={locale} />
-                    )}
-                </Item>
-                <Item
-                    {...formItemLayout}
-                    label="岗位"
-                    hasFeedback
-                >
-                    {getFieldDecorator('Post')(
-                        <Input />
-                    )}
-                </Item>
+                <Row>
+                    <Col span={12}>
+                        <Item
+                            {...formItemLayout}
+                            label="生日"
+                            hasFeedback
+                        >
+                            {getFieldDecorator('Brithday', {
+                                rules: [{
+                                    required: true, message: '生日不能为空',
+                                }],
+                            })(
+                                <DatePicker locale={locale} />
+                            )}
+                        </Item>
+                    </Col>
+                    <Col span={12}>
+                        <Item
+                            {...formItemLayout}
+                            label="岗位"
+                            hasFeedback
+                        >
+                            {getFieldDecorator('Post')(
+                                <Input />
+                            )}
+                        </Item>
+                    </Col>
+                </Row>
                 <Item
                     {...formItemLayout}
                     label="组织机构"

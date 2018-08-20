@@ -46,7 +46,7 @@ class InfoForm extends PureComponent {
                 >
                     {getFieldDecorator('Name', {
                         rules: [{
-                            required: true, message: '组织机构名称不能为空',
+                            required: true, message: '名称不能为空',
                         }],
                     })(
                         <Input />

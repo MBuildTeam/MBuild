@@ -3,7 +3,7 @@ const _ = require('lodash')
 const getParam = require('../common/common').getParam
 
 let arr = [{
-    ID: Mock.Random.id(),
+    ID: '111',
     Name: "组织1",
     Status: 1,
     Creator: "System",
@@ -11,7 +11,7 @@ let arr = [{
     IsManagerPlatform: true,
     KeyWord: "KeyWord",
 },{
-    ID: Mock.Random.id(),
+    ID: '222',
     Name: "组织2",
     Status: 1,
     Creator: "System",

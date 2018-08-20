@@ -3,14 +3,14 @@ const _ = require('lodash')
 const getParam = require('../common/common').getParam
 
 let arr = [{
-    ID: '520000201103289947',
+    ID: '111',
     Name: "权限1",
     Creator: "System",
     CreateTime: Mock.Random.date(),
     Menus:[],
     RightType:1
 },{
-    ID: '810000197912255907',
+    ID: '222',
     Name: "权限2",
     Creator: "System",
     CreateTime: Mock.Random.date(),

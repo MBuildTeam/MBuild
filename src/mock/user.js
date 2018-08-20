@@ -3,7 +3,7 @@ const _ = require('lodash')
 const getParam = require('../common/common').getParam
 
 let arr = [{
-    ID: Mock.Random.id(),
+    ID: '111',
     Name: "用户1",
     NameCN:'张三',
     Password:'11112222',
@@ -13,9 +13,9 @@ let arr = [{
     Post:'3岗',
     Creator: "System",
     CreateTime: Mock.Random.date(),
-    Rights:['520000201103289947','810000197912255907']
+    Rights:['111','222']
 },{
-    ID: Mock.Random.id(),
+    ID: '222',
     Name: "用户2",
     NameCN:'李四',
     Password:'11112222',
@@ -25,7 +25,7 @@ let arr = [{
     Post:'3岗',
     Creator: "System",
     CreateTime: Mock.Random.date(),
-    Rights:['520000201103289947']
+    Rights:['111']
 }]
 
 //查询

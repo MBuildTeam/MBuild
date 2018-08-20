@@ -9,7 +9,7 @@ import { role } from './redux/role.redux'
 import { rights } from './redux/rights.redux'
 import { organization } from './redux/organization.redux'
 import { orgaType } from './redux/orgaType.redux'
-import { imterface } from './redux/interface.redux'
+import { imterface } from './redux/interface.redux'//因为interface是保留字，故意写成im
 
 export default combineReducers({
     auth,

@@ -1,8 +1,8 @@
 import React from 'react'
 import AddForm from './AddForm'
-import './bench.scss'
+import './Page.scss'
 
-class Bench extends React.Component {
+class Page extends React.Component {
     render() {
         return (
             <div>
@@ -11,4 +11,4 @@ class Bench extends React.Component {
         )
     }
 }
-export default Bench
+export default Page

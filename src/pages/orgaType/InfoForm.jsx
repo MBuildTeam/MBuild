@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Form, Input, Select } from 'antd'
+import { Form, Input, Select,Radio } from 'antd'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
@@ -20,7 +20,7 @@ const { Option } = Select
     }
 })
 @connect(
-    state => state.role
+    state => state.orgaType
 )
 class InfoForm extends PureComponent {
     render() {
@@ -60,15 +60,31 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label="权限"
+                    label="状态"
                     hasFeedback
                 >
-                    {getFieldDecorator('Rights')(
+                    {getFieldDecorator('Status', {
+                        rules: [{
+                            required: true, message: '状态不能为空',
+                        }],
+                    })(
+                        <Radio.Group>
+                            <Radio value={1}>启用</Radio>
+                            <Radio value={2}>不启用</Radio>
+                        </Radio.Group>
+                    )}
+                </Item>
+                <Item
+                    {...formItemLayout}
+                    label="组织机构"
+                    hasFeedback
+                >
+                    {getFieldDecorator('Organizational')(
                         <Select
                             mode="multiple"
                         >
                             {
-                                this.props.rightsList.map(v => {
+                                this.props.orgaList.map(v => {
                                     return (
                                         <Option key={v.ID} value={v.ID}>
                                             {v.Name}
@@ -79,6 +95,28 @@ class InfoForm extends PureComponent {
                         </Select>
                     )}
                 </Item>
+                <Item
+                    {...formItemLayout}
+                    label="接口"
+                    hasFeedback
+                >
+                    {getFieldDecorator('Interface')(
+                        <Select
+                            mode="multiple"
+                        >
+                            {
+                                this.props.interfaceList.map(v => {
+                                    return (
+                                        <Option key={v.ID} value={v.ID}>
+                                            {v.Name}
+                                        </Option>
+                                    )
+                                })
+                            }
+                        </Select>
+                    )}
+                </Item>
+            
             </Form>
         )
     }

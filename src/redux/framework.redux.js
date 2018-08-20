@@ -105,6 +105,11 @@ export function getMenuList() {
     },
     {
         icon: 'bars',
+        text: '组织机构类别',
+        code: 'orgaType'
+    },
+    {
+        icon: 'bars',
         text: '用户',
         code: 'user'
     },

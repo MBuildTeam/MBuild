@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
 import { Table, Divider, Popconfirm, Tag } from 'antd'
 import { connect } from 'react-redux'
-import { handleModalForm, deleteInfo } from '../../redux/role.redux'
+import { handleModalForm, deleteInfo } from '../../redux/orgaType.redux'
 
 @connect(
-  state => state.role,
+  state => state.orgaType,
   { handleModalForm, deleteInfo }
 )
 class DataTable extends PureComponent {
@@ -20,19 +20,21 @@ class DataTable extends PureComponent {
       dataIndex: 'Name',
       key: 'Name',
     },
-    // {
-    //   title: '权限',
-    //   dataIndex: 'Rights',
-    //   key: 'Rights',
-    //   render: (text, record) => {
-    //     console.log(this.props.rightsList)
-    //     return record.Rights.map(v => {
-    //       return (<Tag key={v}>
-    //         {v}
-    //       </Tag>)
-    //     })
-    //   }
-    // },
+    {
+      title: '状态',
+      dataIndex: 'Status',
+      key: 'Status',
+      render: text => {
+        if (text == 1) {
+          return (<div>启用</div>)
+        } else
+          if (text == 2) {
+            return (<div>不启用</div>)
+          } else {
+            return null
+          }
+      }
+    }, 
     {
       title: '创建者',
       dataIndex: 'Creator',

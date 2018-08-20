@@ -9,6 +9,7 @@ import { role } from './redux/role.redux'
 import { rights } from './redux/rights.redux'
 import { organization } from './redux/organization.redux'
 import { orgaType } from './redux/orgaType.redux'
+import { imterface } from './redux/interface.redux'
 
 export default combineReducers({
     auth,
@@ -21,4 +22,5 @@ export default combineReducers({
     rights,
     organization,
     orgaType,
+    imterface,
 })

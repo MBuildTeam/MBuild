@@ -37,7 +37,7 @@ function getMenuByCode(menus, code) {
     return result
 }
 
-export function menu(state = initState, action) {
+export function framework(state = initState, action) {
     switch (action.type) {
         case MENU_LIST:
             {

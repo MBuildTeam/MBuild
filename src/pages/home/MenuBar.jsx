@@ -10,7 +10,7 @@ const SubMenu = Menu.SubMenu
 const MenuItem = Menu.Item
 
 @connect(
-    state => state.menu,
+    state => state.framework,
     { getMenuList, openMenu }
 )
 class MenuBar extends React.Component {

@@ -13,7 +13,7 @@ class Home extends Component {
      * 根据当前激活的菜单决定显示的页面
      */
     getPage() {
-        let { activeMenuCode } = this.props.menu
+        let { activeMenuCode } = this.props.framework
         if (!activeMenuCode) {
             return null
         }
@@ -26,7 +26,7 @@ class Home extends Component {
     }
     shouldComponentUpdate(nextProps, nextState) {
         //解决组件页面不停的装载卸载的问题
-        return nextProps.menu.activeMenuCode !== this.props.menu.activeMenuCode
+        return nextProps.framework.activeMenuCode !== this.props.framework.activeMenuCode
     }
     render() {
         const { redirectTo } = this.props.user

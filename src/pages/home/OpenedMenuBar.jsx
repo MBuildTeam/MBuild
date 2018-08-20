@@ -6,7 +6,7 @@ import { resetBenchState } from '../../redux/bench.redux'
 
 const stepWidth = 100//步调的像素值
 @connect(
-    state => state.menu,
+    state => state.framework,
     { openMenu, closeMenu, resetBenchState }
 )
 class OpenedMenuBar extends React.PureComponent {

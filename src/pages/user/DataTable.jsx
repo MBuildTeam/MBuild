@@ -16,11 +16,45 @@ class DataTable extends PureComponent {
   }
   render() {
     const columns = [{
-      title: '名称',
+      title: '用户名',
       dataIndex: 'Name',
       key: 'Name',
     },
-    
+    {
+      title: '姓名',
+      dataIndex: 'NameCN',
+      key: 'NameCN',
+    },
+    {
+      title: '性别',
+      dataIndex: 'Sex',
+      key: 'Sex',
+      render: text => {
+        if (text == 1) {
+          return (<div>男</div>)
+        } else
+          if (text == 0) {
+            return (<div>女</div>)
+          } else {
+            return null
+          }
+      }
+    },
+    {
+      title: '年龄',
+      dataIndex: 'Age',
+      key: 'Age',
+    },
+    {
+      title: '生日',
+      dataIndex: 'Birthday',
+      key: 'Birthday',
+    },
+    {
+      title: '岗位',
+      dataIndex: 'Post',
+      key: 'Post',
+    },
     {
       title: '创建者',
       dataIndex: 'Creator',

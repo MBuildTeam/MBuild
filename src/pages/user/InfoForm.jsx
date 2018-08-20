@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Row, Col, Form, Input, Select, InputNumber, Radio, DatePicker } from 'antd'
 import locale from 'antd/lib/date-picker/locale/zh_CN';
+import moment from 'moment';
 import 'moment/locale/zh-cn';
 import { connect } from 'react-redux'
 import _ from 'lodash'
@@ -11,12 +12,16 @@ const RadioGroup = Radio.Group
 @create({
     mapPropsToFields(props) {
         if (props.formType === 'edit') {
-            console.log(props.formData)
             let fields = {}
             for (let key in props.formData) {
                 fields[key] = Form.createFormField({
                     value: props.formData[key]
                 })
+                if(key === 'Birthday'){
+                    fields[key] = Form.createFormField({
+                        value: moment(props.formData[key],'YYYY-MM-DD')
+                    })
+                }
             }
             return fields
         }
@@ -133,7 +138,7 @@ class InfoForm extends PureComponent {
                             label="生日"
                             hasFeedback
                         >
-                            {getFieldDecorator('Brithday', {
+                            {getFieldDecorator('Birthday', {
                                 rules: [{
                                     required: true, message: '生日不能为空',
                                 }],

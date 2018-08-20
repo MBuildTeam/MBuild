@@ -5,12 +5,24 @@ const getParam = require('../common/common').getParam
 let arr = [{
     ID: Mock.Random.id(),
     Name: "用户1",
+    NameCN:'张三',
+    Password:'11112222',
+    Sex:1,
+    Age:18,
+    Birthday:'1990-10-01',
+    Post:'3岗',
     Creator: "System",
     CreateTime: Mock.Random.date(),
     Rights:['520000201103289947','810000197912255907']
 },{
     ID: Mock.Random.id(),
     Name: "用户2",
+    NameCN:'李四',
+    Password:'11112222',
+    Sex:0,
+    Age:18,
+    Birthday:'1990-10-01',
+    Post:'3岗',
     Creator: "System",
     CreateTime: Mock.Random.date(),
     Rights:['520000201103289947']

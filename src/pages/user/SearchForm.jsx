@@ -52,7 +52,21 @@ class SearchForm extends PureComponent {
                             )}
                         </Item>
                     </Col>
-                    <Col span={18} >
+                    <Col span={6}>
+                        <Item label="姓名">
+                            {getFieldDecorator('NameCN')(
+                                <Input />
+                            )}
+                        </Item>
+                    </Col>
+                    <Col span={6}>
+                        <Item label="性别">
+                            {getFieldDecorator('Sex')(
+                                <Input />
+                            )}
+                        </Item>
+                    </Col>
+                    <Col span={6} >
                         <Button type="primary" htmlType="submit">查询</Button>
                         <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>重置</Button>
                     </Col>

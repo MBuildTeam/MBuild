@@ -14,7 +14,7 @@ let config = {
         path: path.join(__dirname, '../dist'),
         filename: '[name].[hash].js',
         chunkFilename: "[name].[hash].js",
-        publicPath:''
+        publicPath: ''
     },
     optimization: {
         runtimeChunk: {
@@ -22,10 +22,13 @@ let config = {
         },
         splitChunks: {
             cacheGroups: {
-                vendor: {
-                    test: /node_modules/,
-                    name: "vendor",
-                    chunks: "all"
+                commons: {
+                    name: "commons",
+                    chunks: "initial",
+                    minChunks: 2
+                    // test: /node_modules/,
+                    // name: "vendor",
+                    // chunks: "all"
                 }
             }
         }
@@ -110,7 +113,7 @@ let config = {
         new LodashModuleReplacementPlugin({
             'collections': true,
             'paths': true
-          }),
+        }),
     ],
     resolve: {
         modules: [

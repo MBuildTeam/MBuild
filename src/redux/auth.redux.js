@@ -6,20 +6,23 @@ const ERROR_MSG = 'ERROR_MSG'
 const CLEAR_MSG = 'CLEAR_MSG'
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
 const LOGOUT = 'LOGOUT'
+const AUTO_FORM = 'AUTO_FORM'
 
 const initState = {
     redirectTo: '',
     msg: '',
     isAuth: false,
     userid: '',
+    password: '',
     username: '',
     realname: '',
+    remember:true,
     token: ''
 }
 
 export function auth(state = initState, action) {
     switch (action.type) {
-        case AUTH_SUCCESS:
+        case AUTH_SUCCESS: {
             const { userid, username, realname, token } = action.payload
             return {
                 ...state,
@@ -31,12 +34,26 @@ export function auth(state = initState, action) {
                 msg: '',
                 redirectTo: '/home'
             }
-        case ERROR_MSG:
+        }
+        case ERROR_MSG: {
             return { ...state, msg: action.msg }
-        case CLEAR_MSG:
+        }
+        case CLEAR_MSG:{
             return { ...state, msg: '' }
-        case LOGOUT:
-            return { ...initState ,redirectTo:'/login'}
+        }
+        case LOGOUT:{
+            return { ...initState, redirectTo: '/login' }
+        }
+        case AUTO_FORM: {
+            const { loginname,password,remember } = action.payload
+            console.log(remember)
+            return {
+                ...initState, 
+                username:loginname,
+                password,
+                remember
+            }
+        }
         default:
             return state
     }
@@ -64,6 +81,10 @@ export function login(formData) {
                     //存入sessionStorage
                     sessionStorage.setItem('loginname', loginname)
                     sessionStorage.setItem('password', password)
+                    //存入localStorage
+                    localStorage.setItem('remember', remember)
+                    localStorage.setItem('loginname', loginname)
+                    localStorage.setItem('password', password)
                     dispatch(authSuccess(data))
                 } else {
                     dispatch(errorMsg(message))
@@ -83,7 +104,7 @@ export function authCheck(loginname, password) {
                 if (code == 0) {
                     dispatch(authSuccess(data))
                 } else {
-                    dispatch ({ type: LOGOUT })
+                    dispatch({ type: LOGOUT })
                 }
             })
             .catch(e => {
@@ -96,4 +117,8 @@ export function logout() {
     sessionStorage.removeItem('loginname')
     sessionStorage.removeItem('password')
     return { type: LOGOUT }
+}
+
+export function setForm(formData) {
+    return { type: AUTO_FORM, payload: formData }
 }

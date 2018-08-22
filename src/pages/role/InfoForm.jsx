@@ -5,7 +5,19 @@ import { connect } from 'react-redux'
 const { Item, create } = Form
 const { Option } = Select
 
-@create()
+@create({
+    mapPropsToFields(props) {
+        if (props.formType === 'edit') {
+            let fields = {}
+            for (let key in props.formData) {
+                fields[key] = Form.createFormField({
+                    value: props.formData[key]
+                })
+            }
+            return fields
+        }
+    }
+})
 @connect(
     state => state.role
 )

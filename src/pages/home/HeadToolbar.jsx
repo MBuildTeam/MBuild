@@ -30,7 +30,12 @@ class HeadToolbar extends React.Component {
     render() {
         return (
             <div className="head-toolbar">
-                <Icon className="logout" type="logout"  title="退出系统" onClick={this.handleLogout} />
+                <div  className="tool tool-user">
+                    <Icon  type="user" />
+                    {'system'}
+                </div>
+                <Icon className="tool" type="setting" title="设置" />
+                <Icon className="tool" type="logout"  title="退出系统" onClick={this.handleLogout} />
             </div>
         )
     }

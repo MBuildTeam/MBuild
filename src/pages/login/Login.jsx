@@ -2,28 +2,20 @@
  * Created by 30113 on 2018/6/6.
  */
 import React from "react";
-import { Icon, Input, Button, Checkbox, message } from "antd";
+import { Icon, Input, Button, Checkbox } from "antd";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login, changeInput } from "../../redux/auth.redux";
-import "./login.scss";
+import ".Login.scss";
+
 @connect(
   state => state.auth,
   { login, changeInput }
 )
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-  }
-  handleLogin() {
+  handleLogin = () => {
     const { user, pwd } = this.props;
     this.props.login({ user, pwd });
-  }
-  componentDidUpdate() {
-    if (this.props.msg) {
-      message.error(this.props.msg);
-    }
   }
   render() {
     return (

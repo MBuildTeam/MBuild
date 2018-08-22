@@ -28,6 +28,9 @@ let arr = [{
     Rights:['111']
 }]
 
+//登录验证
+
+
 //查询
 Mock.mock(/\/api\/user\/list/, 'get', function (options) {
     const Name = getParam(options.url,'Name')

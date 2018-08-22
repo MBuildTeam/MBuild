@@ -1,24 +1,11 @@
 import React, { PureComponent } from 'react'
 import { Form, Input, Select } from 'antd'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 const { Item, create } = Form
 const { Option } = Select
 
-@create({
-    mapPropsToFields(props) {
-        if (props.formType === 'edit') {
-            let fields = {}
-            for (let key in props.formData) {
-                fields[key] = Form.createFormField({
-                    value: props.formData[key]
-                })
-            }
-            return fields
-        }
-    }
-})
+@create()
 @connect(
     state => state.role
 )

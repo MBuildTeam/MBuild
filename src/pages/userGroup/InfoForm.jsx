@@ -1,10 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Form, Input, Select } from 'antd'
-import locale from 'antd/lib/date-picker/locale/zh_CN';
-import moment from 'moment';
-import 'moment/locale/zh-cn';
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 const { Item, create } = Form
 const { Option } = Select

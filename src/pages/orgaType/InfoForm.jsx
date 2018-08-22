@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Form, Input, Select,Radio } from 'antd'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 
 const { Item, create } = Form
 const { Option } = Select

@@ -3,33 +3,46 @@ const _ = require('lodash')
 const getParam = require('../common/common').getParam
 
 let arr = [{
-    ID: '111',
-    Name: "用户1",
-    NameCN:'张三',
-    Password:'11112222',
-    Sex:1,
-    Age:18,
-    Birthday:'1990-10-01',
-    Post:'3岗',
-    Creator: "System",
-    CreateTime: Mock.Random.date(),
-    Rights:['111','222']
+    id: 1,
+    name: "admin",
+    realname:'张三',
+    password:'11112222',
+    gender:1,
+    age:18,
+    birthday:'1990-10-01',
+    title:'3岗',
+    orgid:1,
+    groupids:[1,2]
 },{
-    ID: '222',
-    Name: "用户2",
-    NameCN:'李四',
-    Password:'11112222',
-    Sex:0,
-    Age:18,
-    Birthday:'1990-10-01',
-    Post:'3岗',
-    Creator: "System",
-    CreateTime: Mock.Random.date(),
-    Rights:['111']
+    id: 2,
+    name: "system",
+    realname:'李四',
+    password:'11112222',
+    gender:1,
+    age:18,
+    birthday:'1990-10-01',
+    title:'3岗',
+    orgid:1,
+    groupids:[1,2]
 }]
 
 //登录验证
-
+Mock.mock(/\/api\/login\/submit/, 'get', function (options) {
+    const loginname = getParam(options.url,'loginname')
+    const password = getParam(options.url,'password')
+    const users =  _.filter(arr,item=>item.name === loginname&& item.password === password)
+    if(users.length>0){
+        const user = users[0]
+        return {code:0,message:'登录成功',data:{
+            userid:user.id,
+            username:user.name,
+            realname:user.realname,
+            token:'asdfds'
+        }}
+    }else{
+        return {code:1,message:'用户名密码不正确'}
+    }
+})
 
 //查询
 Mock.mock(/\/api\/user\/list/, 'get', function (options) {

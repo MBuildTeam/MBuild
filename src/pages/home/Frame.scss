@@ -2,15 +2,16 @@
 .ant-layout {
     height: 100%;
     .logo {
-        height: 32px;
-        background: #333;
-        border-radius: 6px;
-        margin: 16px;
+        height: 50px;
+        color:#fff;
+        text-align: center;
+        line-height: 50px;
+        font-size: 18px;
     }
     .ant-layout-header {
         position: relative;
         padding: 0;
-        background-color: lighten($color: $menu-color, $amount: 20%);
+        background-color: $header-color;
         height:$header-height;
         line-height: $header-height;
         .trigger {

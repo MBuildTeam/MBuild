@@ -17,6 +17,7 @@ class Frame extends React.PureComponent {
     state = {
         collapsed: false,
         mode: 'inline',
+        logo:'苗建信息处理中心'
     };
 
     toggle = () => {
@@ -24,6 +25,7 @@ class Frame extends React.PureComponent {
         this.setState({
             collapsed,
             mode: collapsed ? 'vertical' : 'inline',
+            logo:collapsed?'苗建中心':'苗建信息处理中心'
         });
     }
 
@@ -35,7 +37,9 @@ class Frame extends React.PureComponent {
                     collapsible
                     collapsed={this.state.collapsed}
                 >
-                    <div className="logo" />
+                    <div className="logo" >
+                        {this.state.logo}
+                    </div>
                     <MenuBar mode={this.state.mode} />
                 </Sider>
                 <Layout>

@@ -19,7 +19,7 @@ class App extends React.Component {
                 <Provider store={store}>
                     <BrowserRouter>
                         <React.Fragment>
-                            {/* <AuthRoute /> */}
+                            <AuthRoute />
                             <Switch>
                                 <Route path="/login" component={Login} />
                                 <Route path="/home" component={Home} />

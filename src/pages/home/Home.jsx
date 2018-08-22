@@ -9,9 +9,6 @@ import Loading from '../../components/loading/Loading'
     state => state
 )
 class Home extends Component {
-    /**
-     * 根据当前激活的菜单决定显示的页面
-     */
     getPage() {
         let { activeMenuCode } = this.props.framework
         if (!activeMenuCode) {

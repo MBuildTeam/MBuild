@@ -4,7 +4,6 @@ import axios from 'axios'
 
 const ERROR_MSG = 'ERROR_MSG'
 const CLEAR_MSG = 'CLEAR_MSG'
-const LOAD_DATA = 'LOAD_DATA'
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
 const LOGOUT = 'LOGOUT'
 
@@ -36,10 +35,8 @@ export function auth(state = initState, action) {
             return { ...state, msg: action.msg }
         case CLEAR_MSG:
             return { ...state, msg: '' }
-        case LOAD_DATA:
-            return { ...state, ...action.payload, isAuth: true }
         case LOGOUT:
-            return { ...initState, redirectTo: '/login' }
+            return { ...initState ,redirectTo:'/login'}
         default:
             return state
     }
@@ -54,11 +51,7 @@ function errorMsg(msg) {
 }
 
 export function clearMsg() {
-    return { type: CLEAR_MSG, }
-}
-
-export function loadData(userinfo) {
-    return { type: LOAD_DATA, payload: userinfo }
+    return { type: CLEAR_MSG }
 }
 
 export function login(formData) {
@@ -68,6 +61,9 @@ export function login(formData) {
             .then(res => {
                 const { code, message, data } = res.data
                 if (code == 0) {
+                    //存入sessionStorage
+                    sessionStorage.setItem('loginname', loginname)
+                    sessionStorage.setItem('password', password)
                     dispatch(authSuccess(data))
                 } else {
                     dispatch(errorMsg(message))
@@ -79,6 +75,25 @@ export function login(formData) {
     }
 }
 
+export function authCheck(loginname, password) {
+    return dispatch => {
+        axios.get('/api/login/submit', { params: { loginname, password } })
+            .then(res => {
+                const { code, message, data } = res.data
+                if (code == 0) {
+                    dispatch(authSuccess(data))
+                } else {
+                    dispatch ({ type: LOGOUT })
+                }
+            })
+            .catch(e => {
+                return { type: LOGOUT }
+            })
+    }
+}
+
 export function logout() {
+    sessionStorage.removeItem('loginname')
+    sessionStorage.removeItem('password')
     return { type: LOGOUT }
 }

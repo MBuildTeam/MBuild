@@ -22,7 +22,9 @@ class Home extends Component {
     }
     shouldComponentUpdate(nextProps, nextState) {
         //解决组件页面不停的装载卸载的问题
-        return nextProps.framework.activeMenuCode !== this.props.framework.activeMenuCode
+        const condition1 = nextProps.framework.activeMenuCode !== this.props.framework.activeMenuCode
+        const condition2 = nextProps.auth.redirectTo !== this.props.auth.redirectTo
+        return condition1 || condition2
     }
     render() {
         const { redirectTo } = this.props.auth

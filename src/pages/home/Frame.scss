@@ -3,7 +3,7 @@
     height: 100%;
     .logo {
         height: 50px;
-        color:#fff;
+        color: #fff;
         text-align: center;
         line-height: 50px;
         font-size: 18px;
@@ -12,7 +12,7 @@
         position: relative;
         padding: 0;
         background-color: $header-color;
-        height:$header-height;
+        height: $header-height;
         line-height: $header-height;
         .trigger {
             position: absolute;
@@ -56,13 +56,13 @@
                 bottom: 0;
                 width: 50px;
                 padding: 0 1px;
-                .ctrl-enable{
+                .ctrl-enable {
                     cursor: pointer;
                     color: #fff;
                 }
-                .ctrl-disable{
+                .ctrl-disable {
                     cursor: default;
-                    color:#888;
+                    color: #888;
                 }
             }
             .menu {
@@ -74,8 +74,6 @@
                 min-width: 80px;
                 max-width: 140px;
                 height: 100%;
-                border-top-left-radius: 10px;
-                border-top-right-radius: 10px;
                 border-left: 1px solid darken($color:$menu-color, $amount: 15%);
                 border-right: 1px solid darken($color:$menu-color, $amount: 15%);
                 box-sizing: border-box;
@@ -90,10 +88,12 @@
                     position: absolute;
                     top: 0;
                     right: 0;
-                    color: #ccc;
-                    border-radius: 10px;
+                    color: rgba(220, 220, 220, .4);
+                    transition: transform 0.2s, background-color 0.2s;
                     &:hover {
                         background-color: red;
+                        transform: rotate(90deg);
+                        color: rgba(250, 250, 250, .8);
                     }
                 }
                 div {
@@ -103,6 +103,17 @@
                     background-color: darken($color:$menu-color, $amount: 15%);
                     &:hover {
                         background-color: darken($color:$menu-color, $amount: 15%);
+                    }
+                    &::after {
+                        content:'';
+                        position: absolute;
+                        left: 50%;
+                        bottom: 0;
+                        width: 0;
+                        height: 0;
+                        border: 10px solid transparent;
+                        border-bottom-color: #fff;
+                        transform: translate(-50%,0);
                     }
                 }
             }
@@ -133,7 +144,7 @@
     }
 }
 
-.ant-popover-inner-content{
+.ant-popover-inner-content {
     padding: 0;
     .menu {
         position: relative;
@@ -154,7 +165,7 @@
         }
         &.active {
             background-color: $menu-color;
-            color:#fff;
+            color: #fff;
         }
     }
 }

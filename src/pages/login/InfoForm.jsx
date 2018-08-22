@@ -70,7 +70,7 @@ class InfoForm extends Component {
                     {getFieldDecorator('remember', {
                         valuePropName: 'checked',
                     })(
-                        <Checkbox style={{ float: 'right' }}>记住我</Checkbox>
+                        <Checkbox >记住我</Checkbox>
                     )}
                 </Item>
                 <Button size="large" type="primary" htmlType="submit" className="login-form-button">

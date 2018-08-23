@@ -16,43 +16,42 @@ const { Header, Sider, Content } = Layout;
 class Frame extends React.PureComponent {
     state = {
         collapsed: false,
-        mode: 'inline',
-        logo:'苗建信息处理中心'
     };
 
     toggle = () => {
         let collapsed = !this.state.collapsed
         this.setState({
             collapsed,
-            mode: collapsed ? 'vertical' : 'inline',
-            logo:collapsed?'苗建中心':'苗建信息处理中心'
         });
     }
 
     render() {
         return (
             <Layout>
-                <Sider
-                    trigger={null}
-                    collapsible
-                    collapsed={this.state.collapsed}
-                >
+                <Header>
                     <div className="logo" >
-                        {this.state.logo}
+                        苗建信息数据处理中心
                     </div>
-                    <MenuBar mode={this.state.mode} />
-                </Sider>
+
+                    <OpenedMenuBar />
+                    <HeadToolbar />
+                </Header>
                 <Layout>
-                    <Header>
+                    <Sider
+                        trigger={null}
+                        collapsible
+                        collapsedWidth={0}
+                        width={220}
+                        collapsed={this.state.collapsed}
+                    >
                         <Icon
-                            className="trigger"
-                            type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                            className={this.state.collapsed ? 'trigger-right' : 'trigger-left'}
+                            type={this.state.collapsed ? 'caret-right' : 'caret-left'}
                             onClick={this.toggle}
                         />
-                        <OpenedMenuBar />
-                        <HeadToolbar />
-                    </Header>
-                    <Content style={{ padding:'10px',background: '#fff', minHeight: 280 }}>
+                        <MenuBar />
+                    </Sider>
+                    <Content style={{ padding: '16px', background: '#fff', minHeight: 280 }}>
                         {this.props.children}
                     </Content>
                 </Layout>

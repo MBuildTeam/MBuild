@@ -32,7 +32,6 @@ class Frame extends React.PureComponent {
                     <div className="logo" >
                         苗建信息数据处理中心
                     </div>
-
                     <OpenedMenuBar />
                     <HeadToolbar />
                 </Header>

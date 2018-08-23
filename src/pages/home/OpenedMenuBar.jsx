@@ -2,12 +2,11 @@ import React from 'react'
 import { Icon, Modal, Popover, message } from 'antd'
 import { connect } from 'react-redux'
 import { openMenu, closeMenu } from '../../redux/framework.redux'
-import { resetBenchState } from '../../redux/bench.redux'
 
 const stepWidth = 100//步调的像素值
 @connect(
     state => state.framework,
-    { openMenu, closeMenu, resetBenchState }
+    { openMenu, closeMenu }
 )
 class OpenedMenuBar extends React.PureComponent {
     constructor(props) {
@@ -68,13 +67,6 @@ class OpenedMenuBar extends React.PureComponent {
             cancelText: '取消',
             onOk: () => {
                 this.props.closeMenu(menu.code)
-                switch (menu.code) {
-                    case 'bench':
-                        this.props.resetBenchState()
-                        break
-                    default:
-                        break;
-                }
             }
         })
     }

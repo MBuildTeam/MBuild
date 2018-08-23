@@ -8,7 +8,7 @@ const stepWidth = 100//步调的像素值
     state => state.framework,
     { openMenu, closeMenu }
 )
-class OpenedMenuBar extends React.PureComponent {
+class HeadOpenedMenuBar extends React.PureComponent {
     constructor(props) {
         super(props)
         this.handleLeft = this.handleLeft.bind(this)
@@ -100,7 +100,7 @@ class OpenedMenuBar extends React.PureComponent {
     render() {
         const { left } = this.state
         return (
-            <div className="menu-bar">
+            <div className="opened-menu-bar">
                 <div className="menu-bar-wrap">
                     <div className="menu-bar-container" style={{ left: left + 'px' }}>
                         {
@@ -128,4 +128,4 @@ class OpenedMenuBar extends React.PureComponent {
     }
 }
 
-export default OpenedMenuBar
+export default HeadOpenedMenuBar

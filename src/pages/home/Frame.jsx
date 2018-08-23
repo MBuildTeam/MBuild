@@ -4,7 +4,8 @@
 import React from 'react'
 import { Layout, Icon } from 'antd';
 import MenuBar from './MenuBar'
-import OpenedMenuBar from './OpenedMenuBar'
+import HeadFixedMenuBar from './HeadFixedMenuBar'
+import HeadOpenedMenuBar from './HeadOpenedMenuBar'
 import HeadToolbar from './HeadToolbar'
 import './Frame.scss'
 
@@ -32,7 +33,8 @@ class Frame extends React.PureComponent {
                     <div className="logo" >
                         苗建信息数据处理中心
                     </div>
-                    <OpenedMenuBar />
+                    <HeadFixedMenuBar />
+                    <HeadOpenedMenuBar />
                     <HeadToolbar />
                 </Header>
                 <Layout>

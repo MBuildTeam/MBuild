@@ -116,7 +116,9 @@ export function authCheck(loginname, password) {
 export function logout() {
     sessionStorage.removeItem('loginname')
     sessionStorage.removeItem('password')
-    return { type: LOGOUT }
+    //强制刷新，避免redux状态仍在，最后的return
+    location.reload()
+    // return { type: LOGOUT }
 }
 
 export function setForm(formData) {

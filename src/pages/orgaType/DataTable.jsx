@@ -29,7 +29,7 @@ class DataTable extends PureComponent {
           return (<div>启用</div>)
         } else
           if (text == 2) {
-            return (<div>不启用</div>)
+            return (<div>停用</div>)
           } else {
             return null
           }

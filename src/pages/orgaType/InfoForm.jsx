@@ -69,7 +69,7 @@ class InfoForm extends PureComponent {
                     })(
                         <Radio.Group>
                             <Radio value={1}>启用</Radio>
-                            <Radio value={2}>不启用</Radio>
+                            <Radio value={2}>停用</Radio>
                         </Radio.Group>
                     )}
                 </Item>

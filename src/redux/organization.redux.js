@@ -50,7 +50,7 @@ export function organization(state = initState, action) {
         }
         case ORGA_EDIT_INFO: {
             let dataList = _.cloneDeep(state.dataList)
-            let toUpdate = _.find(dataList, item => (item.ID === action.data.ID))
+            let toUpdate = _.find(dataList, item => (item.id === action.data.id))
             _.assign(toUpdate, action.data)
             return {
                 ...state,
@@ -60,7 +60,7 @@ export function organization(state = initState, action) {
         }
         case ORGA_DELETE_INFO: {
             let dataList = _.cloneDeep(state.dataList)
-            _.remove(dataList, item => item.ID === action.ID)
+            _.remove(dataList, item => item.id === action.id)
             return {
                 ...state,
                 dataList: dataList
@@ -122,13 +122,13 @@ export function editInfo(info) {
     }
 }
 
-export function deleteInfo(ID) {
+export function deleteInfo(id) {
     return dispatch => {
-        axios.post('/api/organization/delete', { ID })
+        axios.post('/api/organization/delete', { id })
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 1) {
-                    dispatch({ type: ORGA_DELETE_INFO, msg, ID })
+                    dispatch({ type: ORGA_DELETE_INFO, msg, id })
                 } else {
                     dispatch({ type: ORGA_SHOW_MSG, msg })
                 }

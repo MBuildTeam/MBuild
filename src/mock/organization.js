@@ -40,7 +40,7 @@ Mock.mock('/api/organization/add', 'post', function (options) {
 //修改
 Mock.mock('/api/organization/update', 'post', function (options) {
     let info = JSON.parse(options.body)
-    let origin = _.find(arr, (item) => (item.ID === info.ID))
+    let origin = _.find(arr, (item) => (item.id === info.id))
     let updated = _.assign(origin, info)
     return { code: 1, msg: '修改成功', data: updated }
 })

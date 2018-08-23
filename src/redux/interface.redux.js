@@ -55,7 +55,7 @@ export function imterface(state = initState, action) {
         }
         case INTERFACE_EDIT_INFO: {
             let dataList = _.cloneDeep(state.dataList)
-            let toUpdate = _.find(dataList, item => (item.ID === action.data.ID))
+            let toUpdate = _.find(dataList, item => (item.id === action.data.id))
             _.assign(toUpdate, action.data)
             return {
                 ...state,
@@ -65,7 +65,7 @@ export function imterface(state = initState, action) {
         }
         case INTERFACE_DELETE_INFO: {
             let dataList = _.cloneDeep(state.dataList)
-            _.remove(dataList, item => item.ID === action.ID)
+            _.remove(dataList, item => item.id === action.id)
             return {
                 ...state,
                 dataList: dataList
@@ -127,13 +127,13 @@ export function editInfo(info) {
     }
 }
 
-export function deleteInfo(ID) {
+export function deleteInfo(id) {
     return dispatch => {
-        axios.post('/api/interface/delete', { ID })
+        axios.post('/api/interface/delete', { id })
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 1) {
-                    dispatch({ type: INTERFACE_DELETE_INFO, msg, ID })
+                    dispatch({ type: INTERFACE_DELETE_INFO, msg, id })
                 } else {
                     dispatch({ type: INTERFACE_SHOW_MSG, msg })
                 }

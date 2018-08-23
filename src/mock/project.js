@@ -3,14 +3,14 @@ const _ = require('lodash')
 const getParam = require('../common/common').getParam
 
 let arr = [{
-    ID: '111',
+    id: '111',
     Name: "项目1",
     Status:1,
     Creator: "System",
     CreateTime: Mock.Random.date(),
     ProjectManager:['111','222']
 },{
-    ID: '222',
+    id: '222',
     Name: "项目2",
     Status:2,
     Creator: "System",
@@ -31,7 +31,7 @@ Mock.mock(/\/api\/project\/list/, 'get', function (options) {
 //新增
 Mock.mock('/api/project/add', 'post', function (options) {
     let info = JSON.parse(options.body)
-    info.ID = Mock.Random.id()
+    info.id = Mock.Random.id()
     info.CreateTime = Mock.Random.date()
     info.Creator = 'System'
     arr.push(info)
@@ -41,16 +41,16 @@ Mock.mock('/api/project/add', 'post', function (options) {
 //修改
 Mock.mock('/api/project/edit', 'post', function (options) {
     let info = JSON.parse(options.body)
-    let origin = _.find(arr,(item)=>(item.ID === info.ID))
+    let origin = _.find(arr,(item)=>(item.id === info.id))
     let updated = _.assign(origin,info)
     return { code: 1, msg: '修改成功', data: updated }
 })
 
 //删除
 Mock.mock('/api/project/delete', 'post', function (options) {
-    let ID = JSON.parse(options.body).ID
+    let id = JSON.parse(options.body).id
     _.remove(arr, item => (
-        item.ID === ID
+        item.id === id
     ))
     return { code: 1, msg: '删除成功' }
 })

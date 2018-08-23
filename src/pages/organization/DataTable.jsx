@@ -64,7 +64,7 @@ class DataTable extends PureComponent {
         <span>
           <a href="javascript:;" onClick={() => this.handleInfo('edit', true, record)}>编辑</a>
           <Divider type="vertical" />
-          <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(record.ID)}>
+          <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(record.id)}>
             <a href="javascript:;">删除</a>
           </Popconfirm>
         </span>
@@ -74,7 +74,7 @@ class DataTable extends PureComponent {
     ];
     return (
       <Table
-        rowKey={record => record.ID}
+        rowKey={record => record.id}
         dataSource={this.props.dataList}
         columns={columns}
         pagination={false} />

@@ -38,7 +38,7 @@ class InfoForm extends PureComponent {
             <Form>
                 {
                     formType === 'edit' ? <Item>
-                        {getFieldDecorator('ID')(
+                        {getFieldDecorator('id')(
                             <Input type="hidden" />
                         )}
                     </Item> : null

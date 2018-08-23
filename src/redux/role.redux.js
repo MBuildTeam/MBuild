@@ -55,7 +55,7 @@ export function role(state = initState, action) {
         }
         case ROLE_EDIT_INFO: {
             let dataList = _.cloneDeep(state.dataList)
-            let toUpdate = _.find(dataList, item => (item.ID === action.data.ID))
+            let toUpdate = _.find(dataList, item => (item.id === action.data.id))
             _.assign(toUpdate, action.data)
             return {
                 ...state,
@@ -65,7 +65,7 @@ export function role(state = initState, action) {
         }
         case ROLE_DELETE_INFO: {
             let dataList = _.cloneDeep(state.dataList)
-            _.remove(dataList, item => item.ID === action.ID)
+            _.remove(dataList, item => item.id === action.id)
             return {
                 ...state,
                 dataList: dataList
@@ -127,13 +127,13 @@ export function editInfo(info) {
     }
 }
 
-export function deleteInfo(ID) {
+export function deleteInfo(id) {
     return dispatch => {
-        axios.post('/api/role/delete', { ID })
+        axios.post('/api/role/delete', { id })
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 1) {
-                    dispatch({ type: ROLE_DELETE_INFO, msg, ID })
+                    dispatch({ type: ROLE_DELETE_INFO, msg, id })
                 } else {
                     dispatch({ type: ROLE_SHOW_MSG, msg })
                 }

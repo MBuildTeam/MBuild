@@ -39,7 +39,7 @@ class InfoForm extends PureComponent {
             <Form>
                 {
                     formType === 'edit' ? <Item>
-                        {getFieldDecorator('ID')(
+                        {getFieldDecorator('id')(
                             <Input type="hidden" />
                         )}
                     </Item> : null
@@ -69,7 +69,7 @@ class InfoForm extends PureComponent {
                             {
                                 this.props.rightsList.map(v => {
                                     return (
-                                        <Option key={v.ID} value={v.ID}>
+                                        <Option key={v.id} value={v.id}>
                                             {v.Name}
                                         </Option>
                                     )

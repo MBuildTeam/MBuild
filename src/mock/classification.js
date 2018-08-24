@@ -10,7 +10,7 @@ let arr = [{
     creatorid: 1,
     createtime: '2018-08-15',
     orgid:1,
-    interfaceinfoid:1
+    apiid:1
 }, {
     id: 2,
     name: '组织分类2',
@@ -19,11 +19,11 @@ let arr = [{
     creatorid: 1,
     createtime: '2018-08-15',
     orgid:2,
-    interfaceinfoid:2
+    apiid:2
 }]
 
 //查询
-Mock.mock(/\/api\/classification\/list/, 'get', function (options) {
+Mock.mock(/\/api\/classification\/select/, 'get', function (options) {
     const name = getParam(options.url, 'name')
     const pagenum = parseInt(getParam(options.url, 'pagenum'))
     const pagesize = parseInt(getParam(options.url, 'pagesize'))
@@ -32,12 +32,6 @@ Mock.mock(/\/api\/classification\/list/, 'get', function (options) {
         data =  _.filter(data, item => item.name.indexOf(name) > -1)
     }
     const resultcounts = data.length
-    // if (name) {
-    //     var result =  _.filter(arr, item => item.name.indexOf(name) > -1)
-    //     return { code: 0, resultcounts, data: result }
-    // } else {
-    //     return { code: 0, resultcounts, data: arr }
-    // }
     var start = (pagenum - 1) * pagesize
     var end = pagenum * pagesize
     data = data.slice(start, end)

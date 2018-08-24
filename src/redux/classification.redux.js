@@ -11,7 +11,7 @@ const CLASSIFICATION_EDIT_INFO = 'CLASSIFICATION_EDIT_INFO'
 const CLASSIFICATION_DELETE_INFO = 'CLASSIFICATION_DELETE_INFO'
 const CLASSIFICATION_SHOW_MSG = 'CLASSIFICATION_SHOW_MSG'
 const CLASSIFICATION_GET_ORGA_LIST = 'CLASSIFICATION_GET_ORGA_LIST'
-const CLASSIFICATION_GET_INTERFACE_LIST = 'CLASSIFICATION_GET_INTERFACE_LIST'
+const CLASSIFICATION_GET_API_LIST = 'CLASSIFICATION_GET_API_LIST'
 
 const initState = {
     searchForm: {},
@@ -21,7 +21,13 @@ const initState = {
     dataList: [],
     msg: '',
     orgaList: [],
-    interfaceList:[],
+    apiList:[],
+    pagination: {
+        showSizeChanger: true,
+        pageSize: 10,
+        current: 1,
+        total: 0
+    }
 }
 
 export function classification(state = initState, action) {
@@ -33,13 +39,21 @@ export function classification(state = initState, action) {
             }
         }
         case CLASSIFICATION_GET_LIST: {
-            return { ...state, dataList: action.payload }
+            let pagination = _.cloneDeep(state.pagination)
+            pagination.total = action.total
+            pagination.current = action.current
+            pagination.pageSize = action.pageSize
+            return {
+                ...state,
+                dataList: action.payload,
+                pagination: pagination
+            }
         }
         case CLASSIFICATION_GET_ORGA_LIST: {
             return { ...state, orgaList: action.payload }
         }
-        case CLASSIFICATION_GET_INTERFACE_LIST: {
-            return { ...state, interfaceList: action.payload }
+        case CLASSIFICATION_GET_API_LIST: {
+            return { ...state, apiList: action.payload }
         }
         case CLASSIFICATION_HANDLE_MODAL_FORM: {
             return {
@@ -84,9 +98,20 @@ export function classification(state = initState, action) {
 export function getList(params) {
     return dispatch => {
         dispatch({ type: CLASSIFICATION_SEARCH_FORM, data: params })
-        axios.get('/api/classification/list', { params })
+        axios.get('/api/classification/select', { params })
             .then(res => {
-                dispatch({ type: CLASSIFICATION_GET_LIST, payload: res.data })
+                const { code, msg, resultcounts, data } = res.data
+                if (code == 0) {
+                    dispatch({
+                        type: CLASSIFICATION_GET_LIST,
+                        payload: data,
+                        total: resultcounts,
+                        current: params.pagenum,
+                        pageSize: params.pagesize
+                    })
+                } else {
+                    dispatch({ type: ORGA_SHOW_MSG, msg })
+                }
             })
             .catch(e => {
 
@@ -151,7 +176,7 @@ export function deleteInfo(id) {
 
 export function getOrgaList() {
     return dispatch => {
-        axios.get('/api/orga/list')
+        axios.get('/api/organization/select')
             .then(res => {
                 dispatch({ type: CLASSIFICATION_GET_ORGA_LIST, payload: res.data })
             })
@@ -161,11 +186,11 @@ export function getOrgaList() {
     }
 }
 
-export function getInterfaceList() {
+export function getApiList() {
     return dispatch => {
-        axios.get('/api/interface/list')
+        axios.get('/api/api/select')
             .then(res => {
-                dispatch({ type: CLASSIFICATION_GET_INTERFACE_LIST, payload: res.data })
+                dispatch({ type: CLASSIFICATION_GET_API_LIST, payload: res.data })
             })
             .catch(e => {
 

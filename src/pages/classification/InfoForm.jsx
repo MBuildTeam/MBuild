@@ -68,8 +68,24 @@ class InfoForm extends PureComponent {
                         }],
                     })(
                         <Radio.Group>
-                            <Radio value={1}>启用</Radio>
-                            <Radio value={2}>停用</Radio>
+                            <Radio value={0}>启用</Radio>
+                            <Radio value={1}>停用</Radio>
+                        </Radio.Group>
+                    )}
+                </Item>
+                <Item
+                    {...formItemLayout}
+                    label="是否分拣"
+                    hasFeedback
+                >
+                    {getFieldDecorator('unsortedflag', {
+                        rules: [{
+                            required: true, message: '是否分拣不能为空',
+                        }],
+                    })(
+                        <Radio.Group>
+                            <Radio value={true}>已分拣</Radio>
+                            <Radio value={false}>未分拣</Radio>
                         </Radio.Group>
                     )}
                 </Item>
@@ -78,10 +94,8 @@ class InfoForm extends PureComponent {
                     label="组织机构"
                     hasFeedback
                 >
-                    {getFieldDecorator('Organizational')(
-                        <Select
-                            mode="multiple"
-                        >
+                    {getFieldDecorator('orgid')(
+                        <Select>
                             {
                                 this.props.orgaList.map(v => {
                                     return (

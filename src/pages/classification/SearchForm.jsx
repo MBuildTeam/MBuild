@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button,Radio } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getInterfaceList,getOrgaList } from '../../redux/classification.redux'
+import { getList, getApiList,getOrgaList } from '../../redux/classification.redux'
 
 const { Item, create } = Form
 
@@ -21,11 +21,11 @@ const { Item, create } = Form
 })
 @connect(
     state => state.classification,
-    { getList, getInterfaceList,getOrgaList }
+    { getList, getApiList,getOrgaList }
 )
 class SearchForm extends PureComponent {
     componentDidMount() {
-        this.props.getInterfaceList()
+        this.props.getApiList()
         this.props.getOrgaList()
         this.props.getList()
     }

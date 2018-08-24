@@ -9,7 +9,7 @@ import { role } from './redux/role.redux'
 import { rights } from './redux/rights.redux'
 import { organization } from './redux/organization.redux'
 import { classification } from './redux/classification.redux'
-import { imterface } from './redux/interface.redux'//因为interface是保留字，故意写成im
+import { api } from './redux/api.redux'
 import { project } from './redux/project.redux'
 import { projManager } from './redux/projManager.redux'
 
@@ -25,7 +25,7 @@ export default combineReducers({
     rights,
     organization,
     classification,
-    imterface,
+    api,
     project,
     projManager,
 })

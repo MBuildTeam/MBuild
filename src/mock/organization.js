@@ -28,15 +28,11 @@ Mock.mock(/\/api\/organization\/select/, 'get', function (options) {
         data =  _.filter(data, item => item.name.indexOf(name) > -1)
     }
     const resultcounts = data.length
-    // if (name) {
-    //     var result =  _.filter(arr, item => item.name.indexOf(name) > -1)
-    //     return { code: 0, resultcounts, data: result }
-    // } else {
-    //     return { code: 0, resultcounts, data: arr }
-    // }
-    var start = (pagenum - 1) * pagesize
-    var end = pagenum * pagesize
-    data = data.slice(start, end)
+    if(pagesize){
+        var start = (pagenum - 1) * pagesize
+        var end = pagenum * pagesize
+        data = data.slice(start, end)
+    }   
     return { code: 0, resultcounts, data }
 })
 

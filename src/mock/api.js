@@ -15,7 +15,7 @@ let arr = [{
 }]
 
 //查询
-Mock.mock(/\/api\/interface\/list/, 'get', function (options) {
+Mock.mock(/\/api\/api\/select/, 'get', function (options) {
     const name = getParam(options.url,'name')
     if(name){
         return _.filter(arr,item=>item.name.indexOf(name)>-1)
@@ -25,7 +25,7 @@ Mock.mock(/\/api\/interface\/list/, 'get', function (options) {
 })
 
 //新增
-Mock.mock('/api/interface/add', 'post', function (options) {
+Mock.mock('/api/api/add', 'post', function (options) {
     let info = JSON.parse(options.body)
     info.id = Mock.Random.id()
     info.CreateTime = Mock.Random.date()
@@ -35,7 +35,7 @@ Mock.mock('/api/interface/add', 'post', function (options) {
 })
 
 //修改
-Mock.mock('/api/interface/edit', 'post', function (options) {
+Mock.mock('/api/api/edit', 'post', function (options) {
     let info = JSON.parse(options.body)
     let origin = _.find(arr,(item)=>(item.id === info.id))
     let updated = _.assign(origin,info)
@@ -43,7 +43,7 @@ Mock.mock('/api/interface/edit', 'post', function (options) {
 })
 
 //删除
-Mock.mock('/api/interface/delete', 'post', function (options) {
+Mock.mock('/api/api/delete', 'post', function (options) {
     let id = JSON.parse(options.body).id
     _.remove(arr, item => (
         item.id === id

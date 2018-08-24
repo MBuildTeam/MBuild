@@ -64,7 +64,7 @@ class SearchForm extends PureComponent {
                     </Col>
                     <Col span={6}>
                         <Item label="类别">
-                            {getFieldDecorator('operationtype')(
+                            {getFieldDecorator('type')(
                                 <Radio.Group>
                                     <Radio value={1}>标准</Radio>
                                     <Radio value={2}>非标准</Radio>

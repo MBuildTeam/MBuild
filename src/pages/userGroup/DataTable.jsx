@@ -30,8 +30,8 @@ class DataTable extends PureComponent {
     },
     {
       title: '类别',
-      dataIndex: 'grouptype',
-      key: 'grouptype',
+      dataIndex: 'type',
+      key: 'type',
       align: 'center',
       render: text => {
         if (text == 1) {

@@ -5,13 +5,13 @@ const getParam = require('../common/common').getParam
 let arr = [{
     id: 1,
     name: '权限1',
-    operationtype:1,
+    type:1,
     creatorid: 1,
     createtime: '2018-08-15',
 }, {
     id: 2,
     name: '权限2',
-    operationtype:1,
+    type:1,
     creatorid: 1,
     createtime: '2018-08-15',
 }]

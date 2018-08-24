@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
 import { Table, Divider ,Popconfirm} from 'antd'
 import { connect } from 'react-redux'
-import { handleModalForm, deleteInfo,getList } from '../../redux/operation.redux'
+import { handleModalForm, deleteInfo,getList } from '../../redux/api.redux'
 
 @connect(
-  state => state.operation,
+  state => state.api,
   { handleModalForm,deleteInfo, getList }
 )
 class DataTable extends PureComponent {

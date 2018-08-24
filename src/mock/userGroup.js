@@ -5,14 +5,14 @@ const getParam = require('../common/common').getParam
 let arr = [{
     id: 1,
     name: '用户组1',
-    grouptype: 0,
+    type: 0,
     creatorid: 1,
     createtime: '2018-08-15',
     roleids: [1, 2]
 }, {
     id: 2,
     name: '用户组2',
-    grouptype: 2,
+    type: 2,
     creatorid: 1,
     createtime: '2018-08-15',
     roleids: [1]

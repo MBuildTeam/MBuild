@@ -61,7 +61,7 @@ class InfoForm extends PureComponent {
                     label="类别"
                     hasFeedback
                 >
-                    {getFieldDecorator('grouptype', {
+                    {getFieldDecorator('type', {
                         rules: [{
                             required: true, message: '类别不能为空',
                         }],

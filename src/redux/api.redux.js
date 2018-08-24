@@ -10,7 +10,6 @@ const API_ADD_INFO = 'API_ADD_INFO'
 const API_EDIT_INFO = 'API_EDIT_INFO'
 const API_DELETE_INFO = 'API_DELETE_INFO'
 const API_SHOW_MSG = 'API_SHOW_MSG'
-const API_GET_RIGHTS_LIST = 'API_GET_RIGHTS_LIST'
 
 const initState = {
     searchForm: {},
@@ -19,7 +18,13 @@ const initState = {
     formData: {},
     dataList: [],
     msg: '',
-    rightsList: [],
+    roleList: [],
+    pagination: {
+        showSizeChanger: true,
+        pageSize: 10,
+        current: 1,
+        total: 0
+    }
 }
 
 export function api(state = initState, action) {
@@ -31,10 +36,15 @@ export function api(state = initState, action) {
             }
         }
         case API_GET_LIST: {
-            return { ...state, dataList: action.payload }
-        }
-        case API_GET_RIGHTS_LIST: {
-            return { ...state, rightsList: action.payload }
+            let pagination = _.cloneDeep(state.pagination)
+            pagination.total = action.total
+            pagination.current = action.current
+            pagination.pageSize = action.pageSize
+            return {
+                ...state,
+                dataList: action.payload,
+                pagination: pagination
+            }
         }
         case API_HANDLE_MODAL_FORM: {
             return {
@@ -46,11 +56,14 @@ export function api(state = initState, action) {
         }
         case API_ADD_INFO: {
             let dataList = _.cloneDeep(state.dataList)
-            dataList.push(action.data)
+            dataList.unshift(action.data)
+            let pagination = _.cloneDeep(state.pagination)
+            pagination.total -= 1
             return {
                 ...state,
                 modalOpen: false,
-                dataList: dataList
+                dataList: dataList,
+                pagination
             }
         }
         case API_EDIT_INFO: {
@@ -60,15 +73,18 @@ export function api(state = initState, action) {
             return {
                 ...state,
                 modalOpen: false,
-                dataList: dataList
+                dataList: dataList,
             }
         }
         case API_DELETE_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             _.remove(dataList, item => item.id === action.id)
+            let pagination = _.cloneDeep(state.pagination)
+            pagination.total -= 1
             return {
                 ...state,
-                dataList: dataList
+                dataList: dataList,
+                pagination
             }
         }
         default:
@@ -79,9 +95,20 @@ export function api(state = initState, action) {
 export function getList(params) {
     return dispatch => {
         dispatch({ type: API_SEARCH_FORM, data: params })
-        axios.get('/api/api/list', { params })
+        axios.get('/api/api/select', { params })
             .then(res => {
-                dispatch({ type: API_GET_LIST, payload: res.data })
+                const { code, msg, resultcounts, data } = res.data
+                if (code == 0) {
+                    dispatch({
+                        type: API_GET_LIST,
+                        payload: data,
+                        total: resultcounts,
+                        current: params.pagenum,
+                        pageSize: params.pagesize
+                    })
+                } else {
+                    dispatch({ type: API_SHOW_MSG, msg })
+                }
             })
             .catch(e => {
 
@@ -129,7 +156,7 @@ export function editInfo(info) {
 
 export function deleteInfo(id) {
     return dispatch => {
-        axios.post('/api/api/delete', { id })
+        axios.get('/api/api/delete',  { params: { id } })
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 0) {
@@ -144,14 +171,3 @@ export function deleteInfo(id) {
     }
 }
 
-export function getRightsList() {
-    return dispatch => {
-        axios.get('/api/operation/list')
-            .then(res => {
-                dispatch({ type: API_GET_RIGHTS_LIST, payload: res.data })
-            })
-            .catch(e => {
-
-            })
-    }
-}

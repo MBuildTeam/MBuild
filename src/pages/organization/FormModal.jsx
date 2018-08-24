@@ -38,7 +38,7 @@ class FormModal extends PureComponent {
                 onOk={this.handleSubmit}
                 onCancel={() => { this.props.handleModalForm(formType, false) }}
             >
-                <InfoForm formType={formType} formData={formData} ref="infoForm" />
+                <InfoForm formType={formType} formData={formData} ref='infoForm' />
             </Modal>
         )
     }

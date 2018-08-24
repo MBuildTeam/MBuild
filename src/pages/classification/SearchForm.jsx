@@ -57,7 +57,7 @@ class SearchForm extends PureComponent {
             <Form onSubmit={this.handleSearch}>
                 <Row gutter={16}>
                     <Col span={6}>
-                        <Item label="名称">
+                        <Item label='名称'>
                             {getFieldDecorator('name')(
                                 <Input />
                             )}
@@ -93,7 +93,7 @@ class SearchForm extends PureComponent {
                         </Item>
                     </Col>
                     <Col span={4} >
-                        <Button type="primary" htmlType="submit">查询</Button>
+                        <Button type='primary' htmlType='submit'>查询</Button>
                         <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>重置</Button>
                     </Col>
                 </Row>

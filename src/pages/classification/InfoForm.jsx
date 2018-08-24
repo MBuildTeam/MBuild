@@ -41,13 +41,13 @@ class InfoForm extends PureComponent {
                 {
                     formType === 'update' ? <Item>
                         {getFieldDecorator('id')(
-                            <Input type="hidden" />
+                            <Input type='hidden' />
                         )}
                     </Item> : null
                 }
                 <Item
                     {...formItemLayout}
-                    label="名称"
+                    label='名称'
                     hasFeedback
                 >
                     {getFieldDecorator('name', {
@@ -60,7 +60,7 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label="状态"
+                    label='状态'
                     hasFeedback
                 >
                     {getFieldDecorator('status', {
@@ -76,7 +76,7 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label="是否分拣"
+                    label='是否分拣'
                     hasFeedback
                 >
                     {getFieldDecorator('unsortedflag', {
@@ -92,7 +92,7 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label="组织机构"
+                    label='组织机构'
                     hasFeedback
                 >
                     {getFieldDecorator('orgid', {
@@ -115,7 +115,7 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label="接口"
+                    label='接口'
                     hasFeedback
                 >
                     {getFieldDecorator('apiid', {

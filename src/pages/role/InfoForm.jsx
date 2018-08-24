@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react'
-import { Form, Input, Radio } from 'antd'
+import { Form, Input, Select } from 'antd'
+import { connect } from 'react-redux'
 
-const RadioGroup = Radio.Group
 const { Item, create } = Form
+const { Option } = Select
+
 @create({
     mapPropsToFields(props) {
         if (props.formType === 'update') {
@@ -16,6 +18,9 @@ const { Item, create } = Form
         }
     }
 })
+@connect(
+    state => state.role
+)
 class InfoForm extends PureComponent {
     render() {
         const formItemLayout = {
@@ -54,18 +59,23 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label='类别'
+                    label='权限'
                     hasFeedback
                 >
-                    {getFieldDecorator('type', {
-                        rules: [{
-                            required: true, message: '类别不能为空',
-                        }],
-                    })(
-                        <Radio.Group>
-                            <Radio value={1}>标准</Radio>
-                            <Radio value={2}>非标准</Radio>
-                        </Radio.Group>
+                    {getFieldDecorator('Rights')(
+                        <Select
+                            mode='multiple'
+                        >
+                            {
+                                this.props.rightsList.map(v => {
+                                    return (
+                                        <Option key={v.id} value={v.id}>
+                                            {v.name}
+                                        </Option>
+                                    )
+                                })
+                            }
+                        </Select>
                     )}
                 </Item>
             </Form>

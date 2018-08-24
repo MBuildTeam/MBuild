@@ -36,7 +36,7 @@ class MenuBar extends React.Component {
                         key={v.code}
                     >
                         <Icon type={v.icon} />
-                        <span className="nav-text">{v.text}</span>
+                        <span className='nav-text'>{v.text}</span>
                     </MenuItem>
                 )
             }
@@ -44,8 +44,8 @@ class MenuBar extends React.Component {
     }
     render() {
         return (
-            <Menu theme="dark"
-                mode={"inline"}
+            <Menu theme='dark'
+                mode={'inline'}
                 selectedKeys={[this.props.activeMenuCode]}
                 onClick={this.handleClick}
             >

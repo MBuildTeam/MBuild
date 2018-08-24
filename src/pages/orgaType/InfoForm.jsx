@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react'
-import { Form, Input, Radio } from 'antd'
+import { Form, Input, Select,Radio } from 'antd'
+import { connect } from 'react-redux'
 
-const RadioGroup = Radio.Group
 const { Item, create } = Form
+const { Option } = Select
+
 @create({
     mapPropsToFields(props) {
         if (props.formType === 'update') {
@@ -16,6 +18,9 @@ const { Item, create } = Form
         }
     }
 })
+@connect(
+    state => state.classification
+)
 class InfoForm extends PureComponent {
     render() {
         const formItemLayout = {
@@ -54,48 +59,6 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label='加密key'
-                    hasFeedback
-                >
-                    {getFieldDecorator('appkey', {
-                        rules: [{
-                            required: true, message: '加密key不能为空',
-                        }],
-                    })(
-                        <Input />
-                    )}
-                </Item>
-                <Item
-                    {...formItemLayout}
-                    label='url'
-                    hasFeedback
-                >
-                    {getFieldDecorator('requesturl', {
-                        rules: [{
-                            required: true, message: 'url不能为空',
-                        }],
-                    })(
-                        <Input />
-                    )}
-                </Item>
-                <Item
-                    {...formItemLayout}
-                    label='类别'
-                    hasFeedback
-                >
-                    {getFieldDecorator('type', {
-                        rules: [{
-                            required: true, message: '类别不能为空',
-                        }],
-                    })(
-                        <Radio.Group>
-                            <Radio value={1}>标准</Radio>
-                            <Radio value={2}>非标准</Radio>
-                        </Radio.Group>
-                    )}
-                </Item>
-                <Item
-                    {...formItemLayout}
                     label='状态'
                     hasFeedback
                 >
@@ -105,11 +68,54 @@ class InfoForm extends PureComponent {
                         }],
                     })(
                         <Radio.Group>
-                            <Radio value={1}>标准</Radio>
-                            <Radio value={2}>非标准</Radio>
+                            <Radio value={1}>启用</Radio>
+                            <Radio value={2}>停用</Radio>
                         </Radio.Group>
                     )}
                 </Item>
+                <Item
+                    {...formItemLayout}
+                    label='组织机构'
+                    hasFeedback
+                >
+                    {getFieldDecorator('Organizational')(
+                        <Select
+                            mode='multiple'
+                        >
+                            {
+                                this.props.orgaList.map(v => {
+                                    return (
+                                        <Option key={v.id} value={v.id}>
+                                            {v.name}
+                                        </Option>
+                                    )
+                                })
+                            }
+                        </Select>
+                    )}
+                </Item>
+                <Item
+                    {...formItemLayout}
+                    label='接口'
+                    hasFeedback
+                >
+                    {getFieldDecorator('Interface')(
+                        <Select
+                            mode='multiple'
+                        >
+                            {
+                                this.props.interfaceList.map(v => {
+                                    return (
+                                        <Option key={v.id} value={v.id}>
+                                            {v.name}
+                                        </Option>
+                                    )
+                                })
+                            }
+                        </Select>
+                    )}
+                </Item>
+            
             </Form>
         )
     }

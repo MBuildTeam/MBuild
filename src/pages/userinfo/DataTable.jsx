@@ -89,15 +89,15 @@ class DataTable extends PureComponent {
       key: 'createtime',
       align: 'center',
     }, {
-      title: (<div>操作<Divider type="vertical" />
-        <a href="javascript:;" onClick={() => this.handleInfo('add', true)}>新增</a></div>),
+      title: (<div>操作<Divider type='vertical' />
+        <a href='javascript:;' onClick={() => this.handleInfo('add', true)}>新增</a></div>),
       key: 'action',
       render: (text, record) => (
         <span>
-          <a href="javascript:;" onClick={() => this.handleInfo('update', true, record)}>编辑</a>
-          <Divider type="vertical" />
-          <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(record.id)}>
-            <a href="javascript:;">删除</a>
+          <a href='javascript:;' onClick={() => this.handleInfo('update', true, record)}>编辑</a>
+          <Divider type='vertical' />
+          <Popconfirm title='确认删除?' onConfirm={() => this.handleDelete(record.id)}>
+            <a href='javascript:;'>删除</a>
           </Popconfirm>
         </span>
       )

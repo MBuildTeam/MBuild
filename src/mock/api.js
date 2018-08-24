@@ -4,7 +4,7 @@ const getParam = require('../common/common').getParam
 
 let arr = [{
     id: 1,
-    name: "接口1",
+    name: '接口1',
     appkey:'xyxyxy',
     type:1,
     requesturl:'/xxx/yyy',
@@ -13,7 +13,7 @@ let arr = [{
     createtime: Mock.Random.date(),
 },{
     id: 2,
-    name: "接口2",
+    name: '接口2',
     appkey:'xyxyxy',
     type:2,
     requesturl:'/xxx/yyy',

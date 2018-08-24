@@ -23,13 +23,13 @@ class HeadToolbar extends React.Component {
     }
     render() {
         return (
-            <div className="head-toolbar">
-                <div className="tool tool-user">
-                    <Icon type="user" />
+            <div className='head-toolbar'>
+                <div className='tool tool-user'>
+                    <Icon type='user' />
                     {this.props.username}
                 </div>
-                <Icon className="tool" type="setting" title="设置" />
-                <Icon className="tool" type="logout" title="退出系统"
+                <Icon className='tool' type='setting' title='设置' />
+                <Icon className='tool' type='logout' title='退出系统'
                     onClick={this.handleLogout} />
             </div>
         )

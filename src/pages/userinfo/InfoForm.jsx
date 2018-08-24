@@ -45,7 +45,7 @@ class InfoForm extends PureComponent {
                 {
                     formType === 'update' ? <Item>
                         {getFieldDecorator('id')(
-                            <Input type="hidden" />
+                            <Input type='hidden' />
                         )}
                     </Item> : null
                 }
@@ -53,7 +53,7 @@ class InfoForm extends PureComponent {
                     <Col span={12}>
                         <Item
                             {...formItemLayout}
-                            label="用户名"
+                            label='用户名'
                             hasFeedback
                         >
                             {getFieldDecorator('name', {
@@ -68,7 +68,7 @@ class InfoForm extends PureComponent {
                     <Col span={12}>
                         <Item
                             {...formItemLayout}
-                            label="姓名"
+                            label='姓名'
                             hasFeedback
                         >
                             {getFieldDecorator('realname', {
@@ -85,7 +85,7 @@ class InfoForm extends PureComponent {
                     <Col span={12}>
                         <Item
                             {...formItemLayout}
-                            label="密码"
+                            label='密码'
                             hasFeedback
                         >
                             {getFieldDecorator('password', {
@@ -100,7 +100,7 @@ class InfoForm extends PureComponent {
                     <Col span={12}>
                         <Item
                             {...formItemLayout}
-                            label="状态"
+                            label='状态'
                             hasFeedback
                         >
                             {getFieldDecorator('status', {
@@ -120,7 +120,7 @@ class InfoForm extends PureComponent {
                     <Col span={12}>
                         <Item
                             {...formItemLayout}
-                            label="性别"
+                            label='性别'
                             hasFeedback
                         >
                             {getFieldDecorator('gender', {
@@ -138,7 +138,7 @@ class InfoForm extends PureComponent {
                     <Col span={12}>
                         <Item
                             {...formItemLayout}
-                            label="年龄"
+                            label='年龄'
                             hasFeedback
                         >
                             {getFieldDecorator('age', {
@@ -155,7 +155,7 @@ class InfoForm extends PureComponent {
                     <Col span={12}>
                         <Item
                             {...formItemLayout}
-                            label="生日"
+                            label='生日'
                             hasFeedback
                         >
                             {getFieldDecorator('birthday', {
@@ -170,7 +170,7 @@ class InfoForm extends PureComponent {
                     <Col span={12}>
                         <Item
                             {...formItemLayout}
-                            label="岗位"
+                            label='岗位'
                             hasFeedback
                         >
                             {getFieldDecorator('title', {
@@ -185,7 +185,7 @@ class InfoForm extends PureComponent {
                 </Row>
                 <Item
                     {...formItemLayout}
-                    label="组织机构"
+                    label='组织机构'
                     hasFeedback
                 >
                     {getFieldDecorator('orgid', {
@@ -208,7 +208,7 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label="用户组"
+                    label='用户组'
                     hasFeedback
                 >
                     {getFieldDecorator('groupids', {
@@ -217,7 +217,7 @@ class InfoForm extends PureComponent {
                         }],
                     })(
                         <Select
-                            mode="multiple"
+                            mode='multiple'
                         >
                             {
                                 this.props.groupList.map(v => {

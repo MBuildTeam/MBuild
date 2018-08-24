@@ -4,7 +4,7 @@ const getParam = require('../common/common').getParam
 
 let arr = [{
     id: 1,
-    name: "admin",
+    name: 'admin',
     realname:'张三',
     password:'1',
     gender:1,
@@ -18,7 +18,7 @@ let arr = [{
     createtime:'2018-08-15'
 },{
     id: 2,
-    name: "system",
+    name: 'system',
     realname:'李四',
     password:'1',
     gender:1,

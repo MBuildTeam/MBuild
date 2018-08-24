@@ -4,16 +4,16 @@ const getParam = require('../common/common').getParam
 
 let arr = [{
     id: '111',
-    name: "项目1",
+    name: '项目1',
     status:1,
-    Creator: "System",
+    Creator: 'System',
     createtime: Mock.Random.date(),
     ProjectManager:['111','222']
 },{
     id: '222',
-    name: "项目2",
+    name: '项目2',
     status:2,
-    Creator: "System",
+    Creator: 'System',
     createtime: Mock.Random.date(),
     ProjectManager:['111']
 }]

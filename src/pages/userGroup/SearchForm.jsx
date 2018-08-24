@@ -56,14 +56,14 @@ class SearchForm extends PureComponent {
             <Form onSubmit={this.handleSearch}>
                 <Row gutter={16}>
                     <Col span={6}>
-                        <Item label="名称">
+                        <Item label='名称'>
                             {getFieldDecorator('name')(
                                 <Input />
                             )}
                         </Item>
                     </Col>
                     <Col span={6}>
-                        <Item label="类别">
+                        <Item label='类别'>
                             {getFieldDecorator('type')(
                                 <Radio.Group>
                                     <Radio value={1}>标准</Radio>
@@ -73,7 +73,7 @@ class SearchForm extends PureComponent {
                         </Item>
                     </Col>
                     <Col span={6}>
-                        <Item label="角色">
+                        <Item label='角色'>
                             {getFieldDecorator('roleid')(
                                 <Select
                                     style={{ width: 170 }}
@@ -92,7 +92,7 @@ class SearchForm extends PureComponent {
                         </Item>
                     </Col>
                     <Col span={6} >
-                        <Button type="primary" htmlType="submit">查询</Button>
+                        <Button type='primary' htmlType='submit'>查询</Button>
                         <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>重置</Button>
                     </Col>
                 </Row>

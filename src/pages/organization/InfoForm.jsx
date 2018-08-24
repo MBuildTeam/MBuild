@@ -35,13 +35,13 @@ class InfoForm extends PureComponent {
                 {
                     formType === 'update' ? <Item>
                         {getFieldDecorator('id')(
-                            <Input type="hidden" />
+                            <Input type='hidden' />
                         )}
                     </Item> : null
                 }
                 <Item
                     {...formItemLayout}
-                    label="名称"
+                    label='名称'
                     hasFeedback
                 >
                     {getFieldDecorator('name', {
@@ -54,7 +54,7 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label="状态"
+                    label='状态'
                     hasFeedback
                 >
                     {getFieldDecorator('status', {
@@ -70,7 +70,7 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label="管理企业"
+                    label='管理企业'
                     hasFeedback
                 >
                     {getFieldDecorator('ismanagerplatform', {

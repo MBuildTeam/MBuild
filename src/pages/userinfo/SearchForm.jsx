@@ -57,21 +57,21 @@ class SearchForm extends PureComponent {
             <Form onSubmit={this.handleSearch}>
                 <Row gutter={16}>
                     <Col span={6}>
-                        <Item label="用户名">
+                        <Item label='用户名'>
                             {getFieldDecorator('name')(
                                 <Input />
                             )}
                         </Item>
                     </Col>
                     <Col span={6}>
-                        <Item label="姓名">
+                        <Item label='姓名'>
                             {getFieldDecorator('realname')(
                                 <Input />
                             )}
                         </Item>
                     </Col>
                     <Col span={6}>
-                        <Item label="状态">
+                        <Item label='状态'>
                             {getFieldDecorator('status')(
                                 <Radio.Group>
                                     <Radio value={0}>启用</Radio>
@@ -81,7 +81,7 @@ class SearchForm extends PureComponent {
                         </Item>
                     </Col>
                     <Col span={6}>
-                        <Item label="机构">
+                        <Item label='机构'>
                             {getFieldDecorator('orgid')(
                                 <Select
                                     style={{ width: 170 }}
@@ -100,7 +100,7 @@ class SearchForm extends PureComponent {
                         </Item>
                     </Col>
                     <Col span={6}>
-                        <Item label="用户组">
+                        <Item label='用户组'>
                             {getFieldDecorator('groupid')(
                                 <Select
                                     style={{ width: 170 }}
@@ -119,7 +119,7 @@ class SearchForm extends PureComponent {
                         </Item>
                     </Col>
                     <Col span={6} >
-                        <Button type="primary" htmlType="submit">查询</Button>
+                        <Button type='primary' htmlType='submit'>查询</Button>
                         <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>重置</Button>
                     </Col>
                 </Row>

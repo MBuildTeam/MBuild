@@ -95,7 +95,11 @@ class InfoForm extends PureComponent {
                     label="组织机构"
                     hasFeedback
                 >
-                    {getFieldDecorator('orgid')(
+                    {getFieldDecorator('orgid', {
+                        rules: [{
+                            required: true, message: '组织机构不能为空',
+                        }],
+                    })(
                         <Select>
                             {
                                 this.props.orgaList.map(v => {
@@ -114,10 +118,12 @@ class InfoForm extends PureComponent {
                     label="接口"
                     hasFeedback
                 >
-                    {getFieldDecorator('apiid')(
-                        <Select
-                            mode="multiple"
-                        >
+                    {getFieldDecorator('apiid', {
+                        rules: [{
+                            required: true, message: '接口不能为空',
+                        }],
+                    })(
+                        <Select>
                             {
                                 this.props.apiList.map(v => {
                                     return (

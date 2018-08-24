@@ -35,7 +35,6 @@ Mock.mock(/\/api\/classification\/select/, 'get', function (options) {
     var start = (pagenum - 1) * pagesize
     var end = pagenum * pagesize
     data = data.slice(start, end)
-    console.log(data)
     return { code: 0, resultcounts, data }
 })
 

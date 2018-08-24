@@ -1,10 +1,14 @@
 import React, { PureComponent } from 'react'
-import { Form, Row, Col, Input, Button } from 'antd'
+import { Form, Row, Col, Input, Button, Radio, Select } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getUserList, getRoleList } from '../../redux/usergroup.redux'
+import { getList, getRoleList } from '../../redux/usergroup.redux'
 
 const { Item, create } = Form
 
+@connect(
+    state => state.usergroup,
+    { getList, getRoleList }
+)
 @create({
     mapPropsToFields(props) {
         if (props.searchForm) {
@@ -18,27 +22,33 @@ const { Item, create } = Form
         }
     }
 })
-@connect(
-    state => state.usergroup,
-    { getList, getUserList, getRoleList }
-)
 class SearchForm extends PureComponent {
     componentDidMount() {
-        this.props.getUserList()
         this.props.getRoleList()
-        this.props.getList()
+        var values = this.props.searchForm
+        //配入分页条件
+        values.pagenum = this.props.pagination.current
+        values.pagesize = this.props.pagination.pageSize
+        this.props.getList(values)
     }
     handleSearch = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
+                //配入分页条件
+                values.pagenum = 1
+                values.pagesize = this.props.pagination.pageSize
                 this.props.getList(values)
             }
         })
     }
     handleReset = () => {
         this.props.form.resetFields()
-        this.props.getList()
+        var values = {}
+        //配入分页条件
+        values.pagenum = 1
+        values.pagesize = this.props.pagination.pageSize
+        this.props.getList(values)
     }
     render() {
         const { getFieldDecorator } = this.props.form
@@ -46,37 +56,38 @@ class SearchForm extends PureComponent {
             <Form onSubmit={this.handleSearch}>
                 <Row gutter={16}>
                     <Col span={6}>
-                        <Item label="用户名">
+                        <Item label="名称">
                             {getFieldDecorator('name')(
                                 <Input />
                             )}
                         </Item>
                     </Col>
                     <Col span={6}>
-                        <Item label="姓名">
-                            {getFieldDecorator('realname')(
-                                <Input />
+                        <Item label="类别">
+                            {getFieldDecorator('grouptype')(
+                                <Radio.Group>
+                                    <Radio value={0}>启用</Radio>
+                                    <Radio value={1}>停用</Radio>
+                                </Radio.Group>
                             )}
                         </Item>
                     </Col>
                     <Col span={6}>
-                        <Item label="姓名">
-                            {getFieldDecorator('realname')(
-                                <Input />
-                            )}
-                        </Item>
-                    </Col>
-                    <Col span={6}>
-                        <Item label="姓名">
-                            {getFieldDecorator('realname')(
-                                <Input />
-                            )}
-                        </Item>
-                    </Col>
-                    <Col span={6}>
-                        <Item label="姓名">
-                            {getFieldDecorator('realname')(
-                                <Input />
+                        <Item label="角色">
+                            {getFieldDecorator('roleid')(
+                                <Select
+                                    style={{ width: 170 }}
+                                >
+                                    {
+                                        this.props.roleList.map(v => {
+                                            return (
+                                                <Select.Option key={v.id} value={v.id}>
+                                                    {v.name}
+                                                </Select.Option>
+                                            )
+                                        })
+                                    }
+                                </Select>
                             )}
                         </Item>
                     </Col>

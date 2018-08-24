@@ -5,15 +5,17 @@ const getParam = require('../common/common').getParam
 let arr = [{
     id: 1,
     name: '用户组1',
-    status: 0,
+    grouptype: 0,
     creatorid: 1,
     createtime: '2018-08-15',
+    roleids: [1, 2]
 }, {
     id: 2,
     name: '用户组2',
-    status: 1,
+    grouptype: 2,
     creatorid: 1,
     createtime: '2018-08-15',
+    roleids: [1]
 }]
 
 //查询
@@ -22,15 +24,15 @@ Mock.mock(/\/api\/usergroup\/select/, 'get', function (options) {
     const pagenum = parseInt(getParam(options.url, 'pagenum'))
     const pagesize = parseInt(getParam(options.url, 'pagesize'))
     var data = arr
-    if(name){
-        data =  _.filter(data, item => item.name.indexOf(name) > -1)
+    if (name) {
+        data = _.filter(data, item => item.name.indexOf(name) > -1)
     }
     const resultcounts = data.length
-    if(!isNaN(pagenum) && !isNaN(pagesize) ){
+    if (!isNaN(pagenum) && !isNaN(pagesize)) {
         var start = (pagenum - 1) * pagesize
         var end = pagenum * pagesize
         data = data.slice(start, end)
-    }   
+    }
     return { code: 0, resultcounts, data }
 })
 

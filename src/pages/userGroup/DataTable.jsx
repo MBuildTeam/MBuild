@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
 import { Table, Divider, Popconfirm, Tag } from 'antd'
 import { connect } from 'react-redux'
-import { handleModalForm, deleteInfo } from '../../redux/usergroup.redux'
+import { handleModalForm, deleteInfo ,getList} from '../../redux/usergroup.redux'
 
 @connect(
   state => state.usergroup,
-  { handleModalForm, deleteInfo }
+  { handleModalForm, deleteInfo,getList }
 )
 class DataTable extends PureComponent {
   handleInfo = (type, open, data) => {
@@ -14,29 +14,55 @@ class DataTable extends PureComponent {
   handleDelete = (id) => {
     this.props.deleteInfo(id)
   }
+  handleTableChange = (pagination) => {
+    let values = this.props.searchForm
+    //配入分页条件
+    values.pagenum = pagination.current
+    values.pagesize = pagination.pageSize
+    this.props.getList(values)
+  }
   render() {
     const columns = [{
       title: '名称',
       dataIndex: 'name',
       key: 'name',
+      align: 'center',
     },
     {
-      title: '描述',
-      dataIndex: 'Description',
-      key: 'Description',
+      title: '类别',
+      dataIndex: 'grouptype',
+      key: 'grouptype',
+      align: 'center',
+      render: text => {
+        if (text == 1) {
+          return (<div>标准</div>)
+        } else {
+          return (<div>非标准</div>)
+        }
+      }
     },
+    {
+      title: 'api接口',
+      dataIndex: 'roleids',
+      key: 'roleids',
+      align: 'center',
+    }, 
     {
       title: '创建者',
-      dataIndex: 'Creator',
-      key: 'Creator',
-    }, {
+      dataIndex: 'creatorid',
+      key: 'creatorid',
+      align: 'center',
+    },
+    {
       title: '创建时间',
       dataIndex: 'createtime',
       key: 'createtime',
+      align: 'center',
     }, {
       title: (<div>操作<Divider type="vertical" />
         <a href="javascript:;" onClick={() => this.handleInfo('add', true)}>新增</a></div>),
       key: 'action',
+      align: 'center',
       render: (text, record) => (
         <span>
           <a href="javascript:;" onClick={() => this.handleInfo('update', true, record)}>编辑</a>
@@ -54,7 +80,9 @@ class DataTable extends PureComponent {
         rowKey={record => record.id}
         dataSource={this.props.dataList}
         columns={columns}
-        pagination={false} />
+        pagination={this.props.pagination}
+        onChange={this.handleTableChange}
+      />
     )
   }
 }

@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
-import { Form, Input, Select } from 'antd'
+import { Form, Input, Select, Radio } from 'antd'
 import { connect } from 'react-redux'
 
 const { Item, create } = Form
-const { Option } = Select
 
 @create({
     mapPropsToFields(props) {
@@ -59,60 +58,41 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label="描述"
+                    label="类别"
                     hasFeedback
                 >
-                    {getFieldDecorator('Description', {
+                    {getFieldDecorator('grouptype', {
                         rules: [{
-                            required: true, message: '描述不能为空',
+                            required: true, message: '类别不能为空',
                         }],
                     })(
-                        <Input />
+                        <Radio.Group>
+                            <Radio value={0}>启用</Radio>
+                            <Radio value={1}>停用</Radio>
+                        </Radio.Group>
                     )}
                 </Item>
-               <Item
+                <Item
                     {...formItemLayout}
                     label="关联角色"
                     hasFeedback
                 >
-                    {getFieldDecorator('Roles')(
+                    {getFieldDecorator('roleids')(
                         <Select
                             mode="multiple"
                         >
                             {
                                 this.props.roleList.map(v => {
                                     return (
-                                        <Option key={v.id} value={v.id}>
+                                        <Select.Option key={v.id} value={v.id}>
                                             {v.name}
-                                        </Option>
+                                        </Select.Option>
                                     )
                                 })
                             }
                         </Select>
                     )}
                 </Item>
-                <Item
-                    {...formItemLayout}
-                    label="关联用户"
-                    hasFeedback
-                >
-                    {getFieldDecorator('Users')(
-                        <Select
-                            mode="multiple"
-                        >
-                            {
-                                this.props.userList.map(v => {
-                                    return (
-                                        <Option key={v.id} value={v.id}>
-                                            {v.name}
-                                        </Option>
-                                    )
-                                })
-                            }
-                        </Select>
-                    )}
-                </Item>
-            
             </Form>
         )
     }

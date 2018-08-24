@@ -5,16 +5,18 @@ import { handleModalForm, addInfo, editInfo } from '../../redux/usergroup.redux'
 import InfoForm from './InfoForm'
 
 @connect(
-    state => state.usergroup,
+    state => state,
     { handleModalForm, addInfo, editInfo }
 )
 class FormModal extends PureComponent {
     handleSubmit = () => {
         const form = this.refs.infoForm
-        const { formType, addInfo, editInfo } = this.props
+        const { userid } = this.props.auth
+        const { formType } = this.props.usergroup
+        const { addInfo, editInfo } = this.props
         form.validateFields((err, values) => {
             if (!err) {
-                console.log(values)
+                values.creatorid = userid
                 if (formType === 'add') {
                     addInfo(values)
                 } else if (formType === 'update') {
@@ -24,7 +26,7 @@ class FormModal extends PureComponent {
         })
     }
     render() {
-        const { formType, modalOpen, formData } = this.props
+        const { formType, modalOpen, formData } = this.props.usergroup
         return (
             <Modal
                 title={formType === 'add' ? '新增' : '编辑'}

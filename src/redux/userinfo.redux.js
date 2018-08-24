@@ -11,6 +11,7 @@ const USERINFO_EDIT_INFO = 'USERINFO_EDIT_INFO'
 const USERINFO_DELETE_INFO = 'USERINFO_DELETE_INFO'
 const USERINFO_SHOW_MSG = 'USERINFO_SHOW_MSG'
 const USERINFO_GET_ORGA_LIST = 'USERINFO_GET_ORGA_LIST'
+const USERINFO_GET_GROUP_LIST = 'USERINFO_GET_GROUP_LIST'
 
 const initState = {
     searchForm: {},
@@ -20,6 +21,7 @@ const initState = {
     dataList: [],
     msg: '',
     orgaList: [],
+    groupList:[],
     pagination: {
         showSizeChanger: true,
         pageSize: 10,
@@ -49,6 +51,9 @@ export function userinfo(state = initState, action) {
         }
         case USERINFO_GET_ORGA_LIST: {
             return { ...state, orgaList: action.payload }
+        }
+        case USERINFO_GET_GROUP_LIST: {
+            return { ...state, groupList: action.payload }
         }
         case USERINFO_HANDLE_MODAL_FORM: {
             return {
@@ -177,6 +182,26 @@ export function getOrgaList() {
                 if (code == 0) {
                     dispatch({
                         type: USERINFO_GET_ORGA_LIST,
+                        payload: data,
+                    })
+                } else {
+                    dispatch({ type: USERINFO_SHOW_MSG, msg })
+                }
+            })
+            .catch(e => {
+
+            })
+    }
+}
+
+export function getGroupList() {
+    return dispatch => {
+        axios.get('/api/usergroup/select')
+            .then(res => {
+                const { code, msg,  data } = res.data
+                if (code == 0) {
+                    dispatch({
+                        type: USERINFO_GET_GROUP_LIST,
                         payload: data,
                     })
                 } else {

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getUserList, getRoleList } from '../../redux/userGroup.redux'
+import { getList, getUserList, getRoleList } from '../../redux/usergroup.redux'
 
 const { Item, create } = Form
 
@@ -19,7 +19,7 @@ const { Item, create } = Form
     }
 })
 @connect(
-    state => state.userGroup,
+    state => state.usergroup,
     { getList, getUserList, getRoleList }
 )
 class SearchForm extends PureComponent {

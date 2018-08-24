@@ -19,7 +19,7 @@ const { Option } = Select
     }
 })
 @connect(
-    state => state.userGroup
+    state => state.usergroup
 )
 class InfoForm extends PureComponent {
     render() {

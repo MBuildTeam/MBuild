@@ -115,7 +115,7 @@ export function getMenuList() {
         {
             icon: 'bars',
             text: '用户组',
-            code: 'userGroup'
+            code: 'usergroup'
         },
         {
             icon: 'bars',

@@ -37,7 +37,7 @@ let arr = [{
 {
     id: '555',
     name: "用户组",
-    Url: 'userGroup',
+    Url: 'usergroup',
     status:1,
     Creator: "System",
     createtime: Mock.Random.date(),

@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { auth } from './redux/auth.redux'
 import { framework } from './redux/framework.redux'
 import { userinfo } from './redux/userinfo.redux'
-import { userGroup } from './redux/userGroup.redux'
+import { usergroup } from './redux/usergroup.redux'
 import { menu } from './redux/menu.redux'
 import { bench } from './redux/bench.redux'
 import { role } from './redux/role.redux'
@@ -18,7 +18,7 @@ export default combineReducers({
     auth,
     framework,
     userinfo,
-    userGroup,
+    usergroup,
     menu,
     bench,
     role,

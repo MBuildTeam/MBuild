@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getOrgaList } from '../../redux/userinfo.redux'
+import { getList, getOrgaList ,getGroupList} from '../../redux/userinfo.redux'
 
 const { Item, create } = Form
 
@@ -21,24 +21,37 @@ const { Item, create } = Form
 })
 @connect(
     state => state.userinfo,
-    { getList, getOrgaList }
+    { getList, getOrgaList,getGroupList }
 )
 class SearchForm extends PureComponent {
     componentDidMount() {
         this.props.getOrgaList()
-        this.props.getList()
+        this.props.getGroupList()
+
+        var values = this.props.searchForm
+        //配入分页条件
+        values.pagenum = this.props.pagination.current
+        values.pagesize = this.props.pagination.pageSize
+        this.props.getList(values)
     }
     handleSearch = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
+                //配入分页条件
+                values.pagenum = 1
+                values.pagesize = this.props.pagination.pageSize
                 this.props.getList(values)
             }
         })
     }
     handleReset = () => {
         this.props.form.resetFields()
-        this.props.getList()
+        var values = {}
+        //配入分页条件
+        values.pagenum = 1
+        values.pagesize = this.props.pagination.pageSize
+        this.props.getList(values)
     }
     render() {
         const { getFieldDecorator } = this.props.form

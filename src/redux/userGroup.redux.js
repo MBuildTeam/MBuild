@@ -1,4 +1,4 @@
-USE_MOCK && require('../mock/userGroup')
+USE_MOCK && require('../mock/usergroup')
 
 import axios from 'axios'
 import _ from 'lodash'
@@ -24,7 +24,7 @@ const initState = {
     roleList:[],
 }
 
-export function userGroup(state = initState, action) {
+export function usergroup(state = initState, action) {
     switch (action.type) {
         case USERGROUP_SEARCH_FORM: {
             return {
@@ -84,7 +84,7 @@ export function userGroup(state = initState, action) {
 export function getList(params) {
     return dispatch => {
         dispatch({ type: USERGROUP_SEARCH_FORM, data: params })
-        axios.get('/api/userGroup/list', { params })
+        axios.get('/api/usergroup/list', { params })
             .then(res => {
                 dispatch({ type: USERGROUP_GET_LIST, payload: res.data })
             })
@@ -100,7 +100,7 @@ export function handleModalForm(formType, modalOpen, formData) {
 
 export function addInfo(info) {
     return dispatch => {
-        axios.post('/api/userGroup/add', info)
+        axios.post('/api/usergroup/add', info)
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 0) {
@@ -117,7 +117,7 @@ export function addInfo(info) {
 
 export function editInfo(info) {
     return dispatch => {
-        axios.post('/api/userGroup/update', info)
+        axios.post('/api/usergroup/update', info)
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 0) {
@@ -134,7 +134,7 @@ export function editInfo(info) {
 
 export function deleteInfo(id) {
     return dispatch => {
-        axios.post('/api/userGroup/delete', { id })
+        axios.post('/api/usergroup/delete', { id })
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 0) {

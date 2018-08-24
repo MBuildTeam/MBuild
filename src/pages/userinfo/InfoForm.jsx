@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 
 const { Item, create } = Form
 const { Option } = Select
-const RadioGroup = Radio.Group
 @create({
     mapPropsToFields(props) {
         if (props.formType === 'update') {
@@ -14,9 +13,9 @@ const RadioGroup = Radio.Group
                 fields[key] = Form.createFormField({
                     value: props.formData[key]
                 })
-                if(key === 'Birthday'){
+                if (key === 'birthday') {
                     fields[key] = Form.createFormField({
-                        value: moment(props.formData[key],'YYYY-MM-DD')
+                        value: moment(props.formData[key], 'YYYY-MM-DD')
                     })
                 }
             }
@@ -25,7 +24,7 @@ const RadioGroup = Radio.Group
     }
 })
 @connect(
-    state => state.user
+    state => state.userinfo
 )
 class InfoForm extends PureComponent {
     render() {
@@ -50,49 +49,73 @@ class InfoForm extends PureComponent {
                         )}
                     </Item> : null
                 }
-                <Item
-                    {...formItemLayout}
-                    label="用户名"
-                    hasFeedback
-                >
-                    {getFieldDecorator('name', {
-                        rules: [{
-                            required: true, message: '用户名不能为空',
-                        }],
-                    })(
-                        <Input />
-                    )}
-                </Item>
-                <Item
-                    {...formItemLayout}
-                    label="姓名"
-                    hasFeedback
-                >
-                    {getFieldDecorator('NameCN', {
-                        rules: [{
-                            required: true, message: '姓名不能为空',
-                        }],
-                    })(
-                        <Input />
-                    )}
-                </Item>
-                <Item
-                    {...formItemLayout}
-                    label="密码"
-                    hasFeedback
-                >
-                    {getFieldDecorator('Password', {
-                        rules: [{
-                            required: true, message: '密码不能为空',
-                        }, {
-                            min: 8, message: '密码不能低于8位',
-                        }, {
-                            max: 16, message: '密码不能高于16位',
-                        }],
-                    })(
-                        <Input />
-                    )}
-                </Item>
+                <Row>
+                    <Col span={12}>
+                        <Item
+                            {...formItemLayout}
+                            label="用户名"
+                            hasFeedback
+                        >
+                            {getFieldDecorator('name', {
+                                rules: [{
+                                    required: true, message: '用户名不能为空',
+                                }],
+                            })(
+                                <Input />
+                            )}
+                        </Item>
+                    </Col>
+                    <Col span={12}>
+                        <Item
+                            {...formItemLayout}
+                            label="姓名"
+                            hasFeedback
+                        >
+                            {getFieldDecorator('realname', {
+                                rules: [{
+                                    required: true, message: '姓名不能为空',
+                                }],
+                            })(
+                                <Input />
+                            )}
+                        </Item>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={12}>
+                        <Item
+                            {...formItemLayout}
+                            label="密码"
+                            hasFeedback
+                        >
+                            {getFieldDecorator('password', {
+                                rules: [{
+                                    required: true, message: '密码不能为空',
+                                }],
+                            })(
+                                <Input />
+                            )}
+                        </Item>
+                    </Col>
+                    <Col span={12}>
+                        <Item
+                            {...formItemLayout}
+                            label="状态"
+                            hasFeedback
+                        >
+                            {getFieldDecorator('status', {
+                                rules: [{
+                                    required: true, message: '状态不能为空',
+                                }],
+                            })(
+                                <Radio.Group>
+                                    <Radio value={0}>启用</Radio>
+                                    <Radio value={1}>停用</Radio>
+                                </Radio.Group>
+                            )}
+                        </Item>
+                    </Col>
+                </Row>
                 <Row>
                     <Col span={12}>
                         <Item
@@ -100,15 +123,15 @@ class InfoForm extends PureComponent {
                             label="性别"
                             hasFeedback
                         >
-                            {getFieldDecorator('Sex', {
+                            {getFieldDecorator('gender', {
                                 rules: [{
                                     required: true, message: '性别不能为空',
                                 }],
                             })(
-                                <RadioGroup>
+                                <Radio.Group>
                                     <Radio value={1}>男</Radio>
-                                    <Radio value={0}>女</Radio>
-                                </RadioGroup>
+                                    <Radio value={2}>女</Radio>
+                                </Radio.Group>
                             )}
                         </Item>
                     </Col>
@@ -118,12 +141,12 @@ class InfoForm extends PureComponent {
                             label="年龄"
                             hasFeedback
                         >
-                            {getFieldDecorator('Age', {
+                            {getFieldDecorator('age', {
                                 rules: [{
                                     required: true, message: '年龄不能为空',
                                 }],
                             })(
-                                <InputNumber min={0} max={100} />
+                                <InputNumber min={18} max={100} />
                             )}
                         </Item>
                     </Col>
@@ -135,7 +158,7 @@ class InfoForm extends PureComponent {
                             label="生日"
                             hasFeedback
                         >
-                            {getFieldDecorator('Birthday', {
+                            {getFieldDecorator('birthday', {
                                 rules: [{
                                     required: true, message: '生日不能为空',
                                 }],
@@ -150,7 +173,11 @@ class InfoForm extends PureComponent {
                             label="岗位"
                             hasFeedback
                         >
-                            {getFieldDecorator('Post')(
+                            {getFieldDecorator('title', {
+                                rules: [{
+                                    required: true, message: '岗位不能为空',
+                                }],
+                            })(
                                 <Input />
                             )}
                         </Item>
@@ -161,12 +188,39 @@ class InfoForm extends PureComponent {
                     label="组织机构"
                     hasFeedback
                 >
-                    {getFieldDecorator('Organizationalid')(
+                    {getFieldDecorator('orgid', {
+                        rules: [{
+                            required: true, message: '组织机构不能为空',
+                        }],
+                    })(
+                        <Select>
+                            {
+                                this.props.orgaList.map(v => {
+                                    return (
+                                        <Option key={v.id} value={v.id}>
+                                            {v.name}
+                                        </Option>
+                                    )
+                                })
+                            }
+                        </Select>
+                    )}
+                </Item>
+                <Item
+                    {...formItemLayout}
+                    label="用户组"
+                    hasFeedback
+                >
+                    {getFieldDecorator('groupids', {
+                        rules: [{
+                            required: true, message: '用户组不能为空',
+                        }],
+                    })(
                         <Select
                             mode="multiple"
                         >
                             {
-                                this.props.orgaList.map(v => {
+                                this.props.groupList.map(v => {
                                     return (
                                         <Option key={v.id} value={v.id}>
                                             {v.name}

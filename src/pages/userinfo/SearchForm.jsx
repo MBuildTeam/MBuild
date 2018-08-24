@@ -20,7 +20,7 @@ const { Item, create } = Form
     }
 })
 @connect(
-    state => state.user,
+    state => state.userinfo,
     { getList, getOrgaList }
 )
 class SearchForm extends PureComponent {

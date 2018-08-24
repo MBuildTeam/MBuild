@@ -12,7 +12,9 @@ let arr = [{
     birthday:'1990-10-01',
     title:'3岗',
     orgid:1,
-    groupids:[1,2]
+    groupids:[1,2],
+    creatorid:1,
+    createtime:'2018-08-15'
 },{
     id: 2,
     name: "system",
@@ -23,7 +25,9 @@ let arr = [{
     birthday:'1990-10-01',
     title:'3岗',
     orgid:1,
-    groupids:[1,2]
+    groupids:[1,2],
+    creatorid:1,
+    createtime:'2018-08-15'
 }]
 
 //登录验证

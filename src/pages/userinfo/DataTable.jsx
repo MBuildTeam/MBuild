@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
 import { Table, Divider, Popconfirm, Tag } from 'antd'
 import { connect } from 'react-redux'
-import { handleModalForm, deleteInfo } from '../../redux/userinfo.redux'
+import { handleModalForm, deleteInfo, getList } from '../../redux/userinfo.redux'
 
 @connect(
-  state => state.user,
-  { handleModalForm, deleteInfo }
+  state => state.userinfo,
+  { handleModalForm, deleteInfo, getList }
 )
 class DataTable extends PureComponent {
   handleInfo = (type, open, data) => {
@@ -14,55 +14,80 @@ class DataTable extends PureComponent {
   handleDelete = (id) => {
     this.props.deleteInfo(id)
   }
+  handleTableChange = (pagination) => {
+    let values = this.props.searchForm
+    //配入分页条件
+    values.pagenum = pagination.current
+    values.pagesize = pagination.pageSize
+    this.props.getList(values)
+  }
   render() {
     const columns = [{
       title: '用户名',
       dataIndex: 'name',
       key: 'name',
+      align: 'center',
     },
     {
       title: '姓名',
-      dataIndex: 'NameCN',
-      key: 'NameCN',
+      dataIndex: 'realname',
+      key: 'realname',
+      align: 'center',
     },
     {
       title: '性别',
-      dataIndex: 'Sex',
-      key: 'Sex',
+      dataIndex: 'gender',
+      key: 'gender',
+      align: 'center',
       render: text => {
         if (text == 1) {
           return (<div>男</div>)
-        } else
-          if (text == 0) {
-            return (<div>女</div>)
-          } else {
-            return null
-          }
+        } else {
+          return (<div>女</div>)
+        }
       }
     },
     {
       title: '年龄',
-      dataIndex: 'Age',
-      key: 'Age',
+      dataIndex: 'age',
+      key: 'age',
+      align: 'center',
     },
     {
       title: '生日',
-      dataIndex: 'Birthday',
-      key: 'Birthday',
+      dataIndex: 'birthday',
+      key: 'birthday',
+      align: 'center',
     },
     {
       title: '岗位',
-      dataIndex: 'Post',
-      key: 'Post',
+      dataIndex: 'title',
+      key: 'title',
+      align: 'center',
+    },
+    {
+      title: '状态',
+      dataIndex: 'status',
+      key: 'status',
+      align: 'center',
+      render: text => {
+        if (text == 0) {
+          return (<div>启用</div>)
+        } else {
+          return (<div>停用</div>)
+        }
+      }
     },
     {
       title: '创建者',
-      dataIndex: 'Creator',
-      key: 'Creator',
+      dataIndex: 'creatorid',
+      key: 'creatorid',
+      align: 'center',
     }, {
       title: '创建时间',
       dataIndex: 'createtime',
       key: 'createtime',
+      align: 'center',
     }, {
       title: (<div>操作<Divider type="vertical" />
         <a href="javascript:;" onClick={() => this.handleInfo('add', true)}>新增</a></div>),
@@ -84,7 +109,10 @@ class DataTable extends PureComponent {
         rowKey={record => record.id}
         dataSource={this.props.dataList}
         columns={columns}
-        pagination={false} />
+        pagination={false}
+        pagination={this.props.pagination}
+        onChange={this.handleTableChange}
+      />
     )
   }
 }

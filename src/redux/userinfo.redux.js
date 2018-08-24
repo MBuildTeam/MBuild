@@ -95,7 +95,18 @@ export function getList(params) {
         dispatch({ type: USERINFO_SEARCH_FORM, data: params })
         axios.get('/api/userinfo/select', { params })
             .then(res => {
-                dispatch({ type: USERINFO_GET_LIST, payload: res.data })
+                const { code, msg, resultcounts, data } = res.data
+                if (code == 0) {
+                    dispatch({
+                        type: USERINFO_GET_LIST,
+                        payload: data,
+                        total: resultcounts,
+                        current: params.pagenum,
+                        pageSize: params.pagesize
+                    })
+                } else {
+                    dispatch({ type: USERINFO_SHOW_MSG, msg })
+                }
             })
             .catch(e => {
 

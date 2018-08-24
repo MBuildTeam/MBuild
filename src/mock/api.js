@@ -51,10 +51,11 @@ Mock.mock('/api/api/update', 'post', function (options) {
 })
 
 //删除
-Mock.mock('/api/api/delete', 'post', function (options) {
-    let id = JSON.parse(options.body).id
+Mock.mock(/\/api\/api\/delete/, 'get', function (options) {
+    let id = getParam(options.url, 'id')
+    id = parseInt(id)
     _.remove(arr, item => (
         item.id === id
     ))
-    return { code: 1, msg: '删除成功' }
+    return { code: 0, msg: '删除成功' }
 })

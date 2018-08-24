@@ -159,7 +159,7 @@ export function editInfo(info) {
 
 export function deleteInfo(id) {
     return dispatch => {
-        axios.post('/api/classification/delete', { id })
+        axios.get('/api/classification/delete',  { params: { id } })
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 0) {

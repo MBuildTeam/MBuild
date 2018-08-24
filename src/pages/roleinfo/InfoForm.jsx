@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
-import { Form, Input, Select } from 'antd'
+import { Form, Input, Select, Radio } from 'antd'
 import { connect } from 'react-redux'
 
 const { Item, create } = Form
-const { Option } = Select
 
 @create({
     mapPropsToFields(props) {
@@ -19,7 +18,7 @@ const { Option } = Select
     }
 })
 @connect(
-    state => state.role
+    state => state.roleinfo
 )
 class InfoForm extends PureComponent {
     render() {
@@ -59,19 +58,39 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
+                    label="类别"
+                    hasFeedback
+                >
+                    {getFieldDecorator('roletype', {
+                        rules: [{
+                            required: true, message: '类别不能为空',
+                        }],
+                    })(
+                        <Radio.Group>
+                            <Radio value={1}>标准</Radio>
+                            <Radio value={2}>非标准</Radio>
+                        </Radio.Group>
+                    )}
+                </Item>
+                <Item
+                    {...formItemLayout}
                     label="权限"
                     hasFeedback
                 >
-                    {getFieldDecorator('Rights')(
+                    {getFieldDecorator('operationids', {
+                        rules: [{
+                            required: true, message: '权限不能为空',
+                        }],
+                    })(
                         <Select
                             mode="multiple"
                         >
                             {
-                                this.props.rightsList.map(v => {
+                                this.props.operationList.map(v => {
                                     return (
-                                        <Option key={v.id} value={v.id}>
+                                        <Select.Option key={v.id} value={v.id}>
                                             {v.name}
-                                        </Option>
+                                        </Select.Option>
                                     )
                                 })
                             }

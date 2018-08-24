@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button, Radio, Select } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getRoleList } from '../../redux/usergroup.redux'
+import { getList, getOperationList } from '../../redux/roleinfo.redux'
 
 const { Item, create } = Form
 
 @connect(
-    state => state.usergroup,
-    { getList, getRoleList }
+    state => state.roleinfo,
+    { getList, getOperationList }
 )
 @create({
     mapPropsToFields(props) {
@@ -24,7 +24,7 @@ const { Item, create } = Form
 })
 class SearchForm extends PureComponent {
     componentDidMount() {
-        this.props.getRoleList()
+        this.props.getOperationList()
         var values = this.props.searchForm
         //配入分页条件
         values.pagenum = this.props.pagination.current
@@ -64,7 +64,7 @@ class SearchForm extends PureComponent {
                     </Col>
                     <Col span={6}>
                         <Item label="类别">
-                            {getFieldDecorator('grouptype')(
+                            {getFieldDecorator('roletype')(
                                 <Radio.Group>
                                     <Radio value={1}>标准</Radio>
                                     <Radio value={2}>非标准</Radio>
@@ -73,13 +73,13 @@ class SearchForm extends PureComponent {
                         </Item>
                     </Col>
                     <Col span={6}>
-                        <Item label="角色">
-                            {getFieldDecorator('roleid')(
+                        <Item label="权限">
+                            {getFieldDecorator('operationid')(
                                 <Select
                                     style={{ width: 170 }}
                                 >
                                     {
-                                        this.props.roleList.map(v => {
+                                        this.props.operationList.map(v => {
                                             return (
                                                 <Select.Option key={v.id} value={v.id}>
                                                     {v.name}

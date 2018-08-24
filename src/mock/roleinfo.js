@@ -5,21 +5,21 @@ const getParam = require('../common/common').getParam
 let arr = [{
     id: 1,
     name: '角色1',
-    ismanagerplatform: 1,
-    status: 0,
+    roletype: 1,
     creatorid: 1,
     createtime: '2018-08-15',
+    operationids:[1,2]
 }, {
     id: 2,
     name: '角色2',
-    ismanagerplatform: 0,
-    status: 1,
+    roletype: 2,
     creatorid: 1,
     createtime: '2018-08-15',
+    operationids:[1]
 }]
 
 //查询
-Mock.mock(/\/api\/role\/select/, 'get', function (options) {
+Mock.mock(/\/api\/roleinfo\/select/, 'get', function (options) {
     const name = getParam(options.url, 'name')
     const pagenum = parseInt(getParam(options.url, 'pagenum'))
     const pagesize = parseInt(getParam(options.url, 'pagesize'))
@@ -37,7 +37,7 @@ Mock.mock(/\/api\/role\/select/, 'get', function (options) {
 })
 
 //新增
-Mock.mock('/api/role/add', 'post', function (options) {
+Mock.mock('/api/roleinfo/add', 'post', function (options) {
     let info = JSON.parse(options.body)
     info.id = arr.length > 0 ? arr[arr.length - 1].id + 1 : 1
     info.createtime = Mock.Random.date()
@@ -46,7 +46,7 @@ Mock.mock('/api/role/add', 'post', function (options) {
 })
 
 //修改
-Mock.mock('/api/role/update', 'post', function (options) {
+Mock.mock('/api/roleinfo/update', 'post', function (options) {
     let info = JSON.parse(options.body)
     let origin = _.find(arr, (item) => (item.id === info.id))
     let updated = _.assign(origin, info)
@@ -54,7 +54,7 @@ Mock.mock('/api/role/update', 'post', function (options) {
 })
 
 //删除
-Mock.mock(/\/api\/role\/delete/, 'get', function (options) {
+Mock.mock(/\/api\/roleinfo\/delete/, 'get', function (options) {
     let id = getParam(options.url, 'id')
     id = parseInt(id)
     _.remove(arr, item => (

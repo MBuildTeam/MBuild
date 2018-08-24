@@ -125,7 +125,7 @@ export function getMenuList() {
         {
             icon: 'bars',
             text: '角色',
-            code: 'role'
+            code: 'roleinfo'
         },
         {
             icon: 'bars',

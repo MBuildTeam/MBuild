@@ -78,9 +78,12 @@ export function organization(state = initState, action) {
         case ORGA_DELETE_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             _.remove(dataList, item => item.id === action.id)
+            let pagination = _.cloneDeep(state.pagination)
+            pagination.total -= 1
             return {
                 ...state,
-                dataList: dataList
+                dataList: dataList,
+                pagination: pagination
             }
         }
         default:

@@ -1,4 +1,4 @@
-USE_MOCK && require('../mock/user')
+USE_MOCK && require('../mock/userinfo')
 
 import axios from 'axios'
 

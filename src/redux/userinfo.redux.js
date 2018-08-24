@@ -60,7 +60,7 @@ export function userinfo(state = initState, action) {
         }
         case USERINFO_ADD_INFO: {
             let dataList = _.cloneDeep(state.dataList)
-            dataList.push(action.data)
+            dataList.unshift(action.data)
             return {
                 ...state,
                 modalOpen: false,

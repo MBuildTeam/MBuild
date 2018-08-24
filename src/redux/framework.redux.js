@@ -110,7 +110,7 @@ export function getMenuList() {
         {
             icon: 'bars',
             text: '用户',
-            code: 'user'
+            code: 'userinfo'
         },
         {
             icon: 'bars',

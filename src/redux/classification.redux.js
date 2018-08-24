@@ -24,7 +24,7 @@ const initState = {
     apiList:[],
     pagination: {
         showSizeChanger: true,
-        pageSize: 10,
+        pageSize: 2,
         current: 1,
         total: 0
     }
@@ -65,11 +65,14 @@ export function classification(state = initState, action) {
         }
         case CLASSIFICATION_ADD_INFO: {
             let dataList = _.cloneDeep(state.dataList)
-            dataList.push(action.data)
+            dataList.unshift(action.data)
+            let pagination = _.cloneDeep(state.pagination)
+            pagination.total += 1
             return {
                 ...state,
                 modalOpen: false,
-                dataList: dataList
+                dataList: dataList,
+                pagination:pagination
             }
         }
         case CLASSIFICATION_EDIT_INFO: {
@@ -85,9 +88,12 @@ export function classification(state = initState, action) {
         case CLASSIFICATION_DELETE_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             _.remove(dataList, item => item.id === action.id)
+            let pagination = _.cloneDeep(state.pagination)
+            pagination.total -= 1
             return {
                 ...state,
-                dataList: dataList
+                dataList: dataList,
+                pagination: pagination
             }
         }
         default:

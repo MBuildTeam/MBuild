@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
 import { Modal } from 'antd'
 import { connect } from 'react-redux'
-import { handleModalForm, addInfo, editInfo } from '../../redux/orgaType.redux'
+import { handleModalForm, addInfo, editInfo } from '../../redux/classification.redux'
 import InfoForm from './InfoForm'
 
 @connect(
-    state => state.orgaType,
+    state => state.classification,
     { handleModalForm, addInfo, editInfo }
 )
 class FormModal extends PureComponent {

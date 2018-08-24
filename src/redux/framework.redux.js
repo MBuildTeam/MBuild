@@ -105,7 +105,7 @@ export function getMenuList() {
         {
             icon: 'bars',
             text: '组织机构类别',
-            code: 'orgaType'
+            code: 'classification'
         },
         {
             icon: 'bars',

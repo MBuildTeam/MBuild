@@ -45,7 +45,7 @@ let arr = [{
 {
     id: '666',
     Name: "组织机构分类",
-    Url: 'orgaType',
+    Url: 'classification',
     Status:1,
     Creator: "System",
     CreateTime: Mock.Random.date(),

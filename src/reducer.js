@@ -8,7 +8,7 @@ import { bench } from './redux/bench.redux'
 import { role } from './redux/role.redux'
 import { rights } from './redux/rights.redux'
 import { organization } from './redux/organization.redux'
-import { orgaType } from './redux/orgaType.redux'
+import { classification } from './redux/classification.redux'
 import { imterface } from './redux/interface.redux'//因为interface是保留字，故意写成im
 import { project } from './redux/project.redux'
 import { projManager } from './redux/projManager.redux'
@@ -24,7 +24,7 @@ export default combineReducers({
     role,
     rights,
     organization,
-    orgaType,
+    classification,
     imterface,
     project,
     projManager,

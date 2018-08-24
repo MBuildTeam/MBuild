@@ -1,17 +1,17 @@
-USE_MOCK && require('../mock/orgaType')
+USE_MOCK && require('../mock/classification')
 
 import axios from 'axios'
 import _ from 'lodash'
 
-const ORGATYPE_SEARCH_FORM = 'ORGATYPE_SEARCH_FORM'
-const ORGATYPE_GET_LIST = 'ORGATYPE_GET_LIST'
-const ORGATYPE_HANDLE_MODAL_FORM = 'ORGATYPE_HANDLE_MODAL_FORM'
-const ORGATYPE_ADD_INFO = 'ORGATYPE_ADD_INFO'
-const ORGATYPE_EDIT_INFO = 'ORGATYPE_EDIT_INFO'
-const ORGATYPE_DELETE_INFO = 'ORGATYPE_DELETE_INFO'
-const ORGATYPE_SHOW_MSG = 'ORGATYPE_SHOW_MSG'
-const ORGATYPE_GET_ORGA_LIST = 'ORGATYPE_GET_ORGA_LIST'
-const ORGATYPE_GET_INTERFACE_LIST = 'ORGATYPE_GET_INTERFACE_LIST'
+const CLASSIFICATION_SEARCH_FORM = 'CLASSIFICATION_SEARCH_FORM'
+const CLASSIFICATION_GET_LIST = 'CLASSIFICATION_GET_LIST'
+const CLASSIFICATION_HANDLE_MODAL_FORM = 'CLASSIFICATION_HANDLE_MODAL_FORM'
+const CLASSIFICATION_ADD_INFO = 'CLASSIFICATION_ADD_INFO'
+const CLASSIFICATION_EDIT_INFO = 'CLASSIFICATION_EDIT_INFO'
+const CLASSIFICATION_DELETE_INFO = 'CLASSIFICATION_DELETE_INFO'
+const CLASSIFICATION_SHOW_MSG = 'CLASSIFICATION_SHOW_MSG'
+const CLASSIFICATION_GET_ORGA_LIST = 'CLASSIFICATION_GET_ORGA_LIST'
+const CLASSIFICATION_GET_INTERFACE_LIST = 'CLASSIFICATION_GET_INTERFACE_LIST'
 
 const initState = {
     searchForm: {},
@@ -24,24 +24,24 @@ const initState = {
     interfaceList:[],
 }
 
-export function orgaType(state = initState, action) {
+export function classification(state = initState, action) {
     switch (action.type) {
-        case ORGATYPE_SEARCH_FORM: {
+        case CLASSIFICATION_SEARCH_FORM: {
             return {
                 ...state,
                 searchForm: action.data
             }
         }
-        case ORGATYPE_GET_LIST: {
+        case CLASSIFICATION_GET_LIST: {
             return { ...state, dataList: action.payload }
         }
-        case ORGATYPE_GET_ORGA_LIST: {
+        case CLASSIFICATION_GET_ORGA_LIST: {
             return { ...state, orgaList: action.payload }
         }
-        case ORGATYPE_GET_INTERFACE_LIST: {
+        case CLASSIFICATION_GET_INTERFACE_LIST: {
             return { ...state, interfaceList: action.payload }
         }
-        case ORGATYPE_HANDLE_MODAL_FORM: {
+        case CLASSIFICATION_HANDLE_MODAL_FORM: {
             return {
                 ...state,
                 formType: action.formType,
@@ -49,7 +49,7 @@ export function orgaType(state = initState, action) {
                 formData: action.formData
             }
         }
-        case ORGATYPE_ADD_INFO: {
+        case CLASSIFICATION_ADD_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             dataList.push(action.data)
             return {
@@ -58,7 +58,7 @@ export function orgaType(state = initState, action) {
                 dataList: dataList
             }
         }
-        case ORGATYPE_EDIT_INFO: {
+        case CLASSIFICATION_EDIT_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             let toUpdate = _.find(dataList, item => (item.id === action.data.id))
             _.assign(toUpdate, action.data)
@@ -68,7 +68,7 @@ export function orgaType(state = initState, action) {
                 dataList: dataList
             }
         }
-        case ORGATYPE_DELETE_INFO: {
+        case CLASSIFICATION_DELETE_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             _.remove(dataList, item => item.id === action.id)
             return {
@@ -83,10 +83,10 @@ export function orgaType(state = initState, action) {
 
 export function getList(params) {
     return dispatch => {
-        dispatch({ type: ORGATYPE_SEARCH_FORM, data: params })
-        axios.get('/api/orgaType/list', { params })
+        dispatch({ type: CLASSIFICATION_SEARCH_FORM, data: params })
+        axios.get('/api/classification/list', { params })
             .then(res => {
-                dispatch({ type: ORGATYPE_GET_LIST, payload: res.data })
+                dispatch({ type: CLASSIFICATION_GET_LIST, payload: res.data })
             })
             .catch(e => {
 
@@ -95,18 +95,18 @@ export function getList(params) {
 }
 
 export function handleModalForm(formType, modalOpen, formData) {
-    return { type: ORGATYPE_HANDLE_MODAL_FORM, formType, modalOpen, formData }
+    return { type: CLASSIFICATION_HANDLE_MODAL_FORM, formType, modalOpen, formData }
 }
 
 export function addInfo(info) {
     return dispatch => {
-        axios.post('/api/orgaType/add', info)
+        axios.post('/api/classification/add', info)
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 1) {
-                    dispatch({ type: ORGATYPE_ADD_INFO, msg, data })
+                    dispatch({ type: CLASSIFICATION_ADD_INFO, msg, data })
                 } else {
-                    dispatch({ type: ORGATYPE_SHOW_MSG, msg })
+                    dispatch({ type: CLASSIFICATION_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -117,13 +117,13 @@ export function addInfo(info) {
 
 export function editInfo(info) {
     return dispatch => {
-        axios.post('/api/orgaType/edit', info)
+        axios.post('/api/classification/edit', info)
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 1) {
-                    dispatch({ type: ORGATYPE_EDIT_INFO, msg, data })
+                    dispatch({ type: CLASSIFICATION_EDIT_INFO, msg, data })
                 } else {
-                    dispatch({ type: ORGATYPE_SHOW_MSG, msg })
+                    dispatch({ type: CLASSIFICATION_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -134,13 +134,13 @@ export function editInfo(info) {
 
 export function deleteInfo(id) {
     return dispatch => {
-        axios.post('/api/orgaType/delete', { id })
+        axios.post('/api/classification/delete', { id })
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 1) {
-                    dispatch({ type: ORGATYPE_DELETE_INFO, msg, id })
+                    dispatch({ type: CLASSIFICATION_DELETE_INFO, msg, id })
                 } else {
-                    dispatch({ type: ORGATYPE_SHOW_MSG, msg })
+                    dispatch({ type: CLASSIFICATION_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -153,7 +153,7 @@ export function getOrgaList() {
     return dispatch => {
         axios.get('/api/orga/list')
             .then(res => {
-                dispatch({ type: ORGATYPE_GET_ORGA_LIST, payload: res.data })
+                dispatch({ type: CLASSIFICATION_GET_ORGA_LIST, payload: res.data })
             })
             .catch(e => {
 
@@ -165,7 +165,7 @@ export function getInterfaceList() {
     return dispatch => {
         axios.get('/api/interface/list')
             .then(res => {
-                dispatch({ type: ORGATYPE_GET_INTERFACE_LIST, payload: res.data })
+                dispatch({ type: CLASSIFICATION_GET_INTERFACE_LIST, payload: res.data })
             })
             .catch(e => {
 

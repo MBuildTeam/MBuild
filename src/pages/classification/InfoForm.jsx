@@ -19,7 +19,7 @@ const { Option } = Select
     }
 })
 @connect(
-    state => state.orgaType
+    state => state.classification
 )
 class InfoForm extends PureComponent {
     render() {

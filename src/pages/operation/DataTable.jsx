@@ -34,7 +34,7 @@ class DataTable extends PureComponent {
       key: 'type',
       align: 'center',
       render: text => {
-        if (text == 1) {
+        if (text === 1) {
           return (<div>标准</div>)
         } else {
           return (<div>非标准</div>)

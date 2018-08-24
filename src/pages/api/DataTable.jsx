@@ -34,10 +34,23 @@ class DataTable extends PureComponent {
       key: 'type',
       align: 'center',
       render: text => {
-        if (text == 1) {
+        if (text === 1) {
           return (<div>标准</div>)
         } else {
           return (<div>非标准</div>)
+        }
+      }
+    },
+    {
+      title: '状态',
+      dataIndex: 'status',
+      key: 'status',
+      align: 'center',
+      render: text => {
+        if (text === 0) {
+          return (<div>启用</div>)
+        } else {
+          return (<div>停用</div>)
         }
       }
     },

@@ -124,6 +124,11 @@ export function getMenuList() {
         },
         {
             icon: 'bars',
+            text: 'api',
+            code: 'api'
+        },
+        {
+            icon: 'bars',
             text: '角色',
             code: 'roleinfo'
         },

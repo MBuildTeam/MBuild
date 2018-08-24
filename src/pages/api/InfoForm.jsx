@@ -105,8 +105,8 @@ class InfoForm extends PureComponent {
                         }],
                     })(
                         <Radio.Group>
-                            <Radio value={1}>标准</Radio>
-                            <Radio value={2}>非标准</Radio>
+                            <Radio value={0}>启用</Radio>
+                            <Radio value={1}>停用</Radio>
                         </Radio.Group>
                     )}
                 </Item>

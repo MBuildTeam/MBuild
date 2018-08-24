@@ -40,7 +40,7 @@ class DataTable extends PureComponent {
       key: 'gender',
       align: 'center',
       render: text => {
-        if (text == 1) {
+        if (text === 1) {
           return (<div>男</div>)
         } else {
           return (<div>女</div>)
@@ -71,7 +71,7 @@ class DataTable extends PureComponent {
       key: 'status',
       align: 'center',
       render: text => {
-        if (text == 0) {
+        if (text === 0) {
           return (<div>启用</div>)
         } else {
           return (<div>停用</div>)

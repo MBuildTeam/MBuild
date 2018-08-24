@@ -74,7 +74,7 @@ class SearchForm extends PureComponent {
                         </Item>
                     </Col>
                     <Col span={6}>
-                        <Item label="管理平台">
+                        <Item label="管理企业">
                             {getFieldDecorator('ismanagerplatform')(
                                 <RadioGroup>
                                     <Radio value={1}>是</Radio>

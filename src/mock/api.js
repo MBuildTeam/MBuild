@@ -47,7 +47,7 @@ Mock.mock('/api/api/add', 'post', function (options) {
     info.createtime = Mock.Random.date()
     info.Creator = 'System'
     arr.push(info)
-    return { code: 1, msg: '新增成功', data: info }
+    return { code: 0, msg: '新增成功', data: info }
 })
 
 //修改
@@ -55,7 +55,7 @@ Mock.mock('/api/api/update', 'post', function (options) {
     let info = JSON.parse(options.body)
     let origin = _.find(arr,(item)=>(item.id === info.id))
     let updated = _.assign(origin,info)
-    return { code: 1, msg: '修改成功', data: updated }
+    return { code: 0, msg: '修改成功', data: updated }
 })
 
 //删除

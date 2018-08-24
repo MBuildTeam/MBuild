@@ -29,6 +29,18 @@ class DataTable extends PureComponent {
       align: 'center',
     },
     {
+      title: '加密key',
+      dataIndex: 'appkey',
+      key: 'appkey',
+      align: 'center',
+    },
+    {
+      title: 'url',
+      dataIndex: 'requesturl',
+      key: 'requesturl',
+      align: 'center',
+    },
+    {
       title: '类别',
       dataIndex: 'type',
       key: 'type',

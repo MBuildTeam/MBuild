@@ -3,25 +3,33 @@ const _ = require('lodash')
 const getParam = require('../common/common').getParam
 
 let arr = [{
-    id: '111',
+    id: 1,
     name: "接口1",
-    Creator: "System",
+    creatorid: 1,
     createtime: Mock.Random.date(),
 },{
-    id: '222',
+    id: 2,
     name: "接口2",
-    Creator: "System",
+    creatorid: 1,
     createtime: Mock.Random.date(),
 }]
 
 //查询
 Mock.mock(/\/api\/api\/select/, 'get', function (options) {
-    const name = getParam(options.url,'name')
+    const name = getParam(options.url, 'name')
+    const pagenum = parseInt(getParam(options.url, 'pagenum'))
+    const pagesize = parseInt(getParam(options.url, 'pagesize'))
+    var data = arr
     if(name){
-        return _.filter(arr,item=>item.name.indexOf(name)>-1)
-    }else{
-        return arr
+        data =  _.filter(data, item => item.name.indexOf(name) > -1)
     }
+    const resultcounts = data.length
+    if(!isNaN(pagenum) && !isNaN(pagesize) ){
+        var start = (pagenum - 1) * pagesize
+        var end = pagenum * pagesize
+        data = data.slice(start, end)
+    }   
+    return { code: 0, resultcounts, data }
 })
 
 //新增

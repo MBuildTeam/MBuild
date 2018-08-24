@@ -32,9 +32,11 @@ Mock.mock(/\/api\/classification\/select/, 'get', function (options) {
         data =  _.filter(data, item => item.name.indexOf(name) > -1)
     }
     const resultcounts = data.length
-    var start = (pagenum - 1) * pagesize
-    var end = pagenum * pagesize
-    data = data.slice(start, end)
+    if(!isNaN(pagenum) && !isNaN(pagesize) ){
+        var start = (pagenum - 1) * pagesize
+        var end = pagenum * pagesize
+        data = data.slice(start, end)
+    }   
     return { code: 0, resultcounts, data }
 })
 

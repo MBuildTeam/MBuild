@@ -1,10 +1,8 @@
 import React, { PureComponent } from 'react'
-import { Form, Input, Radio, Select } from 'antd'
-import {connect} from 'react-redux'
+import { Form, Input, Radio } from 'antd'
 
-const { Item, create } = Form
 const RadioGroup = Radio.Group
-const { Option } = Select
+const { Item, create } = Form
 @create({
     mapPropsToFields(props) {
         if (props.formType === 'update') {
@@ -18,9 +16,6 @@ const { Option } = Select
         }
     }
 })
-@connect(
-    state=>state.operation
-)
 class InfoForm extends PureComponent {
     render() {
         const formItemLayout = {
@@ -59,39 +54,18 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label="菜单"
+                    label="类别"
                     hasFeedback
                 >
-                    {getFieldDecorator('Rights')(
-                        <Select
-                            mode="multiple"
-                        >
-                            {
-                                this.props.menuList.map(v => {
-                                    return (
-                                        <Option key={v.id} value={v.id}>
-                                            {v.name}
-                                        </Option>
-                                    )
-                                })
-                            }
-                        </Select>
-                    )}
-                </Item>
-                <Item
-                    {...formItemLayout}
-                    label="权限类型"
-                    hasFeedback
-                >
-                    {getFieldDecorator('RightType', {
+                    {getFieldDecorator('operationtype', {
                         rules: [{
-                            required: true, message: '权限类型不能为空',
+                            required: true, message: '类别不能为空',
                         }],
                     })(
-                        <RadioGroup>
-                            <Radio value={1}>菜单权限</Radio>
-                            <Radio value={2}>功能权限</Radio>
-                        </RadioGroup>
+                        <Radio.Group>
+                            <Radio value={1}>标准</Radio>
+                            <Radio value={2}>非标准</Radio>
+                        </Radio.Group>
                     )}
                 </Item>
             </Form>

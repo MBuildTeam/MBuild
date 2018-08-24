@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button, Radio } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getMenuList } from '../../redux/operation.redux'
+import { getList } from '../../redux/operation.redux'
 
 const { Item, create } = Form
-const RadioGroup = Radio.Group
 
-
+@connect(
+    state => state.operation,
+    { getList }
+)
 @create({
     mapPropsToFields(props) {
         if (props.searchForm) {
@@ -20,26 +22,33 @@ const RadioGroup = Radio.Group
         }
     }
 })
-@connect(
-    state => state.operation,
-    { getList, getMenuList }
-)
 class SearchForm extends PureComponent {
     handleSearch = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
+                //配入分页条件
+                values.pagenum = 1
+                values.pagesize = this.props.pagination.pageSize
                 this.props.getList(values)
             }
         })
     }
     handleReset = () => {
         this.props.form.resetFields()
-        this.props.getList()
+        var values = {}
+        //配入分页条件
+        values.pagenum = 1
+        values.pagesize = this.props.pagination.pageSize
+        this.props.getList(values)
     }
     componentDidMount() {
-        this.props.getMenuList()
-        this.props.getList()
+        //todo:这里可以做一个优化，区分第一次打开和标签切换
+        var values = this.props.searchForm
+        //配入分页条件
+        values.pagenum = this.props.pagination.current
+        values.pagesize = this.props.pagination.pageSize
+        this.props.getList(values)
     }
     render() {
         const { getFieldDecorator } = this.props.form
@@ -53,19 +62,20 @@ class SearchForm extends PureComponent {
                             )}
                         </Item>
                     </Col>
-                    <Col span={8}>
-                        <Item label="类型">
-                            {getFieldDecorator('RightType')(
-                                <RadioGroup>
-                                    <Radio value={1}>菜单权限</Radio>
-                                    <Radio value={2}>功能权限</Radio>
-                                </RadioGroup>
+                    <Col span={6}>
+                        <Item label="类别">
+                            {getFieldDecorator('operationtype')(
+                                <Radio.Group>
+                                    <Radio value={1}>标准</Radio>
+                                    <Radio value={2}>非标准</Radio>
+                                </Radio.Group>
                             )}
                         </Item>
                     </Col>
-                    <Col span={10}>
+                    <Col span={6}>
                         <Button type="primary" htmlType="submit">查询</Button>
                         <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>重置</Button>
+
                     </Col>
                 </Row>
             </Form>

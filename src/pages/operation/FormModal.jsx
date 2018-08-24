@@ -4,16 +4,20 @@ import { connect } from 'react-redux'
 import { handleModalForm, addInfo, editInfo } from '../../redux/operation.redux'
 import InfoForm from './InfoForm'
 
+
 @connect(
-    state => state.operation,
+    state => state,
     { handleModalForm, addInfo, editInfo }
 )
 class FormModal extends PureComponent {
     handleSubmit = () => {
         const form = this.refs.infoForm
-        const { formType, addInfo, editInfo } = this.props
+        const { userid } = this.props.auth
+        const { formType } = this.props.operation
+        const { addInfo, editInfo } = this.props
         form.validateFields((err, values) => {
             if (!err) {
+                values.creatorid = userid
                 if (formType === 'add') {
                     addInfo(values)
                 } else if (formType === 'update') {
@@ -23,7 +27,7 @@ class FormModal extends PureComponent {
         })
     }
     render() {
-        const { formType, modalOpen, formData } = this.props
+        const { formType, modalOpen, formData } = this.props.operation
         return (
             <Modal
                 title={formType === 'add' ? '新增' : '编辑'}

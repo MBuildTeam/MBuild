@@ -1,4 +1,4 @@
-import React, { Fragment,PureComponent } from 'react'
+import React, {Fragment, PureComponent } from 'react'
 import SearchForm from './SearchForm'
 import DataTable from './DataTable'
 import FormModal from './FormModal'

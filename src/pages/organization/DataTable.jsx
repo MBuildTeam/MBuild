@@ -1,15 +1,18 @@
 import React, { PureComponent } from 'react'
-import { Table, Divider } from 'antd'
+import { Table, Divider, Popconfirm } from 'antd'
 import { connect } from 'react-redux'
-import { handleModalForm, getList } from '../../redux/organization.redux'
+import { handleModalForm, deleteInfo, getList } from '../../redux/organization.redux'
 
 @connect(
   state => state.organization,
-  { handleModalForm, getList }
+  { handleModalForm, deleteInfo, getList }
 )
 class DataTable extends PureComponent {
   handleInfo = (type, open, data) => {
     this.props.handleModalForm(type, open, data)
+  }
+  handleDelete = (id) => {
+    this.props.deleteInfo(id)
   }
   handleTableChange = (pagination) => {
     let values = this.props.searchForm
@@ -24,7 +27,7 @@ class DataTable extends PureComponent {
       dataIndex: 'name',
       key: 'name',
       align: 'center',
-    }, 
+    },
     {
       title: '状态',
       dataIndex: 'status',
@@ -71,6 +74,10 @@ class DataTable extends PureComponent {
       render: (text, record) => (
         <span>
           <a href="javascript:;" onClick={() => this.handleInfo('update', true, record)}>编辑</a>
+          <Divider type="vertical" />
+          <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(record.id)}>
+            <a href="javascript:;">删除</a>
+          </Popconfirm>
         </span>
       )
     }]

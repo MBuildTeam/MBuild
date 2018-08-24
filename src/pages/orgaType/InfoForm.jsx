@@ -62,7 +62,7 @@ class InfoForm extends PureComponent {
                     label="状态"
                     hasFeedback
                 >
-                    {getFieldDecorator('Status', {
+                    {getFieldDecorator('status', {
                         rules: [{
                             required: true, message: '状态不能为空',
                         }],

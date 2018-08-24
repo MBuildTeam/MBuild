@@ -22,8 +22,8 @@ class DataTable extends PureComponent {
     }, 
     {
       title: '状态',
-      dataIndex: 'Status',
-      key: 'Status',
+      dataIndex: 'status',
+      key: 'status',
       render: text => {
         if (text == 1) {
           return (<div>启用</div>)

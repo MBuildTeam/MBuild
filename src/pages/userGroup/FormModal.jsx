@@ -13,7 +13,6 @@ class FormModal extends PureComponent {
         const form = this.refs.infoForm
         const { formType, addInfo, editInfo } = this.props
         form.validateFields((err, values) => {
-            console.log(values)
             if (!err) {
                 console.log(values)
                 if (formType === 'add') {

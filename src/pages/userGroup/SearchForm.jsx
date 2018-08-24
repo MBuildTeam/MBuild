@@ -53,8 +53,29 @@ class SearchForm extends PureComponent {
                         </Item>
                     </Col>
                     <Col span={6}>
-                        <Item label="描述">
-                            {getFieldDecorator('Description')(
+                        <Item label="姓名">
+                            {getFieldDecorator('realname')(
+                                <Input />
+                            )}
+                        </Item>
+                    </Col>
+                    <Col span={6}>
+                        <Item label="姓名">
+                            {getFieldDecorator('realname')(
+                                <Input />
+                            )}
+                        </Item>
+                    </Col>
+                    <Col span={6}>
+                        <Item label="姓名">
+                            {getFieldDecorator('realname')(
+                                <Input />
+                            )}
+                        </Item>
+                    </Col>
+                    <Col span={6}>
+                        <Item label="姓名">
+                            {getFieldDecorator('realname')(
                                 <Input />
                             )}
                         </Item>

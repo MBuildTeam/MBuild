@@ -74,7 +74,7 @@ Mock.mock('/api/userinfo/add', 'post', function (options) {
     info.id = arr.length > 0 ? arr[arr.length - 1].id + 1 : 1
     info.createtime = Mock.Random.date()
     arr.push(info)
-    return { code: 1, msg: '新增成功', data: info }
+    return { code: 0, msg: '新增成功', data: info }
 })
 
 //修改
@@ -82,7 +82,7 @@ Mock.mock('/api/userinfo/update', 'post', function (options) {
     let info = JSON.parse(options.body)
     let origin = _.find(arr,(item)=>(item.id === info.id))
     let updated = _.assign(origin,info)
-    return { code: 1, msg: '修改成功', data: updated }
+    return { code: 0, msg: '修改成功', data: updated }
 })
 
 //删除

@@ -4,18 +4,22 @@ const getParam = require('../common/common').getParam
 
 let arr = [{
     id: 1,
-    name: '组织1',
-    ismanagerplatform: 1,
+    name: '组织分类1',
     status: 0,
+    unsortedflag:true,
     creatorid: 1,
     createtime: '2018-08-15',
+    orgid:1,
+    interfaceinfoid:1
 }, {
     id: 2,
-    name: '组织2',
-    ismanagerplatform: 0,
+    name: '组织分类2',
     status: 1,
+    unsortedflag:false,
     creatorid: 1,
     createtime: '2018-08-15',
+    orgid:2,
+    interfaceinfoid:2
 }]
 
 //查询

@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { handleModalForm, addInfo, editInfo } from '../../redux/api.redux'
 import InfoForm from './InfoForm'
 
-
 @connect(
     state => state,
     { handleModalForm, addInfo, editInfo }

@@ -58,7 +58,7 @@ export function api(state = initState, action) {
             let dataList = _.cloneDeep(state.dataList)
             dataList.unshift(action.data)
             let pagination = _.cloneDeep(state.pagination)
-            pagination.total -= 1
+            pagination.total += 1
             return {
                 ...state,
                 modalOpen: false,
@@ -156,7 +156,7 @@ export function editInfo(info) {
 
 export function deleteInfo(id) {
     return dispatch => {
-        axios.get('/api/api/delete',  { params: { id } })
+        axios.get('/api/api/delete', { params: { id } })
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 0) {

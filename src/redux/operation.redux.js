@@ -58,7 +58,7 @@ export function operation(state = initState, action) {
             let dataList = _.cloneDeep(state.dataList)
             dataList.unshift(action.data)
             let pagination = _.cloneDeep(state.pagination)
-            pagination.total -= 1
+            pagination.total += 1
             return {
                 ...state,
                 modalOpen: false,

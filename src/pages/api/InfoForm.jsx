@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Form, Input, Radio } from 'antd'
 
-const RadioGroup = Radio.Group
 const { Item, create } = Form
 @create({
     mapPropsToFields(props) {

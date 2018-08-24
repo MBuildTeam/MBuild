@@ -43,7 +43,7 @@ Mock.mock(/\/api\/api\/select/, 'get', function (options) {
 //新增
 Mock.mock('/api/api/add', 'post', function (options) {
     let info = JSON.parse(options.body)
-    info.id = Mock.Random.id()
+    info.id = info.id = arr.length > 0 ? arr[arr.length - 1].id + 1 : 1
     info.createtime = Mock.Random.date()
     info.Creator = 'System'
     arr.push(info)

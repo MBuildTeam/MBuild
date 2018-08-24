@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Modal } from 'antd'
 import { connect } from 'react-redux'
-import { handleModalForm, addInfo, editInfo } from '../../redux/user.redux'
+import { handleModalForm, addInfo, editInfo } from '../../redux/userinfo.redux'
 import InfoForm from './InfoForm'
 
 @connect(

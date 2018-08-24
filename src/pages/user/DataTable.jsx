@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Table, Divider, Popconfirm, Tag } from 'antd'
 import { connect } from 'react-redux'
-import { handleModalForm, deleteInfo } from '../../redux/user.redux'
+import { handleModalForm, deleteInfo } from '../../redux/userinfo.redux'
 
 @connect(
   state => state.user,

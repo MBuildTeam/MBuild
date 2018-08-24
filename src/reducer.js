@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { auth } from './redux/auth.redux'
 import { framework } from './redux/framework.redux'
-import { user } from './redux/user.redux'
+import { userinfo } from './redux/userinfo.redux'
 import { userGroup } from './redux/userGroup.redux'
 import { menu } from './redux/menu.redux'
 import { bench } from './redux/bench.redux'
@@ -17,7 +17,7 @@ import { projManager } from './redux/projManager.redux'
 export default combineReducers({
     auth,
     framework,
-    user,
+    userinfo,
     userGroup,
     menu,
     bench,

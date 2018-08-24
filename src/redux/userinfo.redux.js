@@ -1,16 +1,16 @@
-USE_MOCK && require('../mock/user')
+USE_MOCK && require('../mock/userinfo')
 
 import axios from 'axios'
 import _ from 'lodash'
 
-const USER_SEARCH_FORM = 'USER_SEARCH_FORM'
-const USER_GET_LIST = 'USER_GET_LIST'
-const USER_HANDLE_MODAL_FORM = 'USER_HANDLE_MODAL_FORM'
-const USER_ADD_INFO = 'USER_ADD_INFO'
-const USER_EDIT_INFO = 'USER_EDIT_INFO'
-const USER_DELETE_INFO = 'USER_DELETE_INFO'
-const USER_SHOW_MSG = 'USER_SHOW_MSG'
-const USER_GET_ORGA_LIST = 'USER_GET_ORGA_LIST'
+const USERINFO_SEARCH_FORM = 'USERINFO_SEARCH_FORM'
+const USERINFO_GET_LIST = 'USERINFO_GET_LIST'
+const USERINFO_HANDLE_MODAL_FORM = 'USERINFO_HANDLE_MODAL_FORM'
+const USERINFO_ADD_INFO = 'USERINFO_ADD_INFO'
+const USERINFO_EDIT_INFO = 'USERINFO_EDIT_INFO'
+const USERINFO_DELETE_INFO = 'USERINFO_DELETE_INFO'
+const USERINFO_SHOW_MSG = 'USERINFO_SHOW_MSG'
+const USERINFO_GET_ORGA_LIST = 'USERINFO_GET_ORGA_LIST'
 
 const initState = {
     searchForm: {},
@@ -20,23 +20,37 @@ const initState = {
     dataList: [],
     msg: '',
     orgaList: [],
+    pagination: {
+        showSizeChanger: true,
+        pageSize: 10,
+        current: 1,
+        total: 0
+    }
 }
 
-export function user(state = initState, action) {
+export function userinfo(state = initState, action) {
     switch (action.type) {
-        case USER_SEARCH_FORM: {
+        case USERINFO_SEARCH_FORM: {
             return {
                 ...state,
                 searchForm: action.data
             }
         }
-        case USER_GET_LIST: {
-            return { ...state, dataList: action.payload }
+        case USERINFO_GET_LIST: {
+            let pagination = _.cloneDeep(state.pagination)
+            pagination.total = action.total
+            pagination.current = action.current
+            pagination.pageSize = action.pageSize
+            return {
+                ...state,
+                dataList: action.payload,
+                pagination: pagination
+            }
         }
-        case USER_GET_ORGA_LIST: {
+        case USERINFO_GET_ORGA_LIST: {
             return { ...state, orgaList: action.payload }
         }
-        case USER_HANDLE_MODAL_FORM: {
+        case USERINFO_HANDLE_MODAL_FORM: {
             return {
                 ...state,
                 formType: action.formType,
@@ -44,7 +58,7 @@ export function user(state = initState, action) {
                 formData: action.formData
             }
         }
-        case USER_ADD_INFO: {
+        case USERINFO_ADD_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             dataList.push(action.data)
             return {
@@ -53,7 +67,7 @@ export function user(state = initState, action) {
                 dataList: dataList
             }
         }
-        case USER_EDIT_INFO: {
+        case USERINFO_EDIT_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             let toUpdate = _.find(dataList, item => (item.id === action.data.id))
             _.assign(toUpdate, action.data)
@@ -63,7 +77,7 @@ export function user(state = initState, action) {
                 dataList: dataList
             }
         }
-        case USER_DELETE_INFO: {
+        case USERINFO_DELETE_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             _.remove(dataList, item => item.id === action.id)
             return {
@@ -78,10 +92,10 @@ export function user(state = initState, action) {
 
 export function getList(params) {
     return dispatch => {
-        dispatch({ type: USER_SEARCH_FORM, data: params })
-        axios.get('/api/user/list', { params })
+        dispatch({ type: USERINFO_SEARCH_FORM, data: params })
+        axios.get('/api/userinfo/select', { params })
             .then(res => {
-                dispatch({ type: USER_GET_LIST, payload: res.data })
+                dispatch({ type: USERINFO_GET_LIST, payload: res.data })
             })
             .catch(e => {
 
@@ -90,18 +104,18 @@ export function getList(params) {
 }
 
 export function handleModalForm(formType, modalOpen, formData) {
-    return { type: USER_HANDLE_MODAL_FORM, formType, modalOpen, formData }
+    return { type: USERINFO_HANDLE_MODAL_FORM, formType, modalOpen, formData }
 }
 
 export function addInfo(info) {
     return dispatch => {
-        axios.post('/api/user/add', info)
+        axios.post('/api/userinfo/add', info)
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 0) {
-                    dispatch({ type: USER_ADD_INFO, msg, data })
+                    dispatch({ type: USERINFO_ADD_INFO, msg, data })
                 } else {
-                    dispatch({ type: USER_SHOW_MSG, msg })
+                    dispatch({ type: USERINFO_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -112,13 +126,13 @@ export function addInfo(info) {
 
 export function editInfo(info) {
     return dispatch => {
-        axios.post('/api/user/update', info)
+        axios.post('/api/userinfo/update', info)
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 0) {
-                    dispatch({ type: USER_EDIT_INFO, msg, data })
+                    dispatch({ type: USERINFO_EDIT_INFO, msg, data })
                 } else {
-                    dispatch({ type: USER_SHOW_MSG, msg })
+                    dispatch({ type: USERINFO_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -129,13 +143,13 @@ export function editInfo(info) {
 
 export function deleteInfo(id) {
     return dispatch => {
-        axios.post('/api/user/delete', { id })
+        axios.get('/api/userinfo/delete',  { params: { id } })
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 0) {
-                    dispatch({ type: USER_DELETE_INFO, msg, id })
+                    dispatch({ type: USERINFO_DELETE_INFO, msg, id })
                 } else {
-                    dispatch({ type: USER_SHOW_MSG, msg })
+                    dispatch({ type: USERINFO_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -146,9 +160,17 @@ export function deleteInfo(id) {
 
 export function getOrgaList() {
     return dispatch => {
-        axios.get('/api/orga/list')
+        axios.get('/api/organization/select')
             .then(res => {
-                dispatch({ type: USER_GET_ORGA_LIST, payload: res.data })
+                const { code, msg,  data } = res.data
+                if (code == 0) {
+                    dispatch({
+                        type: USERINFO_GET_ORGA_LIST,
+                        payload: data,
+                    })
+                } else {
+                    dispatch({ type: USERINFO_SHOW_MSG, msg })
+                }
             })
             .catch(e => {
 

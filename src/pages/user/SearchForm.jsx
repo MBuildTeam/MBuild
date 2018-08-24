@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getOrgaList } from '../../redux/user.redux'
+import { getList, getOrgaList } from '../../redux/userinfo.redux'
 
 const { Item, create } = Form
 

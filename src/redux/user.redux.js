@@ -98,7 +98,7 @@ export function addInfo(info) {
         axios.post('/api/user/add', info)
             .then(res => {
                 const { code, msg, data } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: USER_ADD_INFO, msg, data })
                 } else {
                     dispatch({ type: USER_SHOW_MSG, msg })
@@ -115,7 +115,7 @@ export function editInfo(info) {
         axios.post('/api/user/edit', info)
             .then(res => {
                 const { code, msg, data } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: USER_EDIT_INFO, msg, data })
                 } else {
                     dispatch({ type: USER_SHOW_MSG, msg })
@@ -132,7 +132,7 @@ export function deleteInfo(id) {
         axios.post('/api/user/delete', { id })
             .then(res => {
                 const { code, msg } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: USER_DELETE_INFO, msg, id })
                 } else {
                     dispatch({ type: USER_SHOW_MSG, msg })

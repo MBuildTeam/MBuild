@@ -128,7 +128,7 @@ export function addInfo(info) {
         axios.post('/api/classification/add', info)
             .then(res => {
                 const { code, msg, data } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: CLASSIFICATION_ADD_INFO, msg, data })
                 } else {
                     dispatch({ type: CLASSIFICATION_SHOW_MSG, msg })
@@ -145,7 +145,7 @@ export function editInfo(info) {
         axios.post('/api/classification/edit', info)
             .then(res => {
                 const { code, msg, data } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: CLASSIFICATION_EDIT_INFO, msg, data })
                 } else {
                     dispatch({ type: CLASSIFICATION_SHOW_MSG, msg })
@@ -162,7 +162,7 @@ export function deleteInfo(id) {
         axios.post('/api/classification/delete', { id })
             .then(res => {
                 const { code, msg } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: CLASSIFICATION_DELETE_INFO, msg, id })
                 } else {
                     dispatch({ type: CLASSIFICATION_SHOW_MSG, msg })

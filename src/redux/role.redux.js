@@ -98,7 +98,7 @@ export function addInfo(info) {
         axios.post('/api/role/add', info)
             .then(res => {
                 const { code, msg, data } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: ROLE_ADD_INFO, msg, data })
                 } else {
                     dispatch({ type: ROLE_SHOW_MSG, msg })
@@ -115,7 +115,7 @@ export function editInfo(info) {
         axios.post('/api/role/edit', info)
             .then(res => {
                 const { code, msg, data } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: ROLE_EDIT_INFO, msg, data })
                 } else {
                     dispatch({ type: ROLE_SHOW_MSG, msg })
@@ -132,7 +132,7 @@ export function deleteInfo(id) {
         axios.post('/api/role/delete', { id })
             .then(res => {
                 const { code, msg } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: ROLE_DELETE_INFO, msg, id })
                 } else {
                     dispatch({ type: ROLE_SHOW_MSG, msg })

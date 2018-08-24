@@ -98,7 +98,7 @@ export function addInfo(info) {
         axios.post('/api/rights/add', info)
             .then(res => {
                 const { code, msg, data } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: RIGHTS_ADD_INFO, msg, data })
                 } else {
                     dispatch({ type: RIGHTS_SHOW_MSG, msg })
@@ -115,7 +115,7 @@ export function editInfo(info) {
         axios.post('/api/rights/edit', info)
             .then(res => {
                 const { code, msg, data } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: RIGHTS_EDIT_INFO, msg, data })
                 } else {
                     dispatch({ type: RIGHTS_SHOW_MSG, msg })
@@ -132,7 +132,7 @@ export function deleteInfo(id) {
         axios.post('/api/rights/delete', { id })
             .then(res => {
                 const { code, msg } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: RIGHTS_DELETE_INFO, msg, id })
                 } else {
                     dispatch({ type: RIGHTS_SHOW_MSG, msg })

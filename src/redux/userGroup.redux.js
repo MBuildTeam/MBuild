@@ -103,7 +103,7 @@ export function addInfo(info) {
         axios.post('/api/userGroup/add', info)
             .then(res => {
                 const { code, msg, data } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: USERGROUP_ADD_INFO, msg, data })
                 } else {
                     dispatch({ type: USERGROUP_SHOW_MSG, msg })
@@ -120,7 +120,7 @@ export function editInfo(info) {
         axios.post('/api/userGroup/edit', info)
             .then(res => {
                 const { code, msg, data } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: USERGROUP_EDIT_INFO, msg, data })
                 } else {
                     dispatch({ type: USERGROUP_SHOW_MSG, msg })
@@ -137,7 +137,7 @@ export function deleteInfo(id) {
         axios.post('/api/userGroup/delete', { id })
             .then(res => {
                 const { code, msg } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: USERGROUP_DELETE_INFO, msg, id })
                 } else {
                     dispatch({ type: USERGROUP_SHOW_MSG, msg })

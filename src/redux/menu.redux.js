@@ -93,7 +93,7 @@ export function addInfo(info) {
         axios.post('/api/menu/add', info)
             .then(res => {
                 const { code, msg, data } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: MENU_ADD_INFO, msg, data })
                 } else {
                     dispatch({ type: MENU_SHOW_MSG, msg })
@@ -110,7 +110,7 @@ export function editInfo(info) {
         axios.post('/api/menu/edit', info)
             .then(res => {
                 const { code, msg, data } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: MENU_EDIT_INFO, msg, data })
                 } else {
                     dispatch({ type: MENU_SHOW_MSG, msg })
@@ -127,7 +127,7 @@ export function deleteInfo(id) {
         axios.post('/api/menu/delete', { id })
             .then(res => {
                 const { code, msg } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: MENU_DELETE_INFO, msg, id })
                 } else {
                     dispatch({ type: MENU_SHOW_MSG, msg })

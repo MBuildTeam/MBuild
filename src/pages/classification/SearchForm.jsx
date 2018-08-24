@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
-import { Form, Row, Col, Input, Button,Radio } from 'antd'
+import { Form, Row, Col, Input, Button, Radio, Select } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getApiList,getOrgaList } from '../../redux/classification.redux'
+import { getList, getApiList, getOrgaList } from '../../redux/classification.redux'
 
 const { Item, create } = Form
 
@@ -21,7 +21,7 @@ const { Item, create } = Form
 })
 @connect(
     state => state.classification,
-    { getList, getApiList,getOrgaList }
+    { getList, getApiList, getOrgaList }
 )
 class SearchForm extends PureComponent {
     componentDidMount() {
@@ -60,6 +60,23 @@ class SearchForm extends PureComponent {
                                     <Radio value={1}>启用</Radio>
                                     <Radio value={2}>停用</Radio>
                                 </Radio.Group>
+                            )}
+                        </Item>
+                    </Col>
+                    <Col span={6}>
+                        <Item label='关联机构'>
+                            {getFieldDecorator('orgid')(
+                                <Select>
+                                    {
+                                        this.props.orgaList.map(v => {
+                                            return (
+                                                <Select.Option key={v.id} value={v.id}>
+                                                    {v.name}
+                                                </Select.Option>
+                                            )
+                                        })
+                                    }
+                                </Select>
                             )}
                         </Item>
                     </Col>

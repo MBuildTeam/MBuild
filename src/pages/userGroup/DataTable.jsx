@@ -42,10 +42,13 @@ class DataTable extends PureComponent {
       }
     },
     {
-      title: 'api接口',
+      title: '角色',
       dataIndex: 'roleids',
       key: 'roleids',
       align: 'center',
+      render: text => {
+        return (<div>{text.join('|')}</div>)
+      }
     }, 
     {
       title: '创建者',

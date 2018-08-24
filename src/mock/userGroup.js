@@ -5,7 +5,7 @@ const getParam = require('../common/common').getParam
 let arr = [{
     id: 1,
     name: '用户组1',
-    type: 0,
+    type: 1,
     creatorid: 1,
     createtime: '2018-08-15',
     roleids: [1, 2]

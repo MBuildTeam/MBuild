@@ -177,7 +177,7 @@ export function deleteInfo(id) {
 
 export function getRoleList() {
     return dispatch => {
-        axios.get('/api/role/select')
+        axios.get('/api/roleinfo/select')
             .then(res => {
                 const { code, msg,  data } = res.data
                 if (code == 0) {

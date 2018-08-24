@@ -46,6 +46,7 @@ class MenuBar extends React.Component {
         return (
             <Menu theme="dark"
                 mode={"inline"}
+                selectedKeys={[this.props.activeMenuCode]}
                 onClick={this.handleClick}
             >
                 {

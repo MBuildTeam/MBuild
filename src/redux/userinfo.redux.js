@@ -66,10 +66,13 @@ export function userinfo(state = initState, action) {
         case USERINFO_ADD_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             dataList.unshift(action.data)
+            let pagination = _.cloneDeep(state.pagination)
+            pagination.total -= 1
             return {
                 ...state,
                 modalOpen: false,
-                dataList: dataList
+                dataList: dataList,
+                pagination
             }
         }
         case USERINFO_EDIT_INFO: {
@@ -79,15 +82,18 @@ export function userinfo(state = initState, action) {
             return {
                 ...state,
                 modalOpen: false,
-                dataList: dataList
+                dataList: dataList,
             }
         }
         case USERINFO_DELETE_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             _.remove(dataList, item => item.id === action.id)
+            let pagination = _.cloneDeep(state.pagination)
+            pagination.total -= 1
             return {
                 ...state,
-                dataList: dataList
+                dataList: dataList,
+                pagination
             }
         }
         default:

@@ -35,7 +35,7 @@ Mock.mock('/api/api/add', 'post', function (options) {
 })
 
 //修改
-Mock.mock('/api/api/edit', 'post', function (options) {
+Mock.mock('/api/api/update', 'post', function (options) {
     let info = JSON.parse(options.body)
     let origin = _.find(arr,(item)=>(item.id === info.id))
     let updated = _.assign(origin,info)

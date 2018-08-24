@@ -117,7 +117,7 @@ export function addInfo(info) {
 
 export function editInfo(info) {
     return dispatch => {
-        axios.post('/api/userGroup/edit', info)
+        axios.post('/api/userGroup/update', info)
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 0) {

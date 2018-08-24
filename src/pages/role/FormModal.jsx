@@ -16,7 +16,7 @@ class FormModal extends PureComponent {
             if (!err) {
                 if (formType === 'add') {
                     addInfo(values)
-                } else if (formType === 'edit') {
+                } else if (formType === 'update') {
                     editInfo(values)
                 }
             }

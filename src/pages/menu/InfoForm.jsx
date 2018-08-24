@@ -6,7 +6,7 @@ const { Item, create } = Form
 const RadioGroup = Radio.Group
 @create({
     mapPropsToFields(props) {
-        if (props.formType === 'edit') {
+        if (props.formType === 'update') {
             let fields = {}
             for (let key in props.formData) {
                 fields[key] = Form.createFormField({
@@ -37,7 +37,7 @@ class InfoForm extends PureComponent {
         return (
             <Form>
                 {
-                    formType === 'edit' ? <Item>
+                    formType === 'update' ? <Item>
                         {getFieldDecorator('id')(
                             <Input type="hidden" />
                         )}

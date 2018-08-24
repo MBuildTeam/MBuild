@@ -112,7 +112,7 @@ export function addInfo(info) {
 
 export function editInfo(info) {
     return dispatch => {
-        axios.post('/api/rights/edit', info)
+        axios.post('/api/rights/update', info)
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 0) {

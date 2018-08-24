@@ -70,7 +70,7 @@ class DataTable extends PureComponent {
       align: 'center',
       render: (text, record) => (
         <span>
-          <a href="javascript:;" onClick={() => this.handleInfo('edit', true, record)}>编辑</a>
+          <a href="javascript:;" onClick={() => this.handleInfo('update', true, record)}>编辑</a>
         </span>
       )
     }]

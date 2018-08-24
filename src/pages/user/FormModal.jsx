@@ -17,7 +17,7 @@ class FormModal extends PureComponent {
                 values.Birthday = values.Birthday.format('YYYY-MM-DD')
                 if (formType === 'add') {
                     addInfo(values)
-                } else if (formType === 'edit') {
+                } else if (formType === 'update') {
                     editInfo(values)
                 }
             }

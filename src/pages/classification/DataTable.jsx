@@ -42,11 +42,37 @@ class DataTable extends PureComponent {
       }
     },
     {
+      title: '是否分拣',
+      dataIndex: 'unsortedflag',
+      key: 'unsortedflag',
+      align: 'center',
+      render: text => {
+        if (text) {
+          return (<div>已分拣</div>)
+        } else {
+          return (<div>未分拣</div>)
+        }
+      }
+    },
+    {
+      title: '关联机构',
+      dataIndex: 'orgid',
+      key: 'orgid',
+      align: 'center',
+    },
+    {
+      title: 'api接口',
+      dataIndex: 'apiid',
+      key: 'apiid',
+      align: 'center',
+    }, 
+    {
       title: '创建者',
       dataIndex: 'creatorid',
       key: 'creatorid',
       align: 'center',
-    }, {
+    },
+    {
       title: '创建时间',
       dataIndex: 'createtime',
       key: 'createtime',
@@ -58,7 +84,7 @@ class DataTable extends PureComponent {
       align: 'center',
       render: (text, record) => (
         <span>
-          <a href="javascript:;" onClick={() => this.handleInfo('edit', true, record)}>编辑</a>
+          <a href="javascript:;" onClick={() => this.handleInfo('update', true, record)}>编辑</a>
           <Divider type="vertical" />
           <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(record.id)}>
             <a href="javascript:;">删除</a>

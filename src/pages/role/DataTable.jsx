@@ -47,7 +47,7 @@ class DataTable extends PureComponent {
       key: 'action',
       render: (text, record) => (
         <span>
-          <a href="javascript:;" onClick={() => this.handleInfo('edit', true, record)}>编辑</a>
+          <a href="javascript:;" onClick={() => this.handleInfo('update', true, record)}>编辑</a>
           <Divider type="vertical" />
           <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(record.id)}>
             <a href="javascript:;">删除</a>

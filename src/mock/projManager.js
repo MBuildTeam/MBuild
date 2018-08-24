@@ -37,7 +37,7 @@ Mock.mock('/api/projManager/add', 'post', function (options) {
 })
 
 //修改
-Mock.mock('/api/projManager/edit', 'post', function (options) {
+Mock.mock('/api/projManager/update', 'post', function (options) {
     let info = JSON.parse(options.body)
     let origin = _.find(arr,(item)=>(item.id === info.id))
     let updated = _.assign(origin,info)

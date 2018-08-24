@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getList, handleModalForm, deleteInfo } from '../../redux/operation.redux'
 
 @connect(
-  state => state.rights,
+  state => state.operation,
   { getList, handleModalForm, deleteInfo }
 )
 class DataTable extends PureComponent {

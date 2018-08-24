@@ -130,7 +130,7 @@ export function getMenuList() {
         {
             icon: 'bars',
             text: '权限',
-            code: 'rights'
+            code: 'operation'
         },
     ]
     return dispatch => {

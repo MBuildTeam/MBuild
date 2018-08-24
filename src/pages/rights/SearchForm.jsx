@@ -21,7 +21,7 @@ const RadioGroup = Radio.Group
     }
 })
 @connect(
-    state => state.rights,
+    state => state.operation,
     { getList, getMenuList }
 )
 class SearchForm extends PureComponent {

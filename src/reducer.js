@@ -6,7 +6,7 @@ import { usergroup } from './redux/usergroup.redux'
 import { menu } from './redux/menu.redux'
 import { bench } from './redux/bench.redux'
 import { roleinfo } from './redux/roleinfo.redux'
-import { rights } from './redux/operation.redux'
+import { operation } from './redux/operation.redux'
 import { organization } from './redux/organization.redux'
 import { classification } from './redux/classification.redux'
 import { api } from './redux/api.redux'
@@ -22,7 +22,7 @@ export default combineReducers({
     menu,
     bench,
     roleinfo,
-    rights,
+    operation,
     organization,
     classification,
     api,

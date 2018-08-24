@@ -1,16 +1,15 @@
-USE_MOCK && require('../mock/usergroup')
+USE_MOCK && require('../mock/operation')
 
 import axios from 'axios'
 import _ from 'lodash'
 
-const USERGROUP_SEARCH_FORM = 'USERGROUP_SEARCH_FORM'
-const USERGROUP_GET_LIST = 'USERGROUP_GET_LIST'
-const USERGROUP_HANDLE_MODAL_FORM = 'USERGROUP_HANDLE_MODAL_FORM'
-const USERGROUP_ADD_INFO = 'USERGROUP_ADD_INFO'
-const USERGROUP_EDIT_INFO = 'USERGROUP_EDIT_INFO'
-const USERGROUP_DELETE_INFO = 'USERGROUP_DELETE_INFO'
-const USERGROUP_SHOW_MSG = 'USERGROUP_SHOW_MSG'
-const USERGROUP_GET_ROLE_LIST = 'USERGROUP_GET_ROLE_LIST'
+const OPERATION_SEARCH_FORM = 'OPERATION_SEARCH_FORM'
+const OPERATION_GET_LIST = 'OPERATION_GET_LIST'
+const OPERATION_HANDLE_MODAL_FORM = 'OPERATION_HANDLE_MODAL_FORM'
+const OPERATION_ADD_INFO = 'OPERATION_ADD_INFO'
+const OPERATION_EDIT_INFO = 'OPERATION_EDIT_INFO'
+const OPERATION_DELETE_INFO = 'OPERATION_DELETE_INFO'
+const OPERATION_SHOW_MSG = 'OPERATION_SHOW_MSG'
 
 const initState = {
     searchForm: {},
@@ -28,15 +27,15 @@ const initState = {
     }
 }
 
-export function usergroup(state = initState, action) {
+export function operation(state = initState, action) {
     switch (action.type) {
-        case USERGROUP_SEARCH_FORM: {
+        case OPERATION_SEARCH_FORM: {
             return {
                 ...state,
                 searchForm: action.data
             }
         }
-        case USERGROUP_GET_LIST: {
+        case OPERATION_GET_LIST: {
             let pagination = _.cloneDeep(state.pagination)
             pagination.total = action.total
             pagination.current = action.current
@@ -47,10 +46,7 @@ export function usergroup(state = initState, action) {
                 pagination: pagination
             }
         }
-        case USERGROUP_GET_ROLE_LIST: {
-            return { ...state, roleList: action.payload }
-        }
-        case USERGROUP_HANDLE_MODAL_FORM: {
+        case OPERATION_HANDLE_MODAL_FORM: {
             return {
                 ...state,
                 formType: action.formType,
@@ -58,7 +54,7 @@ export function usergroup(state = initState, action) {
                 formData: action.formData
             }
         }
-        case USERGROUP_ADD_INFO: {
+        case OPERATION_ADD_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             dataList.unshift(action.data)
             let pagination = _.cloneDeep(state.pagination)
@@ -70,7 +66,7 @@ export function usergroup(state = initState, action) {
                 pagination
             }
         }
-        case USERGROUP_EDIT_INFO: {
+        case OPERATION_EDIT_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             let toUpdate = _.find(dataList, item => (item.id === action.data.id))
             _.assign(toUpdate, action.data)
@@ -80,7 +76,7 @@ export function usergroup(state = initState, action) {
                 dataList: dataList,
             }
         }
-        case USERGROUP_DELETE_INFO: {
+        case OPERATION_DELETE_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             _.remove(dataList, item => item.id === action.id)
             let pagination = _.cloneDeep(state.pagination)
@@ -98,20 +94,20 @@ export function usergroup(state = initState, action) {
 
 export function getList(params) {
     return dispatch => {
-        dispatch({ type: USERGROUP_SEARCH_FORM, data: params })
-        axios.get('/api/usergroup/select', { params })
+        dispatch({ type: OPERATION_SEARCH_FORM, data: params })
+        axios.get('/api/operation/select', { params })
             .then(res => {
                 const { code, msg, resultcounts, data } = res.data
                 if (code == 0) {
                     dispatch({
-                        type: USERGROUP_GET_LIST,
+                        type: OPERATION_GET_LIST,
                         payload: data,
                         total: resultcounts,
                         current: params.pagenum,
                         pageSize: params.pagesize
                     })
                 } else {
-                    dispatch({ type: USERGROUP_SHOW_MSG, msg })
+                    dispatch({ type: OPERATION_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -121,18 +117,18 @@ export function getList(params) {
 }
 
 export function handleModalForm(formType, modalOpen, formData) {
-    return { type: USERGROUP_HANDLE_MODAL_FORM, formType, modalOpen, formData }
+    return { type: OPERATION_HANDLE_MODAL_FORM, formType, modalOpen, formData }
 }
 
 export function addInfo(info) {
     return dispatch => {
-        axios.post('/api/usergroup/add', info)
+        axios.post('/api/operation/add', info)
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 0) {
-                    dispatch({ type: USERGROUP_ADD_INFO, msg, data })
+                    dispatch({ type: OPERATION_ADD_INFO, msg, data })
                 } else {
-                    dispatch({ type: USERGROUP_SHOW_MSG, msg })
+                    dispatch({ type: OPERATION_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -143,13 +139,13 @@ export function addInfo(info) {
 
 export function editInfo(info) {
     return dispatch => {
-        axios.post('/api/usergroup/update', info)
+        axios.post('/api/operation/update', info)
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 0) {
-                    dispatch({ type: USERGROUP_EDIT_INFO, msg, data })
+                    dispatch({ type: OPERATION_EDIT_INFO, msg, data })
                 } else {
-                    dispatch({ type: USERGROUP_SHOW_MSG, msg })
+                    dispatch({ type: OPERATION_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -160,13 +156,13 @@ export function editInfo(info) {
 
 export function deleteInfo(id) {
     return dispatch => {
-        axios.get('/api/usergroup/delete',  { params: { id } })
+        axios.get('/api/operation/delete',  { params: { id } })
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 0) {
-                    dispatch({ type: USERGROUP_DELETE_INFO, msg, id })
+                    dispatch({ type: OPERATION_DELETE_INFO, msg, id })
                 } else {
-                    dispatch({ type: USERGROUP_SHOW_MSG, msg })
+                    dispatch({ type: OPERATION_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -175,22 +171,3 @@ export function deleteInfo(id) {
     }
 }
 
-export function getRoleList() {
-    return dispatch => {
-        axios.get('/api/role/select')
-            .then(res => {
-                const { code, msg,  data } = res.data
-                if (code == 0) {
-                    dispatch({
-                        type: USERGROUP_GET_ROLE_LIST,
-                        payload: data,
-                    })
-                } else {
-                    dispatch({ type: USERGROUP_SHOW_MSG, msg })
-                }
-            })
-            .catch(e => {
-
-            })
-    }
-}

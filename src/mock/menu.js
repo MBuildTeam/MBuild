@@ -13,7 +13,7 @@ let arr = [{
 {
     id: '222',
     name: "权限",
-    Url: 'rights',
+    Url: 'operation',
     status:1,
     Creator: "System",
     createtime: Mock.Random.date(),

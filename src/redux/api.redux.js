@@ -146,7 +146,7 @@ export function deleteInfo(id) {
 
 export function getRightsList() {
     return dispatch => {
-        axios.get('/api/rights/list')
+        axios.get('/api/operation/list')
             .then(res => {
                 dispatch({ type: API_GET_RIGHTS_LIST, payload: res.data })
             })

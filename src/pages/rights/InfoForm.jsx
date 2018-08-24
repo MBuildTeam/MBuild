@@ -19,7 +19,7 @@ const { Option } = Select
     }
 })
 @connect(
-    state=>state.rights
+    state=>state.operation
 )
 class InfoForm extends PureComponent {
     render() {

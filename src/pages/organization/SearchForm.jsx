@@ -28,17 +28,28 @@ class SearchForm extends PureComponent {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
+                //配入分页条件
+                values.pagenum = 1
+                values.pagesize = this.props.pagination.pageSize
                 this.props.getList(values)
             }
         })
     }
     handleReset = () => {
         this.props.form.resetFields()
-        this.props.getList()
+        var values = {}
+        //配入分页条件
+        values.pagenum = 1
+        values.pagesize = this.props.pagination.pageSize
+        this.props.getList(values)
     }
     componentDidMount() {
         //todo:这里可以做一个优化，区分第一次打开和标签切换
-        this.props.getList()
+        var values = {}
+        //配入分页条件
+        values.pagenum = 1
+        values.pagesize = this.props.pagination.pageSize
+        this.props.getList(values)
     }
     render() {
         const { getFieldDecorator } = this.props.form

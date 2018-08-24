@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom'
 import Loadable from 'react-loadable'
 import Framework from './Frame'
 import Loading from '../../components/loading/Loading'
+import { LocaleProvider } from 'antd'
+import zhCN from 'antd/lib/locale-provider/zh_CN';
 
 @connect(
     state => state
@@ -31,11 +33,13 @@ class Home extends Component {
         return (
             <Fragment>
                 {redirectTo && redirectTo !== '/home' ? <Redirect to={redirectTo} /> : null}
-                <Framework>
-                    {
-                        this.getPage()
-                    }
-                </Framework>
+                <LocaleProvider locale={zhCN}>
+                    <Framework>
+                        {
+                            this.getPage()
+                        }
+                    </Framework>
+                </LocaleProvider>
             </Fragment>
         )
     }

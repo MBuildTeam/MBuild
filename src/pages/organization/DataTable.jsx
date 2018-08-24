@@ -1,53 +1,59 @@
 import React, { PureComponent } from 'react'
-import { Table, Divider, Popconfirm } from 'antd'
+import { Table, Divider } from 'antd'
 import { connect } from 'react-redux'
-import { handleModalForm, deleteInfo } from '../../redux/organization.redux'
+import { handleModalForm, getList } from '../../redux/organization.redux'
 
 @connect(
   state => state.organization,
-  { handleModalForm, deleteInfo }
+  { handleModalForm, getList }
 )
 class DataTable extends PureComponent {
   handleInfo = (type, open, data) => {
     this.props.handleModalForm(type, open, data)
   }
-  handleDelete = (id) => {
-    this.props.deleteInfo(id)
+  handleTableChange = (pagination) => {
+    let values = this.props.searchForm
+    //配入分页条件
+    values.pagenum = pagination.current
+    values.pagesize = pagination.pageSize
+    this.props.getList(values)
   }
   render() {
     const columns = [{
       title: '名称',
       dataIndex: 'name',
       key: 'name',
+      align: 'center',
     }, {
       title: '状态',
       dataIndex: 'status',
       key: 'status',
+      align: 'center',
       render: text => {
         if (text == 0) {
           return (<div>启用</div>)
-        } else
-          if (text == 1) {
-            return (<div>停用</div>)
-          } else {
-            return null
-          }
+        } else {
+          return (<div>停用</div>)
+        }
       }
-    }, 
+    },
     {
       title: '创建者',
-      dataIndex: 'creator',
-      key: 'creator',
-    }, 
+      dataIndex: 'creatorid',
+      key: 'creatorid',
+      align: 'center',
+    },
     {
       title: '创建时间',
       dataIndex: 'createtime',
       key: 'createtime',
-    }, 
+      align: 'center',
+    },
     {
       title: '管理企业',
       dataIndex: 'ismanagerplatform',
       key: 'ismanagerplatform',
+      align: 'center',
       render: text => {
         if (text == 1) {
           return (<div>是</div>)
@@ -56,28 +62,25 @@ class DataTable extends PureComponent {
         }
       }
     },
-     {
+    {
       title: (<div>操作<Divider type="vertical" />
         <a href="javascript:;" onClick={() => this.handleInfo('add', true)}>新增</a></div>),
       key: 'action',
+      align: 'center',
       render: (text, record) => (
         <span>
           <a href="javascript:;" onClick={() => this.handleInfo('edit', true, record)}>编辑</a>
-          <Divider type="vertical" />
-          <Popconfirm title="确认删除?" onConfirm={() => this.handleDelete(record.id)}>
-            <a href="javascript:;">删除</a>
-          </Popconfirm>
         </span>
       )
-    }
-
-    ];
+    }]
     return (
       <Table
         rowKey={record => record.id}
         dataSource={this.props.dataList}
         columns={columns}
-        pagination={false} />
+        pagination={this.props.pagination}
+        onChange={this.handleTableChange}
+      />
     )
   }
 }

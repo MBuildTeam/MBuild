@@ -17,19 +17,33 @@ const initState = {
     formType: 'add',
     formData: {},
     dataList: [],
-    msg: ''
+    msg: '',
+    pagination: {
+        showSizeChanger: true,
+        pageSize: 2,
+        current: 1,
+        total: 0
+    }
 }
 
 export function organization(state = initState, action) {
     switch (action.type) {
-        case ORGA_SEARCH_FORM:{
+        case ORGA_SEARCH_FORM: {
             return {
                 ...state,
-                searchForm:action.data
+                searchForm: action.data
             }
         }
         case ORGA_GET_LIST: {
-            return { ...state, dataList: action.payload }
+            let pagination = _.cloneDeep(state.pagination)
+            pagination.total = action.total
+            pagination.current = action.current
+            pagination.pageSize = action.pageSize
+            return {
+                ...state,
+                dataList: action.payload,
+                pagination: pagination
+            }
         }
         case ORGA_HANDLE_MODAL_FORM: {
             return {
@@ -41,11 +55,14 @@ export function organization(state = initState, action) {
         }
         case ORGA_ADD_INFO: {
             let dataList = _.cloneDeep(state.dataList)
-            dataList.push(action.data)
+            dataList.unshift(action.data)
+            let pagination = _.cloneDeep(state.pagination)
+            pagination.total += 1
             return {
                 ...state,
                 modalOpen: false,
-                dataList: dataList
+                dataList: dataList,
+                pagination: pagination
             }
         }
         case ORGA_EDIT_INFO: {
@@ -76,7 +93,18 @@ export function getList(params) {
         dispatch({ type: ORGA_SEARCH_FORM, data: params })
         axios.get('/api/organization/list', { params })
             .then(res => {
-                dispatch({ type: ORGA_GET_LIST, payload: res.data })
+                const { code, msg, resultcounts, data } = res.data
+                if (code == 0) {
+                    dispatch({
+                        type: ORGA_GET_LIST,
+                        payload: data,
+                        total: resultcounts,
+                        current: params.pagenum,
+                        pageSize: params.pagesize
+                    })
+                } else {
+                    dispatch({ type: ORGA_SHOW_MSG, msg })
+                }
             })
             .catch(e => {
 
@@ -93,7 +121,7 @@ export function addInfo(info) {
         axios.post('/api/organization/add', info)
             .then(res => {
                 const { code, msg, data } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: ORGA_ADD_INFO, msg, data })
                 } else {
                     dispatch({ type: ORGA_SHOW_MSG, msg })
@@ -110,7 +138,7 @@ export function editInfo(info) {
         axios.post('/api/organization/update', info)
             .then(res => {
                 const { code, msg, data } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: ORGA_EDIT_INFO, msg, data })
                 } else {
                     dispatch({ type: ORGA_SHOW_MSG, msg })
@@ -124,10 +152,10 @@ export function editInfo(info) {
 
 export function deleteInfo(id) {
     return dispatch => {
-        axios.post('/api/organization/delete', { id })
+        axios.get('/api/organization/delete', { params: { id } })
             .then(res => {
                 const { code, msg } = res.data
-                if (code == 1) {
+                if (code == 0) {
                     dispatch({ type: ORGA_DELETE_INFO, msg, id })
                 } else {
                     dispatch({ type: ORGA_SHOW_MSG, msg })

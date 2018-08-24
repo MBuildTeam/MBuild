@@ -6,15 +6,19 @@ import InfoForm from './InfoForm'
 
 
 @connect(
-    state => state.organization,
-    { handleModalForm, addInfo, editInfo  }
+    state => state,
+    { handleModalForm, addInfo, editInfo }
 )
 class FormModal extends PureComponent {
     handleSubmit = () => {
         const form = this.refs.infoForm
-        const { formType,addInfo, editInfo  } = this.props
+        const { userid } = this.props.auth
+        const { formType } = this.props.organization
+        const { addInfo, editInfo } = this.props
         form.validateFields((err, values) => {
             if (!err) {
+                console.log(values)
+                values.creatorid = userid
                 if (formType === 'add') {
                     addInfo(values)
                 } else if (formType === 'edit') {
@@ -24,7 +28,7 @@ class FormModal extends PureComponent {
         })
     }
     render() {
-        const { formType, modalOpen, formData } = this.props
+        const { formType, modalOpen, formData } = this.props.organization
         return (
             <Modal
                 title={formType === 'add' ? '新增' : '编辑'}

@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Row, Col, Form, Input, Select, InputNumber, Radio, DatePicker } from 'antd'
-import locale from 'antd/lib/date-picker/locale/zh_CN';
 import moment from 'moment';
-import 'moment/locale/zh-cn';
 import { connect } from 'react-redux'
 
 const { Item, create } = Form
@@ -142,7 +140,7 @@ class InfoForm extends PureComponent {
                                     required: true, message: '生日不能为空',
                                 }],
                             })(
-                                <DatePicker locale={locale} />
+                                <DatePicker />
                             )}
                         </Item>
                     </Col>

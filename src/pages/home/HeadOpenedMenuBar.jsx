@@ -60,15 +60,16 @@ class HeadOpenedMenuBar extends React.PureComponent {
      * @param {Object} menu 
      */
     closeMenu(menu) {
-        Modal.confirm({
-            title: '确认',
-            content: `将要关闭【${menu.text}】窗口，是否继续？`,
-            okText: '确认',
-            cancelText: '取消',
-            onOk: () => {
-                this.props.closeMenu(menu.code)
-            }
-        })
+        this.props.closeMenu(menu.code)
+        // Modal.confirm({
+        //     title: '确认',
+        //     content: `将要关闭【${menu.text}】窗口，是否继续？`,
+        //     okText: '确认',
+        //     cancelText: '取消',
+        //     onOk: () => {
+        //         this.props.closeMenu(menu.code)
+        //     }
+        // })
     }
     handleLeft() {
         let { left } = this.state

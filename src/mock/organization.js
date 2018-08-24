@@ -19,7 +19,7 @@ let arr = [{
 }]
 
 //查询
-Mock.mock(/\/api\/organization\/list/, 'get', function (options) {
+Mock.mock(/\/api\/organization\/select/, 'get', function (options) {
     const name = getParam(options.url, 'name')
     const pagenum = parseInt(getParam(options.url, 'pagenum'))
     const pagesize = parseInt(getParam(options.url, 'pagesize'))

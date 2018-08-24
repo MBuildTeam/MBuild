@@ -91,7 +91,7 @@ export function organization(state = initState, action) {
 export function getList(params) {
     return dispatch => {
         dispatch({ type: ORGA_SEARCH_FORM, data: params })
-        axios.get('/api/organization/list', { params })
+        axios.get('/api/organization/select', { params })
             .then(res => {
                 const { code, msg, resultcounts, data } = res.data
                 if (code == 0) {

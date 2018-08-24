@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react'
-import { Form, Input, Radio } from 'antd'
-import {connect} from 'react-redux'
+import { Form, Input, Select,Radio } from 'antd'
+import { connect } from 'react-redux'
 
 const { Item, create } = Form
-const RadioGroup = Radio.Group
+const { Option } = Select
+
 @create({
     mapPropsToFields(props) {
         if (props.formType === 'edit') {
@@ -18,7 +19,7 @@ const RadioGroup = Radio.Group
     }
 })
 @connect(
-    state=>state.menu
+    state => state.classification
 )
 class InfoForm extends PureComponent {
     render() {
@@ -58,19 +59,6 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label="Url"
-                    hasFeedback
-                >
-                    {getFieldDecorator('Url', {
-                        rules: [{
-                            required: true, message: 'Url不能为空',
-                        }],
-                    })(
-                        <Input />
-                    )}
-                </Item>
-                <Item
-                    {...formItemLayout}
                     label="状态"
                     hasFeedback
                 >
@@ -79,12 +67,55 @@ class InfoForm extends PureComponent {
                             required: true, message: '状态不能为空',
                         }],
                     })(
-                        <RadioGroup>
+                        <Radio.Group>
                             <Radio value={1}>启用</Radio>
                             <Radio value={2}>停用</Radio>
-                        </RadioGroup>
+                        </Radio.Group>
                     )}
                 </Item>
+                <Item
+                    {...formItemLayout}
+                    label="组织机构"
+                    hasFeedback
+                >
+                    {getFieldDecorator('Organizational')(
+                        <Select
+                            mode="multiple"
+                        >
+                            {
+                                this.props.orgaList.map(v => {
+                                    return (
+                                        <Option key={v.id} value={v.id}>
+                                            {v.name}
+                                        </Option>
+                                    )
+                                })
+                            }
+                        </Select>
+                    )}
+                </Item>
+                <Item
+                    {...formItemLayout}
+                    label="接口"
+                    hasFeedback
+                >
+                    {getFieldDecorator('Interface')(
+                        <Select
+                            mode="multiple"
+                        >
+                            {
+                                this.props.interfaceList.map(v => {
+                                    return (
+                                        <Option key={v.id} value={v.id}>
+                                            {v.name}
+                                        </Option>
+                                    )
+                                })
+                            }
+                        </Select>
+                    )}
+                </Item>
+            
             </Form>
         )
     }

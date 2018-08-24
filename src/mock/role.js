@@ -4,13 +4,13 @@ const getParam = require('../common/common').getParam
 
 let arr = [{
     id: '111',
-    Name: "角色1",
+    name: "角色1",
     Creator: "System",
     CreateTime: Mock.Random.date(),
     Rights:['111','222']
 },{
     id: '222',
-    Name: "角色2",
+    name: "角色2",
     Creator: "System",
     CreateTime: Mock.Random.date(),
     Rights:['111']
@@ -18,9 +18,9 @@ let arr = [{
 
 //查询
 Mock.mock(/\/api\/role\/list/, 'get', function (options) {
-    const Name = getParam(options.url,'Name')
-    if(Name){
-        return _.filter(arr,item=>item.Name.indexOf(Name)>-1)
+    const name = getParam(options.url,'name')
+    if(name){
+        return _.filter(arr,item=>item.name.indexOf(name)>-1)
     }else{
         return arr
     }

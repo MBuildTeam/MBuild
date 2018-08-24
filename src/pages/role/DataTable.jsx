@@ -17,8 +17,8 @@ class DataTable extends PureComponent {
   render() {
     const columns = [{
       title: '名称',
-      dataIndex: 'Name',
-      key: 'Name',
+      dataIndex: 'name',
+      key: 'name',
     },
     // {
     //   title: '权限',

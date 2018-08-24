@@ -48,7 +48,7 @@ class InfoForm extends PureComponent {
                     label="名称"
                     hasFeedback
                 >
-                    {getFieldDecorator('Name', {
+                    {getFieldDecorator('name', {
                         rules: [{
                             required: true, message: '名称不能为空',
                         }],
@@ -85,7 +85,7 @@ class InfoForm extends PureComponent {
                                 this.props.projManagerList.map(v => {
                                     return (
                                         <Option key={v.id} value={v.id}>
-                                            {v.Name}
+                                            {v.name}
                                         </Option>
                                     )
                                 })

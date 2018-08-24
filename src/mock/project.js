@@ -4,14 +4,14 @@ const getParam = require('../common/common').getParam
 
 let arr = [{
     id: '111',
-    Name: "项目1",
+    name: "项目1",
     Status:1,
     Creator: "System",
     CreateTime: Mock.Random.date(),
     ProjectManager:['111','222']
 },{
     id: '222',
-    Name: "项目2",
+    name: "项目2",
     Status:2,
     Creator: "System",
     CreateTime: Mock.Random.date(),
@@ -20,9 +20,9 @@ let arr = [{
 
 //查询
 Mock.mock(/\/api\/project\/list/, 'get', function (options) {
-    const Name = getParam(options.url,'Name')
-    if(Name){
-        return _.filter(arr,item=>item.Name.indexOf(Name)>-1)
+    const name = getParam(options.url,'name')
+    if(name){
+        return _.filter(arr,item=>item.name.indexOf(name)>-1)
     }else{
         return arr
     }

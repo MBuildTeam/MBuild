@@ -24,7 +24,8 @@ class DataTable extends PureComponent {
       dataIndex: 'name',
       key: 'name',
       align: 'center',
-    }, {
+    }, 
+    {
       title: '状态',
       dataIndex: 'status',
       key: 'status',

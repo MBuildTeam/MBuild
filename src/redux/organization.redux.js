@@ -20,7 +20,7 @@ const initState = {
     msg: '',
     pagination: {
         showSizeChanger: true,
-        pageSize: 2,
+        pageSize: 10,
         current: 1,
         total: 0
     }

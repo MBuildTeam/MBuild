@@ -6,6 +6,10 @@ import { getList } from '../../redux/organization.redux'
 const RadioGroup = Radio.Group
 const { Item, create } = Form
 
+@connect(
+    state => state.organization,
+    { getList }
+)
 @create({
     mapPropsToFields(props) {
         if (props.searchForm) {
@@ -19,10 +23,6 @@ const { Item, create } = Form
         }
     }
 })
-@connect(
-    state => state.organization,
-    { getList }
-)
 class SearchForm extends PureComponent {
     handleSearch = (e) => {
         e.preventDefault();
@@ -45,9 +45,9 @@ class SearchForm extends PureComponent {
     }
     componentDidMount() {
         //todo:这里可以做一个优化，区分第一次打开和标签切换
-        var values = {}
+        var values = this.props.searchForm
         //配入分页条件
-        values.pagenum = 1
+        values.pagenum = this.props.pagination.current
         values.pagesize = this.props.pagination.pageSize
         this.props.getList(values)
     }

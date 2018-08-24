@@ -28,7 +28,7 @@ Mock.mock(/\/api\/organization\/select/, 'get', function (options) {
         data =  _.filter(data, item => item.name.indexOf(name) > -1)
     }
     const resultcounts = data.length
-    if(pagesize){
+    if(!isNaN(pagenum) && !isNaN(pagesize) ){
         var start = (pagenum - 1) * pagesize
         var end = pagenum * pagesize
         data = data.slice(start, end)

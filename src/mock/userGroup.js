@@ -7,7 +7,7 @@ let arr = [{
     name: "用户组1",
     Description:'xxx',
     Creator: "System",
-    CreateTime: Mock.Random.date(),
+    createtime: Mock.Random.date(),
     Roles:['111'],
     Users:['111','222'],
 },{
@@ -15,7 +15,7 @@ let arr = [{
     name: "用户组2",
     Description:'xxx',
     Creator: "System",
-    CreateTime: Mock.Random.date(),
+    createtime: Mock.Random.date(),
     Roles:['222'],
     Users:['111','222'],
 }]
@@ -34,7 +34,7 @@ Mock.mock(/\/api\/userGroup\/list/, 'get', function (options) {
 Mock.mock('/api/userGroup/add', 'post', function (options) {
     let info = JSON.parse(options.body)
     info.id = Mock.Random.id()
-    info.CreateTime = Mock.Random.date()
+    info.createtime = Mock.Random.date()
     info.Creator = 'System'
     arr.push(info)
     return { code: 1, msg: '新增成功', data: info }

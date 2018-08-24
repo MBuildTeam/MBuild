@@ -58,7 +58,7 @@ Mock.mock(/\/api\/user\/list/, 'get', function (options) {
 Mock.mock('/api/user/add', 'post', function (options) {
     let info = JSON.parse(options.body)
     info.id = Mock.Random.id()
-    info.CreateTime = Mock.Random.date()
+    info.createtime = Mock.Random.date()
     info.Creator = 'System'
     arr.push(info)
     return { code: 1, msg: '新增成功', data: info }

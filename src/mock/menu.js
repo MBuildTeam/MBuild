@@ -8,7 +8,7 @@ let arr = [{
     Url: 'organization',
     status:1,
     Creator: "System",
-    CreateTime: Mock.Random.date(),
+    createtime: Mock.Random.date(),
 },
 {
     id: '222',
@@ -16,7 +16,7 @@ let arr = [{
     Url: 'rights',
     status:1,
     Creator: "System",
-    CreateTime: Mock.Random.date(),
+    createtime: Mock.Random.date(),
 },
 {
     id: '333',
@@ -24,7 +24,7 @@ let arr = [{
     Url: 'role',
     status:1,
     Creator: "System",
-    CreateTime: Mock.Random.date(),
+    createtime: Mock.Random.date(),
 },
 {
     id: '444',
@@ -32,7 +32,7 @@ let arr = [{
     Url: 'user',
     status:1,
     Creator: "System",
-    CreateTime: Mock.Random.date(),
+    createtime: Mock.Random.date(),
 },
 {
     id: '555',
@@ -40,7 +40,7 @@ let arr = [{
     Url: 'userGroup',
     status:1,
     Creator: "System",
-    CreateTime: Mock.Random.date(),
+    createtime: Mock.Random.date(),
 },
 {
     id: '666',
@@ -48,7 +48,7 @@ let arr = [{
     Url: 'classification',
     status:1,
     Creator: "System",
-    CreateTime: Mock.Random.date(),
+    createtime: Mock.Random.date(),
 },
 {
     id: '777',
@@ -56,7 +56,7 @@ let arr = [{
     Url: 'project',
     status:1,
     Creator: "System",
-    CreateTime: Mock.Random.date(),
+    createtime: Mock.Random.date(),
 },
 ]
 
@@ -79,7 +79,7 @@ Mock.mock(/\/api\/menu\/list/, 'get', function (options) {
 Mock.mock('/api/menu/add', 'post', function (options) {
     let info = JSON.parse(options.body)
     info.id = Mock.Random.id()
-    info.CreateTime = Mock.Random.date()
+    info.createtime = Mock.Random.date()
     info.Creator = 'System'
     arr.push(info)
     return { code: 1, msg: '新增成功', data: info }

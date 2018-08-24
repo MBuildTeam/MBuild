@@ -31,8 +31,8 @@ class DataTable extends PureComponent {
       key: 'Creator',
     }, {
       title: '创建时间',
-      dataIndex: 'CreateTime',
-      key: 'CreateTime',
+      dataIndex: 'createtime',
+      key: 'createtime',
     }, {
       title: (<div>操作<Divider type="vertical" />
         <a href="javascript:;" onClick={() => this.handleInfo('add', true)}>新增</a></div>),

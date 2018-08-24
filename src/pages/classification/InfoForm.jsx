@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 const { Item, create } = Form
 const { Option } = Select
 
+
 @create({
     mapPropsToFields(props) {
         if (props.formType === 'edit') {
@@ -113,12 +114,12 @@ class InfoForm extends PureComponent {
                     label="接口"
                     hasFeedback
                 >
-                    {getFieldDecorator('Interface')(
+                    {getFieldDecorator('apiid')(
                         <Select
                             mode="multiple"
                         >
                             {
-                                this.props.interfaceList.map(v => {
+                                this.props.apiList.map(v => {
                                     return (
                                         <Option key={v.id} value={v.id}>
                                             {v.name}

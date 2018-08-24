@@ -6,12 +6,12 @@ let arr = [{
     id: '111',
     name: "接口1",
     Creator: "System",
-    CreateTime: Mock.Random.date(),
+    createtime: Mock.Random.date(),
 },{
     id: '222',
     name: "接口2",
     Creator: "System",
-    CreateTime: Mock.Random.date(),
+    createtime: Mock.Random.date(),
 }]
 
 //查询
@@ -28,7 +28,7 @@ Mock.mock(/\/api\/api\/select/, 'get', function (options) {
 Mock.mock('/api/api/add', 'post', function (options) {
     let info = JSON.parse(options.body)
     info.id = Mock.Random.id()
-    info.CreateTime = Mock.Random.date()
+    info.createtime = Mock.Random.date()
     info.Creator = 'System'
     arr.push(info)
     return { code: 1, msg: '新增成功', data: info }

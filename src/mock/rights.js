@@ -6,14 +6,14 @@ let arr = [{
     id: '111',
     name: "权限1",
     Creator: "System",
-    CreateTime: Mock.Random.date(),
+    createtime: Mock.Random.date(),
     Menus:[],
     RightType:1
 },{
     id: '222',
     name: "权限2",
     Creator: "System",
-    CreateTime: Mock.Random.date(),
+    createtime: Mock.Random.date(),
     Menus:[],
     RightType:2
 }]
@@ -32,7 +32,7 @@ Mock.mock(/\/api\/rights\/list/, 'get', function (options) {
 Mock.mock('/api/rights/add', 'post', function (options) {
     let info = JSON.parse(options.body)
     info.id = Mock.Random.id()
-    info.CreateTime = Mock.Random.date()
+    info.createtime = Mock.Random.date()
     info.Creator = 'System'
     arr.push(info)
     return { code: 1, msg: '新增成功', data: info }

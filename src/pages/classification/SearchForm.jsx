@@ -5,7 +5,10 @@ import { getList, getApiList, getOrgaList } from '../../redux/classification.red
 
 const { Item, create } = Form
 
-
+@connect(
+    state => state.classification,
+    { getList, getApiList, getOrgaList }
+)
 @create({
     mapPropsToFields(props) {
         if (props.searchForm) {
@@ -19,27 +22,34 @@ const { Item, create } = Form
         }
     }
 })
-@connect(
-    state => state.classification,
-    { getList, getApiList, getOrgaList }
-)
 class SearchForm extends PureComponent {
     componentDidMount() {
         this.props.getApiList()
         this.props.getOrgaList()
-        this.props.getList()
+        var values = this.props.searchForm
+        //配入分页条件
+        values.pagenum = this.props.pagination.current
+        values.pagesize = this.props.pagination.pageSize
+        this.props.getList(values)
     }
     handleSearch = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
+                //配入分页条件
+                values.pagenum = 1
+                values.pagesize = this.props.pagination.pageSize
                 this.props.getList(values)
             }
         })
     }
     handleReset = () => {
         this.props.form.resetFields()
-        this.props.getList()
+        var values = {}
+        //配入分页条件
+        values.pagenum = 1
+        values.pagesize = this.props.pagination.pageSize
+        this.props.getList(values)
     }
     render() {
         const { getFieldDecorator } = this.props.form
@@ -63,10 +73,12 @@ class SearchForm extends PureComponent {
                             )}
                         </Item>
                     </Col>
-                    <Col span={6}>
+                    <Col span={8}>
                         <Item label='关联机构'>
                             {getFieldDecorator('orgid')(
-                                <Select>
+                                <Select
+                                    style={{ width: 170 }}
+                                >
                                     {
                                         this.props.orgaList.map(v => {
                                             return (
@@ -80,7 +92,7 @@ class SearchForm extends PureComponent {
                             )}
                         </Item>
                     </Col>
-                    <Col span={6} >
+                    <Col span={4} >
                         <Button type="primary" htmlType="submit">查询</Button>
                         <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>重置</Button>
                     </Col>

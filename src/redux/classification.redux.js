@@ -178,7 +178,15 @@ export function getOrgaList() {
     return dispatch => {
         axios.get('/api/organization/select')
             .then(res => {
-                dispatch({ type: CLASSIFICATION_GET_ORGA_LIST, payload: res.data })
+                const { code, msg,  data } = res.data
+                if (code == 0) {
+                    dispatch({
+                        type: CLASSIFICATION_GET_ORGA_LIST,
+                        payload: data,
+                    })
+                } else {
+                    dispatch({ type: CLASSIFICATION_SHOW_MSG, msg })
+                }
             })
             .catch(e => {
 
@@ -190,7 +198,15 @@ export function getApiList() {
     return dispatch => {
         axios.get('/api/api/select')
             .then(res => {
-                dispatch({ type: CLASSIFICATION_GET_API_LIST, payload: res.data })
+                const { code, msg,  data } = res.data
+                if (code == 0) {
+                    dispatch({
+                        type: CLASSIFICATION_GET_API_LIST,
+                        payload: data,
+                    })
+                } else {
+                    dispatch({ type: CLASSIFICATION_SHOW_MSG, msg })
+                }
             })
             .catch(e => {
 

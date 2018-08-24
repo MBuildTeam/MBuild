@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Table, Divider, Popconfirm } from 'antd'
 import { connect } from 'react-redux'
-import { getList, handleModalForm, deleteInfo } from '../../redux/rights.redux'
+import { getList, handleModalForm, deleteInfo } from '../../redux/operation.redux'
 
 @connect(
   state => state.rights,

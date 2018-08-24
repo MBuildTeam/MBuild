@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button, Radio } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getMenuList } from '../../redux/rights.redux'
+import { getList, getMenuList } from '../../redux/operation.redux'
 
 const { Item, create } = Form
 const RadioGroup = Radio.Group

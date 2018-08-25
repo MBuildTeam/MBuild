@@ -18,14 +18,13 @@ class MenuBar extends React.Component {
         this.props.getMenuList(this.props.auth.userid)
     }
     handleClick = (e) => {
-        console.log(e)
         this.props.openMenu(e.key)
     }
     mapMenus(menus) {
         return menus.map(v => {
             if (v.children) {
                 return (
-                    <SubMenu key={v.id} title={v.name}>
+                    <SubMenu key={v.code ? v.code : v.id} title={v.name}>
                         {
                             this.mapMenus(v.children)
                         }

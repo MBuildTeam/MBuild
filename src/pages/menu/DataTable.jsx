@@ -8,6 +8,9 @@ import { getList, handleModalForm, deleteInfo } from '../../redux/menu.redux'
   { getList, handleModalForm, deleteInfo }
 )
 class DataTable extends PureComponent {
+  componentDidMount(){
+    this.props.getList()
+  }
   handleInfo = (type, open, data) => {
     this.props.handleModalForm(type, open, data)
   }
@@ -19,37 +22,40 @@ class DataTable extends PureComponent {
       title: '名称',
       dataIndex: 'name',
       key: 'name',
-    }, 
+    },
     {
       title: 'Url',
-      dataIndex: 'Url',
-      key: 'Url',
-    }, 
+      dataIndex: 'url',
+      key: 'url',
+    },
     {
       title: '状态',
       dataIndex: 'status',
       key: 'status',
       render: text => {
-        if (text === 1) {
-          return (<div>启用</div>)
-        } else
-          if (text == 2) {
-            return (<div>停用</div>)
-          } else {
-            return null
-          }
+        if (text === 0) {
+          return (<div>可用</div>)
+        } {
+          return (<div>停用</div>)
+        }
       }
-    }, 
+    },
+    {
+      title: '层级',
+      dataIndex: 'level',
+      key: 'level',
+    },
     {
       title: '创建者',
-      dataIndex: 'Creator',
-      key: 'Creator',
-    }, 
+      dataIndex: 'creatorid',
+      key: 'creatorid',
+    },
     {
       title: '创建时间',
       dataIndex: 'createtime',
       key: 'createtime',
-    }, {
+    }, 
+    {
       title: (<div>操作<Divider type='vertical' />
         <a href='javascript:;' onClick={() => this.handleInfo('add', true)}>新增</a></div>),
       key: 'action',

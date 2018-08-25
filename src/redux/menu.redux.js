@@ -18,12 +18,6 @@ const initState = {
     formData: {},
     dataList: [],
     msg: '',
-    pagination: {
-        showSizeChanger: true,
-        pageSize: 10,
-        current: 1,
-        total: 0
-    }
 }
 
 export function menu(state = initState, action) {
@@ -35,14 +29,9 @@ export function menu(state = initState, action) {
             }
         }
         case MENU_GET_LIST: {
-            let pagination = _.cloneDeep(state.pagination)
-            pagination.total = action.total
-            pagination.current = action.current
-            pagination.pageSize = action.pageSize
             return {
                 ...state,
                 dataList: action.payload,
-                pagination: pagination
             }
         }
         case MENU_HANDLE_MODAL_FORM: {
@@ -54,15 +43,10 @@ export function menu(state = initState, action) {
             }
         }
         case MENU_ADD_INFO: {
-            let dataList = _.cloneDeep(state.dataList)
-            dataList.unshift(action.data)
-            let pagination = _.cloneDeep(state.pagination)
-            pagination.total += 1
             return {
                 ...state,
                 modalOpen: false,
                 dataList: dataList,
-                pagination: pagination
             }
         }
         case MENU_EDIT_INFO: {
@@ -76,14 +60,9 @@ export function menu(state = initState, action) {
             }
         }
         case MENU_DELETE_INFO: {
-            let dataList = _.cloneDeep(state.dataList)
-            _.remove(dataList, item => item.id === action.id)
-            let pagination = _.cloneDeep(state.pagination)
-            pagination.total -= 1
             return {
                 ...state,
                 dataList: dataList,
-                pagination: pagination
             }
         }
         default:
@@ -96,14 +75,11 @@ export function getList(params) {
         dispatch({ type: MENU_SEARCH_FORM, data: params })
         axios.get('/api/menu/select', { params })
             .then(res => {
-                const { code, msg, resultcounts, data } = res.data
+                const { code, msg, data } = res.data
                 if (code == 0) {
                     dispatch({
                         type: MENU_GET_LIST,
                         payload: data,
-                        total: resultcounts,
-                        current: params.pagenum,
-                        pageSize: params.pagesize
                     })
                 } else {
                     dispatch({ type: MENU_SHOW_MSG, msg })

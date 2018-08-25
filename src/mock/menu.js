@@ -7,7 +7,9 @@ let arr = [
         id: 1,
         name: '基础管理',
         level: 1,
-        isenable: 1,
+        status: 0,
+        creatorid:1,
+        createtime:'2018-08-15',
     },
     {
         id: 2,
@@ -15,7 +17,9 @@ let arr = [
         url: 'menu',
         parentid: 1,
         level: 2,
-        isenable: 1,
+        status: 0,
+        creatorid:1,
+        createtime:'2018-08-15',
     },
     {
         id: 3,
@@ -23,7 +27,9 @@ let arr = [
         url: 'organization',
         parentid: 1,
         level: 2,
-        isenable: 1,
+        status: 0,
+        creatorid:1,
+        createtime:'2018-08-15',
     },
     {
         id: 4,
@@ -31,7 +37,9 @@ let arr = [
         url: 'classification',
         parentid: 1,
         level: 2,
-        isenable: 1,
+        status: 0,
+        creatorid:1,
+        createtime:'2018-08-15',
     },
     {
         id: 5,
@@ -39,7 +47,9 @@ let arr = [
         url: 'userinfo',
         parentid: 1,
         level: 2,
-        isenable: 1,
+        status: 0,
+        creatorid:1,
+        createtime:'2018-08-15',
     },
     {
         id: 6,
@@ -47,7 +57,9 @@ let arr = [
         url: 'usergroup',
         parentid: 1,
         level: 2,
-        isenable: 1,
+        status: 0,
+        creatorid:1,
+        createtime:'2018-08-15',
     },
     {
         id: 7,
@@ -55,7 +67,9 @@ let arr = [
         url: 'project',
         parentid: 1,
         level: 2,
-        isenable: 1,
+        status: 0,
+        creatorid:1,
+        createtime:'2018-08-15',
     },
     {
         id: 8,
@@ -63,7 +77,9 @@ let arr = [
         url: 'api',
         parentid: 1,
         level: 2,
-        isenable: 1,
+        status: 0,
+        creatorid:1,
+        createtime:'2018-08-15',
     },
     {
         id: 9,
@@ -71,7 +87,9 @@ let arr = [
         url: 'roleinfo',
         parentid: 1,
         level: 2,
-        isenable: 1,
+        status: 0,
+        creatorid:1,
+        createtime:'2018-08-15',
     },
     {
         id: 10,
@@ -79,7 +97,9 @@ let arr = [
         url: 'operation',
         parentid: 1,
         level: 2,
-        isenable: 1,
+        status: 0,
+        creatorid:1,
+        createtime:'2018-08-15',
     },
 ]
 
@@ -104,25 +124,28 @@ Mock.mock(/\/api\/main\/usermenulist/, 'get', function (options) {
 })
 
 //查询
-Mock.mock(/\/api\/organization\/select/, 'get', function (options) {
-    const name = getParam(options.url, 'name')
-    const pagenum = parseInt(getParam(options.url, 'pagenum'))
-    const pagesize = parseInt(getParam(options.url, 'pagesize'))
-    var data = arr
-    if (name) {
-        data = _.filter(data, item => item.name.indexOf(name) > -1)
+Mock.mock(/\/api\/menu\/select/, 'get', function (options) {
+    //直接返回所有菜单
+    var result = []
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].level === 1) {
+            arr[i].children = []
+            result.push(arr[i])
+        }
     }
-    const resultcounts = data.length
-    if (!isNaN(pagenum) && !isNaN(pagesize)) {
-        var start = (pagenum - 1) * pagesize
-        var end = pagenum * pagesize
-        data = data.slice(start, end)
+    for (let i = 0; i < result.length; i++) {
+        var level1 = result[i]
+        for (let j = 0; j < arr.length; j++) {
+            if (level1.id === arr[j].parentid) {
+                level1.children.push(arr[j])
+            }
+        }
     }
-    return { code: 0, resultcounts, data }
+    return { code: 0, msg: '', data: result }
 })
 
 //新增
-Mock.mock('/api/organization/add', 'post', function (options) {
+Mock.mock('/api/menu/add', 'post', function (options) {
     let info = JSON.parse(options.body)
     info.id = arr.length > 0 ? arr[arr.length - 1].id + 1 : 1
     info.createtime = Mock.Random.date()
@@ -131,7 +154,7 @@ Mock.mock('/api/organization/add', 'post', function (options) {
 })
 
 //修改
-Mock.mock('/api/organization/update', 'post', function (options) {
+Mock.mock('/api/menu/update', 'post', function (options) {
     let info = JSON.parse(options.body)
     let origin = _.find(arr, (item) => (item.id === info.id))
     let updated = _.assign(origin, info)
@@ -139,7 +162,7 @@ Mock.mock('/api/organization/update', 'post', function (options) {
 })
 
 //删除
-Mock.mock(/\/api\/organization\/delete/, 'get', function (options) {
+Mock.mock(/\/api\/menu\/delete/, 'get', function (options) {
     let id = getParam(options.url, 'id')
     id = parseInt(id)
     _.remove(arr, item => (

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
-import { Form, Input, Radio } from 'antd'
-import {connect} from 'react-redux'
+import { Form, Input, Radio, Select } from 'antd'
+import { connect } from 'react-redux'
 
 const { Item, create } = Form
 const RadioGroup = Radio.Group
@@ -18,7 +18,7 @@ const RadioGroup = Radio.Group
     }
 })
 @connect(
-    state=>state.menu
+    state => state.menu
 )
 class InfoForm extends PureComponent {
     render() {
@@ -61,12 +61,32 @@ class InfoForm extends PureComponent {
                     label='Url'
                     hasFeedback
                 >
-                    {getFieldDecorator('Url', {
-                        rules: [{
-                            required: true, message: 'Url不能为空',
-                        }],
-                    })(
+                    {getFieldDecorator('url')(
                         <Input />
+                    )}
+                </Item>
+                <Item
+                    {...formItemLayout}
+                    label='父节点'
+                    hasFeedback
+                >
+                    {getFieldDecorator('parentid')(
+                        <Select>
+                            <Select.Option key={'null-parent-id'} value={undefined}>
+                                无
+                            </Select.Option>
+                            {
+                                this.props.dataList.map(v => {
+                                    if (v.level === 1) {
+                                        return (
+                                            <Select.Option key={v.id} value={v.id}>
+                                                {v.name}
+                                            </Select.Option>
+                                        )
+                                    }
+                                })
+                            }
+                        </Select>
                     )}
                 </Item>
                 <Item
@@ -80,8 +100,8 @@ class InfoForm extends PureComponent {
                         }],
                     })(
                         <RadioGroup>
-                            <Radio value={1}>启用</Radio>
-                            <Radio value={2}>停用</Radio>
+                            <Radio value={0}>启用</Radio>
+                            <Radio value={1}>停用</Radio>
                         </RadioGroup>
                     )}
                 </Item>

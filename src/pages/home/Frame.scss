@@ -9,6 +9,9 @@
         text-align: center;
         line-height: 50px;
         font-size: 18px;
+        background-image: url(../../styles/logo.png);
+        background-repeat:no-repeat;
+        background-size: 90%;
     }
     .ant-layout-header {
         position: relative;
@@ -18,14 +21,18 @@
         line-height: $header-height;
         color: #fff;
         .fixed-menu-bar {
-            display: inline-block;
+            position: absolute;
+            top:0;
+            left:220px;
             width: 80px;
+            height: $header-height;
             border-left: 1px solid darken($color:$header-color, $amount: 10%);
             border-right: 1px solid darken($color:$header-color, $amount: 10%);
             .fixed-menu {
                 position: relative;
                 width: 80px;
                 text-align: center;
+                height: $header-height;
                 line-height: $header-height;
                 cursor: pointer;
                 &.active {

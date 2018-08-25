@@ -17,6 +17,7 @@ class Login extends React.Component {
         {this.props.redirectTo && this.props.redirectTo !== '/login' ? (
           <Redirect to={this.props.redirectTo} />
         ) : null}
+        <div class='login-logo'></div>
         <InfoForm />
       </div>
     );

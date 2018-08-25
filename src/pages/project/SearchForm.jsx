@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button, Radio, Select } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getOperationList } from '../../redux/project.redux'
+import { getList, getOrgList, getUserinfoList } from '../../redux/project.redux'
 
 const { Item, create } = Form
 
 @connect(
     state => state.project,
-    { getList, getOperationList }
+    { getList, getOrgList, getUserinfoList }
 )
 @create({
     mapPropsToFields(props) {
@@ -24,7 +24,8 @@ const { Item, create } = Form
 })
 class SearchForm extends PureComponent {
     componentDidMount() {
-        this.props.getOperationList()
+        this.props.getOrgList()
+        this.props.getUserinfoList()
         var values = this.props.searchForm
         //配入分页条件
         values.pagenum = this.props.pagination.current
@@ -63,23 +64,27 @@ class SearchForm extends PureComponent {
                         </Item>
                     </Col>
                     <Col span={6}>
-                        <Item label='类别'>
-                            {getFieldDecorator('type')(
+                        <Item label='状态'>
+                            {getFieldDecorator('status')(
                                 <Radio.Group>
-                                    <Radio value={1}>标准</Radio>
-                                    <Radio value={2}>非标准</Radio>
+                                    <Radio value={0}>启用</Radio>
+                                    <Radio value={1}>停用</Radio>
                                 </Radio.Group>
                             )}
                         </Item>
                     </Col>
-                    <Col span={6}>
-                        <Item label='权限'>
-                            {getFieldDecorator('operationid')(
+                    <Col span={8}>
+                        <Item label='项目经理'>
+                            {getFieldDecorator('pmid')(
                                 <Select
                                     style={{ width: 170 }}
+                                    showSearch
+                                    filterOption={(input, option) => option.props.
+                                        children.toLowerCase().
+                                        indexOf(input.toLowerCase()) >= 0}
                                 >
                                     {
-                                        this.props.operationList.map(v => {
+                                        this.props.userinfoList.map(v => {
                                             return (
                                                 <Select.Option key={v.id} value={v.id}>
                                                     {v.name}
@@ -91,7 +96,7 @@ class SearchForm extends PureComponent {
                             )}
                         </Item>
                     </Col>
-                    <Col span={6} >
+                    <Col span={4} >
                         <Button type='primary' htmlType='submit'>查询</Button>
                         <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>重置</Button>
                     </Col>

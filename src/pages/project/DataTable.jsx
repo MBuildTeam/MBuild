@@ -29,22 +29,28 @@ class DataTable extends PureComponent {
       align: 'center',
     },
     {
-      title: '类别',
-      dataIndex: 'type',
-      key: 'type',
+      title: '状态',
+      dataIndex: 'status',
+      key: 'status',
       align: 'center',
       render: text => {
-        if (text === 1) {
-          return (<div>标准</div>)
+        if (text === 0) {
+          return (<div>启用</div>)
         } else {
-          return (<div>非标准</div>)
+          return (<div>停用</div>)
         }
       }
     },
     {
-      title: '权限',
-      dataIndex: 'operationids',
-      key: 'operationids',
+      title: '项目经理',
+      dataIndex: 'pmid',
+      key: 'pmid',
+      align: 'center',
+    }, 
+    {
+      title: '关联机构',
+      dataIndex: 'orgids',
+      key: 'orgids',
       align: 'center',
       render: text => {
         return (<div>{text.join('|')}</div>)

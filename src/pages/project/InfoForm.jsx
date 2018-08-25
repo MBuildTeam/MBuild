@@ -58,35 +58,63 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label='类别'
+                    label='状态'
                     hasFeedback
                 >
-                    {getFieldDecorator('type', {
+                    {getFieldDecorator('status', {
                         rules: [{
-                            required: true, message: '类别不能为空',
+                            required: true, message: '状态不能为空',
                         }],
                     })(
                         <Radio.Group>
-                            <Radio value={1}>标准</Radio>
-                            <Radio value={2}>非标准</Radio>
+                            <Radio value={0}>启用</Radio>
+                            <Radio value={1}>停用</Radio>
                         </Radio.Group>
                     )}
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label='权限'
+                    label='项目经理'
                     hasFeedback
                 >
-                    {getFieldDecorator('operationids', {
+                    {getFieldDecorator('pmid', {
                         rules: [{
-                            required: true, message: '权限不能为空',
+                            required: true, message: '项目经理不能为空',
+                        }],
+                    })(
+                        <Select
+                            showSearch
+                            filterOption={(input, option) => option.props.
+                                children.toLowerCase().
+                                indexOf(input.toLowerCase()) >= 0}
+                        >
+                            {
+                                this.props.userinfoList.map(v => {
+                                    return (
+                                        <Select.Option key={v.id} value={v.id}>
+                                            {v.name}
+                                        </Select.Option>
+                                    )
+                                })
+                            }
+                        </Select>
+                    )}
+                </Item>
+                <Item
+                    {...formItemLayout}
+                    label='关联机构'
+                    hasFeedback
+                >
+                    {getFieldDecorator('orgids', {
+                        rules: [{
+                            required: true, message: '关联机构不能为空',
                         }],
                     })(
                         <Select
                             mode='multiple'
                         >
                             {
-                                this.props.operationList.map(v => {
+                                this.props.orgList.map(v => {
                                     return (
                                         <Select.Option key={v.id} value={v.id}>
                                             {v.name}

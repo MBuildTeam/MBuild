@@ -11,6 +11,7 @@ const PROJECT_EDIT_INFO = 'PROJECT_EDIT_INFO'
 const PROJECT_DELETE_INFO = 'PROJECT_DELETE_INFO'
 const PROJECT_SHOW_MSG = 'PROJECT_SHOW_MSG'
 const PROJECT_GET_ORG_LIST = 'PROJECT_GET_ORG_LIST'
+const PROJECT_GET_USERINFO_LIST = 'PROJECT_GET_USERINFO_LIST'
 
 const initState = {
     searchForm: {},
@@ -19,7 +20,8 @@ const initState = {
     formData: {},
     dataList: [],
     msg: '',
-    operationList: [],
+    orgList: [],
+    userinfoList:[],
     pagination: {
         showSizeChanger: true,
         pageSize: 10,
@@ -48,7 +50,10 @@ export function project(state = initState, action) {
             }
         }
         case PROJECT_GET_ORG_LIST: {
-            return { ...state, operationList: action.payload }
+            return { ...state, orgList: action.payload }
+        }
+        case PROJECT_GET_USERINFO_LIST: {
+            return { ...state, userinfoList: action.payload }
         }
         case PROJECT_HANDLE_MODAL_FORM: {
             return {
@@ -182,11 +187,31 @@ export function getOrgList() {
                 const { code, msg,  data } = res.data
                 if (code == 0) {
                     dispatch({
-                        type: CLASSIFICATION_GET_ORG_LIST,
+                        type: PROJECT_GET_ORG_LIST,
                         payload: data,
                     })
                 } else {
-                    dispatch({ type: CLASSIFICATION_SHOW_MSG, msg })
+                    dispatch({ type: PROJECT_SHOW_MSG, msg })
+                }
+            })
+            .catch(e => {
+
+            })
+    }
+}
+
+export function getUserinfoList() {
+    return dispatch => {
+        axios.get('/api/userinfo/select')
+            .then(res => {
+                const { code, msg,  data } = res.data
+                if (code == 0) {
+                    dispatch({
+                        type: PROJECT_GET_USERINFO_LIST,
+                        payload: data,
+                    })
+                } else {
+                    dispatch({ type: PROJECT_SHOW_MSG, msg })
                 }
             })
             .catch(e => {

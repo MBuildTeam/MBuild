@@ -72,9 +72,6 @@ class InfoForm extends PureComponent {
                 >
                     {getFieldDecorator('parentid')(
                         <Select>
-                            <Select.Option key={'null-parent-id'} value={undefined}>
-                                无
-                            </Select.Option>
                             {
                                 this.props.dataList.map(v => {
                                     if (v.level === 1) {

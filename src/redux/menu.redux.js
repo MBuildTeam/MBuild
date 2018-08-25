@@ -18,6 +18,7 @@ const initState = {
     formData: {},
     dataList: [],
     msg: '',
+    refresh:false,
 }
 
 export function menu(state = initState, action) {
@@ -32,6 +33,7 @@ export function menu(state = initState, action) {
             return {
                 ...state,
                 dataList: action.payload,
+                refresh:false
             }
         }
         case MENU_HANDLE_MODAL_FORM: {
@@ -46,23 +48,20 @@ export function menu(state = initState, action) {
             return {
                 ...state,
                 modalOpen: false,
-                dataList: dataList,
+                refresh:true,
             }
         }
         case MENU_EDIT_INFO: {
-            let dataList = _.cloneDeep(state.dataList)
-            let toUpdate = _.find(dataList, item => (item.id === action.data.id))
-            _.assign(toUpdate, action.data)
             return {
                 ...state,
                 modalOpen: false,
-                dataList: dataList
+                refresh:true,
             }
         }
         case MENU_DELETE_INFO: {
             return {
                 ...state,
-                dataList: dataList,
+                refresh:true,
             }
         }
         default:
@@ -72,7 +71,7 @@ export function menu(state = initState, action) {
 
 export function getList(params) {
     return dispatch => {
-        dispatch({ type: MENU_SEARCH_FORM, data: params })
+        // dispatch({ type: MENU_SEARCH_FORM, data: params })
         axios.get('/api/menu/select', { params })
             .then(res => {
                 const { code, msg, data } = res.data

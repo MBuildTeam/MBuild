@@ -8,8 +8,14 @@ import { getList, handleModalForm, deleteInfo } from '../../redux/menu.redux'
   { getList, handleModalForm, deleteInfo }
 )
 class DataTable extends PureComponent {
-  componentDidMount(){
+  componentDidMount() {
     this.props.getList()
+  }
+  componentDidUpdate(){
+    if(this.props.refresh){
+      console.log('refresh')
+      this.props.getList()
+    }
   }
   handleInfo = (type, open, data) => {
     this.props.handleModalForm(type, open, data)
@@ -54,7 +60,7 @@ class DataTable extends PureComponent {
       title: '创建时间',
       dataIndex: 'createtime',
       key: 'createtime',
-    }, 
+    },
     {
       title: (<div>操作<Divider type='vertical' />
         <a href='javascript:;' onClick={() => this.handleInfo('add', true)}>新增</a></div>),
@@ -73,6 +79,7 @@ class DataTable extends PureComponent {
     ];
     return (
       <Table
+        defaultExpandAllRows={true}
         rowKey={record => record.id}
         dataSource={this.props.dataList}
         columns={columns}

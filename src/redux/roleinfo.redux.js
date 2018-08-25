@@ -111,7 +111,7 @@ export function getList(params) {
                         pageSize: params.pagesize
                     })
                 } else {
-                    dispatch({ type: ORGA_SHOW_MSG, msg })
+                    dispatch({ type: ROLEINFO_SHOW_MSG, msg })
                 }
             })
             .catch(e => {

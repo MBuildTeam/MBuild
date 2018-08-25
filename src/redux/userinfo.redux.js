@@ -10,7 +10,7 @@ const USERINFO_ADD_INFO = 'USERINFO_ADD_INFO'
 const USERINFO_EDIT_INFO = 'USERINFO_EDIT_INFO'
 const USERINFO_DELETE_INFO = 'USERINFO_DELETE_INFO'
 const USERINFO_SHOW_MSG = 'USERINFO_SHOW_MSG'
-const USERINFO_GET_ORGA_LIST = 'USERINFO_GET_ORGA_LIST'
+const USERINFO_GET_ORG_LIST = 'USERINFO_GET_ORG_LIST'
 const USERINFO_GET_GROUP_LIST = 'USERINFO_GET_GROUP_LIST'
 
 const initState = {
@@ -49,7 +49,7 @@ export function userinfo(state = initState, action) {
                 pagination: pagination
             }
         }
-        case USERINFO_GET_ORGA_LIST: {
+        case USERINFO_GET_ORG_LIST: {
             return { ...state, orgaList: action.payload }
         }
         case USERINFO_GET_GROUP_LIST: {
@@ -180,14 +180,14 @@ export function deleteInfo(id) {
     }
 }
 
-export function getOrgaList() {
+export function getOrgList() {
     return dispatch => {
         axios.get('/api/organization/select')
             .then(res => {
                 const { code, msg,  data } = res.data
                 if (code == 0) {
                     dispatch({
-                        type: USERINFO_GET_ORGA_LIST,
+                        type: USERINFO_GET_ORG_LIST,
                         payload: data,
                     })
                 } else {

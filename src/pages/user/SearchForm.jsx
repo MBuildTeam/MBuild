@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getOrgaList } from '../../redux/userinfo.redux'
+import { getList, getOrgList } from '../../redux/userinfo.redux'
 
 const { Item, create } = Form
 
@@ -21,11 +21,11 @@ const { Item, create } = Form
 })
 @connect(
     state => state.user,
-    { getList, getOrgaList }
+    { getList, getOrgList }
 )
 class SearchForm extends PureComponent {
     componentDidMount() {
-        this.props.getOrgaList()
+        this.props.getOrgList()
         this.props.getList()
     }
     handleSearch = (e) => {

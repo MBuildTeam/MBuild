@@ -3,13 +3,13 @@ USE_MOCK && require('../mock/organization')
 import axios from 'axios'
 import _ from 'lodash'
 
-const ORGA_SEARCH_FORM = 'ORGA_SEARCH_FORM'
-const ORGA_GET_LIST = 'ORGA_GET_LIST'
-const ORGA_HANDLE_MODAL_FORM = 'ORGA_HANDLE_MODAL_FORM'
-const ORGA_ADD_INFO = 'ORGA_ADD_INFO'
-const ORGA_EDIT_INFO = 'ORGA_EDIT_INFO'
-const ORGA_DELETE_INFO = 'ORGA_DELETE_INFO'
-const ORGA_SHOW_MSG = 'ORGA_SHOW_MSG'
+const ORG_SEARCH_FORM = 'ORG_SEARCH_FORM'
+const ORG_GET_LIST = 'ORG_GET_LIST'
+const ORG_HANDLE_MODAL_FORM = 'ORG_HANDLE_MODAL_FORM'
+const ORG_ADD_INFO = 'ORG_ADD_INFO'
+const ORG_EDIT_INFO = 'ORG_EDIT_INFO'
+const ORG_DELETE_INFO = 'ORG_DELETE_INFO'
+const ORG_SHOW_MSG = 'ORG_SHOW_MSG'
 
 const initState = {
     searchForm: {},
@@ -28,13 +28,13 @@ const initState = {
 
 export function organization(state = initState, action) {
     switch (action.type) {
-        case ORGA_SEARCH_FORM: {
+        case ORG_SEARCH_FORM: {
             return {
                 ...state,
                 searchForm: action.data
             }
         }
-        case ORGA_GET_LIST: {
+        case ORG_GET_LIST: {
             let pagination = _.cloneDeep(state.pagination)
             pagination.total = action.total
             pagination.current = action.current
@@ -45,7 +45,7 @@ export function organization(state = initState, action) {
                 pagination: pagination
             }
         }
-        case ORGA_HANDLE_MODAL_FORM: {
+        case ORG_HANDLE_MODAL_FORM: {
             return {
                 ...state,
                 formType: action.formType,
@@ -53,7 +53,7 @@ export function organization(state = initState, action) {
                 formData: action.formData
             }
         }
-        case ORGA_ADD_INFO: {
+        case ORG_ADD_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             dataList.unshift(action.data)
             let pagination = _.cloneDeep(state.pagination)
@@ -65,7 +65,7 @@ export function organization(state = initState, action) {
                 pagination: pagination
             }
         }
-        case ORGA_EDIT_INFO: {
+        case ORG_EDIT_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             let toUpdate = _.find(dataList, item => (item.id === action.data.id))
             _.assign(toUpdate, action.data)
@@ -75,7 +75,7 @@ export function organization(state = initState, action) {
                 dataList: dataList
             }
         }
-        case ORGA_DELETE_INFO: {
+        case ORG_DELETE_INFO: {
             let dataList = _.cloneDeep(state.dataList)
             _.remove(dataList, item => item.id === action.id)
             let pagination = _.cloneDeep(state.pagination)
@@ -93,20 +93,20 @@ export function organization(state = initState, action) {
 
 export function getList(params) {
     return dispatch => {
-        dispatch({ type: ORGA_SEARCH_FORM, data: params })
+        dispatch({ type: ORG_SEARCH_FORM, data: params })
         axios.get('/api/organization/select', { params })
             .then(res => {
                 const { code, msg, resultcounts, data } = res.data
                 if (code == 0) {
                     dispatch({
-                        type: ORGA_GET_LIST,
+                        type: ORG_GET_LIST,
                         payload: data,
                         total: resultcounts,
                         current: params.pagenum,
                         pageSize: params.pagesize
                     })
                 } else {
-                    dispatch({ type: ORGA_SHOW_MSG, msg })
+                    dispatch({ type: ORG_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -116,7 +116,7 @@ export function getList(params) {
 }
 
 export function handleModalForm(formType, modalOpen, formData) {
-    return { type: ORGA_HANDLE_MODAL_FORM, formType, modalOpen, formData }
+    return { type: ORG_HANDLE_MODAL_FORM, formType, modalOpen, formData }
 }
 
 export function addInfo(info) {
@@ -125,9 +125,9 @@ export function addInfo(info) {
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 0) {
-                    dispatch({ type: ORGA_ADD_INFO, msg, data })
+                    dispatch({ type: ORG_ADD_INFO, msg, data })
                 } else {
-                    dispatch({ type: ORGA_SHOW_MSG, msg })
+                    dispatch({ type: ORG_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -142,9 +142,9 @@ export function editInfo(info) {
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 0) {
-                    dispatch({ type: ORGA_EDIT_INFO, msg, data })
+                    dispatch({ type: ORG_EDIT_INFO, msg, data })
                 } else {
-                    dispatch({ type: ORGA_SHOW_MSG, msg })
+                    dispatch({ type: ORG_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -159,9 +159,9 @@ export function deleteInfo(id) {
             .then(res => {
                 const { code, msg } = res.data
                 if (code == 0) {
-                    dispatch({ type: ORGA_DELETE_INFO, msg, id })
+                    dispatch({ type: ORG_DELETE_INFO, msg, id })
                 } else {
-                    dispatch({ type: ORGA_SHOW_MSG, msg })
+                    dispatch({ type: ORG_SHOW_MSG, msg })
                 }
             })
             .catch(e => {

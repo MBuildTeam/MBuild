@@ -10,7 +10,7 @@ const CLASSIFICATION_ADD_INFO = 'CLASSIFICATION_ADD_INFO'
 const CLASSIFICATION_EDIT_INFO = 'CLASSIFICATION_EDIT_INFO'
 const CLASSIFICATION_DELETE_INFO = 'CLASSIFICATION_DELETE_INFO'
 const CLASSIFICATION_SHOW_MSG = 'CLASSIFICATION_SHOW_MSG'
-const CLASSIFICATION_GET_ORGA_LIST = 'CLASSIFICATION_GET_ORGA_LIST'
+const CLASSIFICATION_GET_ORG_LIST = 'CLASSIFICATION_GET_ORG_LIST'
 const CLASSIFICATION_GET_API_LIST = 'CLASSIFICATION_GET_API_LIST'
 
 const initState = {
@@ -49,7 +49,7 @@ export function classification(state = initState, action) {
                 pagination: pagination
             }
         }
-        case CLASSIFICATION_GET_ORGA_LIST: {
+        case CLASSIFICATION_GET_ORG_LIST: {
             return { ...state, orgaList: action.payload }
         }
         case CLASSIFICATION_GET_API_LIST: {
@@ -116,7 +116,7 @@ export function getList(params) {
                         pageSize: params.pagesize
                     })
                 } else {
-                    dispatch({ type: ORGA_SHOW_MSG, msg })
+                    dispatch({ type: CLASSIFICATION_SHOW_MSG, msg })
                 }
             })
             .catch(e => {
@@ -180,14 +180,14 @@ export function deleteInfo(id) {
     }
 }
 
-export function getOrgaList() {
+export function getOrgList() {
     return dispatch => {
         axios.get('/api/organization/select')
             .then(res => {
                 const { code, msg,  data } = res.data
                 if (code == 0) {
                     dispatch({
-                        type: CLASSIFICATION_GET_ORGA_LIST,
+                        type: CLASSIFICATION_GET_ORG_LIST,
                         payload: data,
                     })
                 } else {

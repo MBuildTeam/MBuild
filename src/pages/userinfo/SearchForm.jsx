@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button, Radio, Select } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getOrgaList, getGroupList } from '../../redux/userinfo.redux'
+import { getList, getOrgList, getGroupList } from '../../redux/userinfo.redux'
 
 const { Item, create } = Form
 
 @connect(
     state => state.userinfo,
-    { getList, getOrgaList, getGroupList }
+    { getList, getOrgList, getGroupList }
 )
 @create({
     mapPropsToFields(props) {
@@ -24,7 +24,7 @@ const { Item, create } = Form
 })
 class SearchForm extends PureComponent {
     componentDidMount() {
-        this.props.getOrgaList()
+        this.props.getOrgList()
         this.props.getGroupList()
         var values = this.props.searchForm
         //配入分页条件

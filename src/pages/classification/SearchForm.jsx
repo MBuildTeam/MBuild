@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button, Radio, Select } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getApiList, getOrgaList } from '../../redux/classification.redux'
+import { getList, getApiList, getOrgList } from '../../redux/classification.redux'
 
 const { Item, create } = Form
 
 @connect(
     state => state.classification,
-    { getList, getApiList, getOrgaList }
+    { getList, getApiList, getOrgList }
 )
 @create({
     mapPropsToFields(props) {
@@ -25,7 +25,7 @@ const { Item, create } = Form
 class SearchForm extends PureComponent {
     componentDidMount() {
         this.props.getApiList()
-        this.props.getOrgaList()
+        this.props.getOrgList()
         var values = this.props.searchForm
         //配入分页条件
         values.pagenum = this.props.pagination.current

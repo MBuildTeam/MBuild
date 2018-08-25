@@ -45,10 +45,9 @@ class HeadOpenedMenuBar extends React.PureComponent {
                 <div
                     onClick={() => { this.clickMenu(v.code) }}
                 >
-                    <Icon className='menu-icon' type={v.icon} />
-                    {v.text}
+                    {v.name}
                 </div>
-                <Icon className='close' type='close' onClick={() => { this.closeMenu(v) }} />
+                <Icon className="close" type="close" onClick={() => { this.closeMenu(v) }} />
             </div>
         ))
     }
@@ -101,27 +100,27 @@ class HeadOpenedMenuBar extends React.PureComponent {
     render() {
         const { left } = this.state
         return (
-            <div className='opened-menu-bar'>
-                <div className='menu-bar-wrap'>
-                    <div className='menu-bar-container' style={{ left: left + 'px' }}>
+            <div className="opened-menu-bar">
+                <div className="menu-bar-wrap">
+                    <div className="menu-bar-container" style={{ left: left + 'px' }}>
                         {
                             this.getOpenedMenuList(this.props.openedMenus)
                         }
                     </div>
                 </div>
-                <div className='menu-bar-ctrl'>
-                    <Icon type='caret-left'
-                        className='ctrl-enable'
+                <div className="menu-bar-ctrl">
+                    <Icon type="caret-left"
+                        className="ctrl-enable"
                         onClick={this.handleLeft} />
                     <Popover
-                        trigger='click'
-                        title='打开的菜单'
+                        trigger="click"
+                        title="打开的菜单"
                         content={this.getOpenedMenuList(this.props.openedMenus)}
                     >
-                        <Icon type='bars' className='ctrl-enable' />
+                        <Icon type="bars" className="ctrl-enable" />
                     </Popover>
-                    <Icon type='caret-right'
-                        className='ctrl-enable'
+                    <Icon type="caret-right"
+                        className="ctrl-enable"
                         onClick={this.handleRight} />
                 </div>
             </div>

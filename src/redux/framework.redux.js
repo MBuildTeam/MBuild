@@ -3,10 +3,11 @@ USE_MOCK && require('../mock/menu')
 import axios from 'axios'
 import _ from 'lodash'
 
-const MENU_LIST = 'MENU_LIST'
-const OPEN_MENU = 'OPEN_MENU'
-const CLOSE_MENU = 'CLOSE_MENU'
-const ACTIVE_MENU = 'ACTIVE_MENU'
+const FW_MENU_LIST = 'FW_MENU_LIST'
+const FW_OPEN_MENU = 'FW_OPEN_MENU'
+const FW_CLOSE_MENU = 'FW_CLOSE_MENU'
+const FW_ACTIVE_MENU = 'FW_ACTIVE_MENU'
+const FW_SHOW_MSG = 'FW_SHOW_MSG'
 
 const initState = {
     menus: [],
@@ -35,14 +36,14 @@ function getMenuByCode(menus, code) {
 
 export function framework(state = initState, action) {
     switch (action.type) {
-        case MENU_LIST:
+        case FW_MENU_LIST:
             {
                 return {
                     ...state,
                     menus: action.payload
                 }
             }
-        case OPEN_MENU:
+        case FW_OPEN_MENU:
             {
                 let menuCode = action.payload
                 if (_.findIndex(state.openedMenus, v => v.code == menuCode) === -1) {
@@ -59,7 +60,7 @@ export function framework(state = initState, action) {
                     }
                 }
             }
-        case CLOSE_MENU:
+        case FW_CLOSE_MENU:
             {
                 let menuCode = action.payload
                 let openedMenus = _.filter(state.openedMenus, v => v.code !== menuCode)
@@ -70,7 +71,7 @@ export function framework(state = initState, action) {
                     activeMenuCode: activeMenuCode
                 }
             }
-        case ACTIVE_MENU: {
+        case FW_ACTIVE_MENU: {
             let menuCode = action.payload
             return {
                 ...state,
@@ -82,84 +83,53 @@ export function framework(state = initState, action) {
     }
 }
 
-function menuList(data) {
-    return {
-        type: MENU_LIST,
-        payload: data
+function alasUrlToCode(data){
+    for(var i =0; i<data.length;i++){
+        var children = data[i].children
+        for(var j=0;j<children.length;j++){
+            var menu = children[j]
+            menu.code = menu.url
+        }
     }
+    return data
 }
 
-
 export function getMenuList() {
-    const menus = [
-        {
-            icon: 'bars',
-            text: '菜单',
-            code: 'menu'
-        },
-        {
-            icon: 'bars',
-            text: '组织机构',
-            code: 'organization'
-        },
-        {
-            icon: 'bars',
-            text: '组织机构类别',
-            code: 'classification'
-        },
-        {
-            icon: 'bars',
-            text: '用户',
-            code: 'userinfo'
-        },
-        {
-            icon: 'bars',
-            text: '用户组',
-            code: 'usergroup'
-        },
-        {
-            icon: 'bars',
-            text: '项目',
-            code: 'project'
-        },
-        {
-            icon: 'bars',
-            text: 'api',
-            code: 'api'
-        },
-        {
-            icon: 'bars',
-            text: '角色',
-            code: 'roleinfo'
-        },
-        {
-            icon: 'bars',
-            text: '权限',
-            code: 'operation'
-        },
-    ]
     return dispatch => {
-        dispatch(menuList(menus))
+        axios.get('/api/main/usermenulist')
+            .then(res => {
+                const { code, msg, data } = res.data
+                if (code == 0) {
+                    //做一下转义，将服务器返回结果的url别名为code
+                    let aliasdata = alasUrlToCode(data)
+                    dispatch({ type: FW_MENU_LIST, payload: aliasdata })
+                } else {
+                    dispatch({ type: FW_SHOW_MSG, msg })
+                }
+            })
+            .catch(e => {
+
+            })
     }
 }
 
 export function openMenu(menuCode) {
     return {
-        type: OPEN_MENU,
+        type: FW_OPEN_MENU,
         payload: menuCode
     }
 }
 
 export function closeMenu(menuCode) {
     return {
-        type: CLOSE_MENU,
+        type: FW_CLOSE_MENU,
         payload: menuCode
     }
 }
 
 export function activeMenu(menuCode) {
     return {
-        type: ACTIVE_MENU,
+        type: FW_ACTIVE_MENU,
         payload: menuCode
     }
 }

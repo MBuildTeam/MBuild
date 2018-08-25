@@ -48,15 +48,6 @@ class DataTable extends PureComponent {
       align: 'center',
     }, 
     {
-      title: '关联机构',
-      dataIndex: 'orgids',
-      key: 'orgids',
-      align: 'center',
-      render: text => {
-        return (<div>{text.join('|')}</div>)
-      }
-    }, 
-    {
       title: '创建者',
       dataIndex: 'creatorid',
       key: 'creatorid',

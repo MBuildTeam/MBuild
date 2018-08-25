@@ -52,7 +52,7 @@ class InfoForm extends Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <Form onSubmit={this.handleSubmit} className='login-form'>
-                <div class='login-form-title'>
+                <div className='login-form-title'>
                 苗建信息数据处理中心
                 </div>
                 <Item>

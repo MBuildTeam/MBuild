@@ -46,7 +46,6 @@ export function auth(state = initState, action) {
         }
         case AUTO_FORM: {
             const { loginname,password,remember } = action.payload
-            console.log(remember)
             return {
                 ...initState, 
                 username:loginname,

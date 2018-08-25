@@ -8,10 +8,13 @@ const { Item, create } = Form
     mapPropsToFields(props) {
         if (props.formType === 'update') {
             let fields = {}
+            console.log(props.formData)
             for (let key in props.formData) {
                 fields[key] = Form.createFormField({
                     value: props.formData[key]
                 })
+
+
             }
             return fields
         }
@@ -100,6 +103,7 @@ class InfoForm extends PureComponent {
                         </Select>
                     )}
                 </Item>
+                <div style={{textAlign:'center',color:'red',marginTop:'10px'}}>注意：关联机构和客户经理请保持数目和顺序一一对应</div>
                 <Item
                     {...formItemLayout}
                     label='关联机构'
@@ -125,6 +129,36 @@ class InfoForm extends PureComponent {
                         </Select>
                     )}
                 </Item>
+                <Item
+                    {...formItemLayout}
+                    label='客户经理'
+                    hasFeedback
+                >
+                    {getFieldDecorator('cmids', {
+                        rules: [{
+                            required: true, message: '客户经理不能为空',
+                        }],
+                    })(
+                        <Select
+                            mode='multiple'
+                            showSearch
+                            filterOption={(input, option) => option.props.
+                                children.toLowerCase().
+                                indexOf(input.toLowerCase()) >= 0}
+                        >
+                            {
+                                this.props.userinfoList.map(v => {
+                                    return (
+                                        <Select.Option key={v.id} value={v.id}>
+                                            {v.name}
+                                        </Select.Option>
+                                    )
+                                })
+                            }
+                        </Select>
+                    )}
+                </Item>
+
             </Form>
         )
     }

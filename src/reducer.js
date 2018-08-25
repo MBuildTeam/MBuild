@@ -16,10 +16,10 @@ import { project } from './redux/project.redux'
 export default combineReducers({
     auth,
     framework,
+    bench,
     userinfo,
     usergroup,
     menu,
-    bench,
     roleinfo,
     operation,
     organization,

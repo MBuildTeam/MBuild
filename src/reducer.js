@@ -11,7 +11,6 @@ import { organization } from './redux/organization.redux'
 import { classification } from './redux/classification.redux'
 import { api } from './redux/api.redux'
 import { project } from './redux/project.redux'
-import { projManager } from './redux/projManager.redux'
 
 
 export default combineReducers({
@@ -27,5 +26,4 @@ export default combineReducers({
     classification,
     api,
     project,
-    projManager,
 })

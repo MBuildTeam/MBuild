@@ -65,6 +65,9 @@ export function framework(state = initState, action) {
                 let menuCode = action.payload
                 let openedMenus = _.filter(state.openedMenus, v => v.code !== menuCode)
                 let activeMenuCode = state.activeMenuCode === menuCode ? (openedMenus.length > 0 ? openedMenus[0].code : null) : state.activeMenuCode
+                if(!activeMenuCode){
+                    activeMenuCode = 'bench'
+                }
                 return {
                     ...state,
                     openedMenus: openedMenus,

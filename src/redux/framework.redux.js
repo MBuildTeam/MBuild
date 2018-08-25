@@ -94,9 +94,9 @@ function alasUrlToCode(data){
     return data
 }
 
-export function getMenuList() {
+export function getMenuList(userid) {
     return dispatch => {
-        axios.get('/api/main/usermenulist')
+        axios.get('/api/main/usermenulist',{params:{userid}})
             .then(res => {
                 const { code, msg, data } = res.data
                 if (code == 0) {

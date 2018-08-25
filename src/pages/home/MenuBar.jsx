@@ -2,7 +2,7 @@
  * Created by 30113 on 2018/3/22.
  */
 import React from 'react'
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
 import { connect } from 'react-redux'
 import { getMenuList, openMenu } from '../../redux/framework.redux'
 
@@ -10,12 +10,12 @@ const SubMenu = Menu.SubMenu
 const MenuItem = Menu.Item
 
 @connect(
-    state => state.framework,
+    state => state,
     { getMenuList, openMenu }
 )
 class MenuBar extends React.Component {
     componentDidMount() {
-        this.props.getMenuList()
+        this.props.getMenuList(this.props.auth.userid)
     }
     handleClick = (e) => {
         console.log(e)
@@ -46,11 +46,11 @@ class MenuBar extends React.Component {
         return (
             <Menu theme='dark'
                 mode={'inline'}
-                selectedKeys={[this.props.activeMenuCode]}
+                selectedKeys={[this.props.framework.activeMenuCode]}
                 onClick={this.handleClick}
             >
                 {
-                    this.mapMenus(this.props.menus)
+                    this.mapMenus(this.props.framework.menus)
                 }
             </Menu>
         )

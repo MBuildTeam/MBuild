@@ -39,6 +39,7 @@ class Frame extends React.PureComponent {
                 </Header>
                 <Layout>
                     <Sider
+                        className="left-sider-area"
                         trigger={null}
                         collapsible
                         collapsedWidth={0}

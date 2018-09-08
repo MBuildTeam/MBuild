@@ -9,6 +9,7 @@ import { hot } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import store from './store'
 import AuthRoute from './components/authroute/authroute'
+// import './common/config'
 
 import './App.scss'
 

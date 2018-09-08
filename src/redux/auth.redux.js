@@ -36,7 +36,6 @@ export function auth(state = initState, action) {
                 token,
                 msg: '',
                 redirectTo: '/home',
-                menus:action.payload.Menus
             }
         }
         case ERROR_MSG: {

@@ -14,24 +14,25 @@ config.devServer = {
     overlay: {
         errors: true
     },
-    open:true,
-    historyApiFallback:true,
-    proxy:{
-        '/api':{
+    open: true,
+    historyApiFallback: true,
+    proxy: {
+        '/api': {
             target: 'http://54.223.186.188:8082',
-            pathRewrite: {'^/api' : ''}
+            changeOrigin: true,
+            pathRewrite: { '^/api': '/api' }
         }
     }
 }
 config.devtool = 'cheap-module-source-map'
 //样式热替换必须使用style-loader
 config.module.rules[1].use[0] = {
-    loader:'style-loader'
+    loader: 'style-loader'
 }
 config.plugins.push(new webpack.HotModuleReplacementPlugin())
 config.plugins.push(new webpack.NamedModulesPlugin())
 config.plugins.push(new webpack.DefinePlugin({
-    'USE_MOCK':false
+    'USE_MOCK': false
 }))
 
 module.exports = config

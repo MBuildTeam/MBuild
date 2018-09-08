@@ -18,7 +18,7 @@ config.devServer = {
     historyApiFallback:true,
     proxy:{
         '/api':{
-            target: 'http://localhost:9093',
+            target: 'http://54.223.186.188:8082',
             pathRewrite: {'^/api' : ''}
         }
     }
@@ -31,7 +31,7 @@ config.module.rules[1].use[0] = {
 config.plugins.push(new webpack.HotModuleReplacementPlugin())
 config.plugins.push(new webpack.NamedModulesPlugin())
 config.plugins.push(new webpack.DefinePlugin({
-    'USE_MOCK':true
+    'USE_MOCK':false
 }))
 
 module.exports = config

@@ -100,8 +100,8 @@ function alasUrlToCode(data){
 export function getMenuList(userid) {
     return dispatch => {
         axios.get('/api/main/usermenulist',{params:{userid}})
-            .then(res => {
-                const { code, msg, data } = res.data
+            .then(response => {
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     //做一下转义，将服务器返回结果的url别名为code
                     let aliasdata = alasUrlToCode(data)

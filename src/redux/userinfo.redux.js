@@ -105,8 +105,8 @@ export function getList(params) {
     return dispatch => {
         dispatch({ type: USERINFO_SEARCH_FORM, data: params })
         axios.get('/api/userinfo/select', { params })
-            .then(res => {
-                const { code, msg, resultcounts, data } = res.data
+            .then(response => {
+                const { code, msg, resultcounts, data } = response.data
                 if (code == 0) {
                     dispatch({
                         type: USERINFO_GET_LIST,
@@ -132,8 +132,8 @@ export function handleModalForm(formType, modalOpen, formData) {
 export function addInfo(info) {
     return dispatch => {
         axios.post('/api/userinfo/add', info)
-            .then(res => {
-                const { code, msg, data } = res.data
+            .then(response => {
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch({ type: USERINFO_ADD_INFO, msg, data })
                 } else {
@@ -149,8 +149,8 @@ export function addInfo(info) {
 export function editInfo(info) {
     return dispatch => {
         axios.post('/api/userinfo/update', info)
-            .then(res => {
-                const { code, msg, data } = res.data
+            .then(response => {
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch({ type: USERINFO_EDIT_INFO, msg, data })
                 } else {
@@ -166,8 +166,8 @@ export function editInfo(info) {
 export function deleteInfo(id) {
     return dispatch => {
         axios.get('/api/userinfo/delete',  { params: { id } })
-            .then(res => {
-                const { code, msg } = res.data
+            .then(response => {
+                const { code, msg } = response.data
                 if (code == 0) {
                     dispatch({ type: USERINFO_DELETE_INFO, msg, id })
                 } else {
@@ -183,8 +183,8 @@ export function deleteInfo(id) {
 export function getOrgList() {
     return dispatch => {
         axios.get('/api/organization/select')
-            .then(res => {
-                const { code, msg,  data } = res.data
+            .then(response => {
+                const { code, msg,  data } = response.data
                 if (code == 0) {
                     dispatch({
                         type: USERINFO_GET_ORG_LIST,
@@ -203,8 +203,8 @@ export function getOrgList() {
 export function getGroupList() {
     return dispatch => {
         axios.get('/api/usergroup/select')
-            .then(res => {
-                const { code, msg,  data } = res.data
+            .then(response => {
+                const { code, msg,  data } = response.data
                 if (code == 0) {
                     dispatch({
                         type: USERINFO_GET_GROUP_LIST,

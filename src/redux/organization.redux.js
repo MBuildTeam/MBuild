@@ -95,8 +95,8 @@ export function getList(params) {
     return dispatch => {
         dispatch({ type: ORG_SEARCH_FORM, data: params })
         axios.get('/api/organization/select', { params })
-            .then(res => {
-                const { code, msg, resultcounts, data } = res.data
+            .then(response => {
+                const { code, msg, resultcounts, data } = response.data
                 if (code == 0) {
                     dispatch({
                         type: ORG_GET_LIST,
@@ -122,8 +122,8 @@ export function handleModalForm(formType, modalOpen, formData) {
 export function addInfo(info) {
     return dispatch => {
         axios.post('/api/organization/add', info)
-            .then(res => {
-                const { code, msg, data } = res.data
+            .then(response => {
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch({ type: ORG_ADD_INFO, msg, data })
                 } else {
@@ -139,8 +139,8 @@ export function addInfo(info) {
 export function editInfo(info) {
     return dispatch => {
         axios.post('/api/organization/update', info)
-            .then(res => {
-                const { code, msg, data } = res.data
+            .then(response => {
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch({ type: ORG_EDIT_INFO, msg, data })
                 } else {
@@ -156,8 +156,8 @@ export function editInfo(info) {
 export function deleteInfo(id) {
     return dispatch => {
         axios.get('/api/organization/delete', { params: { id } })
-            .then(res => {
-                const { code, msg } = res.data
+            .then(response => {
+                const { code, msg } = response.data
                 if (code == 0) {
                     dispatch({ type: ORG_DELETE_INFO, msg, id })
                 } else {

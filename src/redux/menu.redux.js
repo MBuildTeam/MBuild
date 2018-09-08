@@ -73,8 +73,8 @@ export function getList(params) {
     return dispatch => {
         // dispatch({ type: MENU_SEARCH_FORM, data: params })
         axios.get('/api/menu/select', { params })
-            .then(res => {
-                const { code, msg, data } = res.data
+            .then(response => {
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch({
                         type: MENU_GET_LIST,
@@ -97,8 +97,8 @@ export function handleModalForm(formType, modalOpen, formData) {
 export function addInfo(info) {
     return dispatch => {
         axios.post('/api/menu/add', info)
-            .then(res => {
-                const { code, msg, data } = res.data
+            .then(response => {
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch({ type: MENU_ADD_INFO, msg, data })
                 } else {
@@ -114,8 +114,8 @@ export function addInfo(info) {
 export function editInfo(info) {
     return dispatch => {
         axios.post('/api/menu/update', info)
-            .then(res => {
-                const { code, msg, data } = res.data
+            .then(response => {
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch({ type: MENU_EDIT_INFO, msg, data })
                 } else {
@@ -131,8 +131,8 @@ export function editInfo(info) {
 export function deleteInfo(id) {
     return dispatch => {
         axios.get('/api/menu/delete', { params: { id } })
-            .then(res => {
-                const { code, msg } = res.data
+            .then(response => {
+                const { code, msg } = response.data
                 if (code == 0) {
                     dispatch({ type: MENU_DELETE_INFO, msg, id })
                 } else {

@@ -100,8 +100,8 @@ export function getList(params) {
     return dispatch => {
         dispatch({ type: ROLEINFO_SEARCH_FORM, data: params })
         axios.get('/api/roleinfo/select', { params })
-            .then(res => {
-                const { code, msg, resultcounts, data } = res.data
+            .then(response => {
+                const { code, msg, resultcounts, data } = response.data
                 if (code == 0) {
                     dispatch({
                         type: ROLEINFO_GET_LIST,
@@ -127,8 +127,8 @@ export function handleModalForm(formType, modalOpen, formData) {
 export function addInfo(info) {
     return dispatch => {
         axios.post('/api/roleinfo/add', info)
-            .then(res => {
-                const { code, msg, data } = res.data
+            .then(response => {
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch({ type: ROLEINFO_ADD_INFO, msg, data })
                 } else {
@@ -144,8 +144,8 @@ export function addInfo(info) {
 export function editInfo(info) {
     return dispatch => {
         axios.post('/api/roleinfo/update', info)
-            .then(res => {
-                const { code, msg, data } = res.data
+            .then(response => {
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch({ type: ROLEINFO_EDIT_INFO, msg, data })
                 } else {
@@ -161,8 +161,8 @@ export function editInfo(info) {
 export function deleteInfo(id) {
     return dispatch => {
         axios.get('/api/roleinfo/delete',  { params: { id } })
-            .then(res => {
-                const { code, msg } = res.data
+            .then(response => {
+                const { code, msg } = response.data
                 if (code == 0) {
                     dispatch({ type: ROLEINFO_DELETE_INFO, msg, id })
                 } else {
@@ -178,8 +178,8 @@ export function deleteInfo(id) {
 export function getOperationList() {
     return dispatch => {
         axios.get('/api/operation/select')
-            .then(res => {
-                const { code, msg,  data } = res.data
+            .then(response => {
+                const { code, msg,  data } = response.data
                 if (code == 0) {
                     dispatch({
                         type: ROLEINFO_GET_OPERATION_LIST,

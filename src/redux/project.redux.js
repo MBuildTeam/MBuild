@@ -105,8 +105,8 @@ export function getList(params) {
     return dispatch => {
         dispatch({ type: PROJECT_SEARCH_FORM, data: params })
         axios.get('/api/project/select', { params })
-            .then(res => {
-                const { code, msg, resultcounts, data } = res.data
+            .then(response => {
+                const { code, msg, resultcounts, data } = response.data
                 if (code == 0) {
                     dispatch({
                         type: PROJECT_GET_LIST,
@@ -132,8 +132,8 @@ export function handleModalForm(formType, modalOpen, formData) {
 export function addInfo(info) {
     return dispatch => {
         axios.post('/api/project/add', info)
-            .then(res => {
-                const { code, msg, data } = res.data
+            .then(response => {
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch({ type: PROJECT_ADD_INFO, msg, data })
                 } else {
@@ -149,8 +149,8 @@ export function addInfo(info) {
 export function editInfo(info) {
     return dispatch => {
         axios.post('/api/project/update', info)
-            .then(res => {
-                const { code, msg, data } = res.data
+            .then(response => {
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch({ type: PROJECT_EDIT_INFO, msg, data })
                 } else {
@@ -166,8 +166,8 @@ export function editInfo(info) {
 export function deleteInfo(id) {
     return dispatch => {
         axios.get('/api/project/delete',  { params: { id } })
-            .then(res => {
-                const { code, msg } = res.data
+            .then(response => {
+                const { code, msg } = response.data
                 if (code == 0) {
                     dispatch({ type: PROJECT_DELETE_INFO, msg, id })
                 } else {
@@ -183,8 +183,8 @@ export function deleteInfo(id) {
 export function getOrgList() {
     return dispatch => {
         axios.get('/api/organization/select')
-            .then(res => {
-                const { code, msg,  data } = res.data
+            .then(response => {
+                const { code, msg,  data } = response.data
                 if (code == 0) {
                     dispatch({
                         type: PROJECT_GET_ORG_LIST,
@@ -203,8 +203,8 @@ export function getOrgList() {
 export function getUserinfoList() {
     return dispatch => {
         axios.get('/api/userinfo/select')
-            .then(res => {
-                const { code, msg,  data } = res.data
+            .then(response => {
+                const { code, msg,  data } = response.data
                 if (code == 0) {
                     dispatch({
                         type: PROJECT_GET_USERINFO_LIST,

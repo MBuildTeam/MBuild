@@ -16,39 +16,43 @@ const initState = {
     password: '',
     username: '',
     realname: '',
-    remember:true,
+    orgname:'',
+    remember: true,
     token: ''
 }
 
 export function auth(state = initState, action) {
     switch (action.type) {
         case AUTH_SUCCESS: {
-            const { userid, username, realname, token } = action.payload
+            const {token} = action.payload
+            const { userid, name, realname, orgname } = action.payload.userinfo
             return {
                 ...state,
                 isAuth: true,
                 userid,
-                username,
+                username:name,
                 realname,
+                orgname,
                 token,
                 msg: '',
-                redirectTo: '/home'
+                redirectTo: '/home',
+                menus:action.payload.Menus
             }
         }
         case ERROR_MSG: {
             return { ...state, msg: action.msg }
         }
-        case CLEAR_MSG:{
+        case CLEAR_MSG: {
             return { ...state, msg: '' }
         }
-        case LOGOUT:{
+        case LOGOUT: {
             return { ...initState, redirectTo: '/login' }
         }
         case AUTO_FORM: {
-            const { loginname,password,remember } = action.payload
+            const { loginname, password, remember } = action.payload
             return {
-                ...initState, 
-                username:loginname,
+                ...initState,
+                username: loginname,
                 password,
                 remember
             }
@@ -73,10 +77,11 @@ export function clearMsg() {
 export function login(formData) {
     const { loginname, password, remember } = formData
     return dispatch => {
-        axios.get('/api/login/submit', { params: { loginname, password } })
-            .then(res => {
-                const { code, message, data } = res.data
-                if (code == 0) {
+        axios.get(`/api/login/${loginname}/${password}`)
+            .then(response => {
+                console.log(response.data)
+                const { res, msg, data } = response.data
+                if (res == 0) {
                     //存入sessionStorage
                     sessionStorage.setItem('loginname', loginname)
                     sessionStorage.setItem('password', password)
@@ -86,7 +91,7 @@ export function login(formData) {
                     localStorage.setItem('password', password)
                     dispatch(authSuccess(data))
                 } else {
-                    dispatch(errorMsg(message))
+                    dispatch(errorMsg(msg))
                 }
             })
             .catch(e => {
@@ -97,10 +102,10 @@ export function login(formData) {
 
 export function authCheck(loginname, password) {
     return dispatch => {
-        axios.get('/api/login/submit', { params: { loginname, password } })
-            .then(res => {
-                const { code, message, data } = res.data
-                if (code == 0) {
+        axios.get(`/api/login/${loginname}/${password}`)
+            .then(response => {
+                const { res, msg, data  } = response.data
+                if (res == 0) {
                     dispatch(authSuccess(data))
                 } else {
                     dispatch({ type: LOGOUT })

@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
-import HeaderBar from './HeaderBar'
-import NewsList from './NewsList'
+import LeftMenu from './LeftMenu'
+import RightAttr from './RightAttr'
+import Center from './Center'
+
+import './Page.scss'
 
 class Page extends Component {
     render() {
         return (
-            <div>
-                <HeaderBar />
-                <NewsList />
+            <div className='edit-page'>
+                <LeftMenu />
+                <RightAttr />
+                <Center />
             </div>
         )
     }

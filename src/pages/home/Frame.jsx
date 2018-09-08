@@ -8,6 +8,7 @@ import HeadFixedMenuBar from './HeadFixedMenuBar'
 import HeadOpenedMenuBar from './HeadOpenedMenuBar'
 import HeadToolbar from './HeadToolbar'
 import './Frame.scss'
+import { relative } from 'path';
 
 const { Header, Sider, Content } = Layout;
 
@@ -53,7 +54,7 @@ class Frame extends React.PureComponent {
                         />
                         <MenuBar />
                     </Sider>
-                    <Content style={{ padding: '16px', background: '#fff', minHeight: 280 }}>
+                    <Content style={{ position: 'relative', padding: '16px', background: '#fff', minHeight: 280 }}>
                         {this.props.children}
                     </Content>
                 </Layout>

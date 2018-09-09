@@ -17,7 +17,6 @@ class MenuBar extends React.Component {
     componentDidMount() {
         setTimeout(
             ()=>{
-                alert(this.props.auth.userid)
                 this.props.getMenuList(this.props.auth.userid)
             },200
         )

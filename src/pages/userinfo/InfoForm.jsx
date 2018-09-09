@@ -206,7 +206,7 @@ class InfoForm extends PureComponent {
                         </Select>
                     )}
                 </Item>
-                <Item
+                {/* <Item
                     {...formItemLayout}
                     label='用户组'
                     hasFeedback
@@ -230,8 +230,8 @@ class InfoForm extends PureComponent {
                             }
                         </Select>
                     )}
-                </Item>
-            </Form>
+                </Item>*/}
+            </Form> 
         )
     }
 }

@@ -25,7 +25,7 @@ const { Item, create } = Form
 class SearchForm extends PureComponent {
     componentDidMount() {
         this.props.getOrgList()
-        this.props.getGroupList()
+        ////this.props.getGroupList()
         var values = this.props.searchForm
         //配入分页条件
         values.pagenum = this.props.pagination.current
@@ -99,7 +99,7 @@ class SearchForm extends PureComponent {
                             )}
                         </Item>
                     </Col>
-                    <Col span={6}>
+                    {/* <Col span={6}>
                         <Item label='用户组'>
                             {getFieldDecorator('groupid')(
                                 <Select
@@ -117,7 +117,7 @@ class SearchForm extends PureComponent {
                                 </Select>
                             )}
                         </Item>
-                    </Col>
+                    </Col> */}
                     <Col span={6} >
                         <Button type='primary' htmlType='submit'>查询</Button>
                         <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>重置</Button>

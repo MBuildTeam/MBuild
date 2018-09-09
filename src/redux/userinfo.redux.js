@@ -104,14 +104,15 @@ export function userinfo(state = initState, action) {
 export function getList(params) {
     return dispatch => {
         dispatch({ type: USERINFO_SEARCH_FORM, data: params })
-        axios.get('/api/userinfo/select', { params })
+        axios.post(`/api/userinfo/select/${params.pagenum}/${params.pagesize}`, params)
             .then(response => {
-                const { code, msg, resultcounts, data } = response.data
+                const { code, msg, data } = response.data
+                const {Total, Items} = data
                 if (code == 0) {
                     dispatch({
                         type: USERINFO_GET_LIST,
-                        payload: data,
-                        total: resultcounts,
+                        payload: Items,
+                        total: Total,
                         current: params.pagenum,
                         pageSize: params.pagesize
                     })
@@ -131,7 +132,7 @@ export function handleModalForm(formType, modalOpen, formData) {
 
 export function addInfo(info) {
     return dispatch => {
-        axios.post('/api/userinfo/add', info)
+        axios.post('/api/userinfo/save', info)
             .then(response => {
                 const { code, msg, data } = response.data
                 if (code == 0) {
@@ -148,7 +149,7 @@ export function addInfo(info) {
 
 export function editInfo(info) {
     return dispatch => {
-        axios.post('/api/userinfo/update', info)
+        axios.post('/api/userinfo/save', info)
             .then(response => {
                 const { code, msg, data } = response.data
                 if (code == 0) {

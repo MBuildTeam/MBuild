@@ -24,7 +24,7 @@ const { Item, create } = Form
 })
 class SearchForm extends PureComponent {
     componentDidMount() {
-        this.props.getRoleList()
+        //this.props.getRoleList()
         var values = this.props.searchForm
         //配入分页条件
         values.pagenum = this.props.pagination.current
@@ -63,11 +63,11 @@ class SearchForm extends PureComponent {
                         </Item>
                     </Col>
                     <Col span={6}>
-                        <Item label='类别'>
-                            {getFieldDecorator('type')(
+                        <Item label='状态'>
+                            {getFieldDecorator('status')(
                                 <Radio.Group>
-                                    <Radio value={1}>标准</Radio>
-                                    <Radio value={2}>非标准</Radio>
+                                    <Radio value={0}>启用</Radio>
+                                    <Radio value={1}>停用</Radio>
                                 </Radio.Group>
                             )}
                         </Item>

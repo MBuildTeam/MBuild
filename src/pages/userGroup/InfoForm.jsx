@@ -58,23 +58,57 @@ class InfoForm extends PureComponent {
                 </Item>
                 <Item
                     {...formItemLayout}
-                    label='类别'
+                    label='描述'
                     hasFeedback
                 >
-                    {getFieldDecorator('type', {
+                    {getFieldDecorator('description', {
                         rules: [{
-                            required: true, message: '类别不能为空',
+                            required: true, message: '描述不能为空',
+                        }],
+                    })(
+                        <Input />
+                    )}
+                </Item>
+                <Item
+                    {...formItemLayout}
+                    label='状态'
+                    hasFeedback
+                >
+                    {getFieldDecorator('status', {
+                        rules: [{
+                            required: true, message: '状态不能为空',
                         }],
                     })(
                         <Radio.Group>
-                            <Radio value={1}>标准</Radio>
-                            <Radio value={2}>非标准</Radio>
+                            <Radio value={0}>启用</Radio>
+                            <Radio value={1}>停用</Radio>
                         </Radio.Group>
                     )}
                 </Item>
                 <Item
                     {...formItemLayout}
                     label='关联角色'
+                    hasFeedback
+                >
+                    {getFieldDecorator('roleids')(
+                        <Select
+                            mode='multiple'
+                        >
+                            {
+                                this.props.roleList.map(v => {
+                                    return (
+                                        <Select.Option key={v.id} value={v.id}>
+                                            {v.name}
+                                        </Select.Option>
+                                    )
+                                })
+                            }
+                        </Select>
+                    )}
+                </Item>
+                <Item
+                    {...formItemLayout}
+                    label='关联用户'
                     hasFeedback
                 >
                     {getFieldDecorator('roleids')(

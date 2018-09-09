@@ -99,14 +99,15 @@ export function usergroup(state = initState, action) {
 export function getList(params) {
     return dispatch => {
         dispatch({ type: USERGROUP_SEARCH_FORM, data: params })
-        axios.get('/api/usergroup/select', { params })
+        axios.post(`/api/usergroup/select/${params.pagenum}/${params.pagesize}`, params)
             .then(response => {
-                const { code, msg, resultcounts, data } = response.data
+                const { code, msg, data } = response.data
+                const {Total, Items} = data
                 if (code == 0) {
                     dispatch({
                         type: USERGROUP_GET_LIST,
-                        payload: data,
-                        total: resultcounts,
+                        payload: Items,
+                        total: Total,
                         current: params.pagenum,
                         pageSize: params.pagesize
                     })

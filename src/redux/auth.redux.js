@@ -1,6 +1,7 @@
 USE_MOCK && require('../mock/userinfo')
 
 import axios from 'axios'
+import { getMenuList } from './framework.redux'
 
 const ERROR_MSG = 'ERROR_MSG'
 const CLEAR_MSG = 'CLEAR_MSG'
@@ -16,7 +17,7 @@ const initState = {
     password: '',
     username: '',
     realname: '',
-    orgname:'',
+    orgname: '',
     remember: true,
     token: ''
 }
@@ -24,13 +25,13 @@ const initState = {
 export function auth(state = initState, action) {
     switch (action.type) {
         case AUTH_SUCCESS: {
-            const {token} = action.payload
+            const { token } = action.payload
             const { userid, name, realname, orgname } = action.payload.userinfo
             return {
                 ...state,
                 isAuth: true,
                 userid,
-                username:name,
+                username: name,
                 realname,
                 orgname,
                 token,
@@ -62,6 +63,8 @@ export function auth(state = initState, action) {
 }
 
 function authSuccess(obj) {
+    //登录成功后获取菜单
+    getMenuList(obj.userinfo.userid)()
     return { type: AUTH_SUCCESS, payload: obj }
 }
 
@@ -102,7 +105,7 @@ export function authCheck(loginname, password) {
     return dispatch => {
         axios.get(`/api/login/${loginname}/${password}`)
             .then(response => {
-                const { code, msg, data  } = response.data
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch(authSuccess(data))
                 } else {

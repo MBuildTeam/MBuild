@@ -1,6 +1,7 @@
 USE_MOCK && require('../mock/userinfo')
 
 import axios from 'axios'
+import { getMenuList,alasUrlToCode ,FW_MENU_LIST,FW_SHOW_MSG} from './framework.redux'
 
 const ERROR_MSG = 'ERROR_MSG'
 const CLEAR_MSG = 'CLEAR_MSG'
@@ -105,6 +106,19 @@ export function authCheck(loginname, password) {
                 const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch(authSuccess(data))
+                    //获取菜单
+                    let userid = data.userinfo.userid
+                    axios.get(`/api/main/usermenulist/${userid}`)
+                        .then(response => {
+                            const { code, msg, data } = response.data
+                            if (code == 0) {
+                                //做一下转义，将服务器返回结果的url别名为code
+                                let aliasdata = alasUrlToCode(data.menus)
+                                dispatch({ type: FW_MENU_LIST, payload: aliasdata })
+                            } else {
+                                dispatch({ type: FW_SHOW_MSG, msg })
+                            }
+                        })
                 } else {
                     dispatch({ type: LOGOUT })
                 }

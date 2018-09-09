@@ -3,11 +3,11 @@ USE_MOCK && require('../mock/menu')
 import axios from 'axios'
 import _ from 'lodash'
 
-const FW_MENU_LIST = 'FW_MENU_LIST'
+export const FW_MENU_LIST = 'FW_MENU_LIST'
 const FW_OPEN_MENU = 'FW_OPEN_MENU'
 const FW_CLOSE_MENU = 'FW_CLOSE_MENU'
 const FW_ACTIVE_MENU = 'FW_ACTIVE_MENU'
-const FW_SHOW_MSG = 'FW_SHOW_MSG'
+export const FW_SHOW_MSG = 'FW_SHOW_MSG'
 
 const initState = {
     menus: [],
@@ -86,7 +86,7 @@ export function framework(state = initState, action) {
     }
 }
 
-function alasUrlToCode(data){
+export function alasUrlToCode(data){
     for(var i =0; i<data.length;i++){
         var children = data[i].children
         for(var j=0;j<children.length;j++){

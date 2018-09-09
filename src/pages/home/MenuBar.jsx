@@ -14,13 +14,13 @@ const MenuItem = Menu.Item
     { getMenuList, openMenu }
 )
 class MenuBar extends React.Component {
-    componentDidMount() {
-        setTimeout(
-            ()=>{
-                this.props.getMenuList(this.props.auth.userid)
-            },300
-        )
-    }
+    // componentDidMount() {
+    //     setTimeout(
+    //         ()=>{
+    //             this.props.getMenuList(this.props.auth.userid)
+    //         },300
+    //     )
+    // }
     handleClick = (e) => {
         this.props.openMenu(e.key)
     }

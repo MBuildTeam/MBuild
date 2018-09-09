@@ -78,7 +78,6 @@ export function login(formData) {
     return dispatch => {
         axios.get(`/api/login/${loginname}/${password}`)
             .then(response => {
-                console.log(response.data)
                 const { code, msg, data } = response.data
                 if (code == 0) {
                     //存入sessionStorage

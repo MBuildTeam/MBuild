@@ -15,7 +15,12 @@ const MenuItem = Menu.Item
 )
 class MenuBar extends React.Component {
     componentDidMount() {
-        this.props.getMenuList(this.props.auth.userid)
+        setTimeout(
+            ()=>{
+                alert(this.props.auth.userid)
+                this.props.getMenuList(this.props.auth.userid)
+            },200
+        )
     }
     handleClick = (e) => {
         this.props.openMenu(e.key)

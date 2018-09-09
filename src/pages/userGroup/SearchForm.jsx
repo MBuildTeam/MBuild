@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react'
 import { Form, Row, Col, Input, Button, Radio, Select } from 'antd'
 import { connect } from 'react-redux'
-import { getList, getRoleList } from '../../redux/usergroup.redux'
+import { getList, getRoleList,getUserList } from '../../redux/usergroup.redux'
 
 const { Item, create } = Form
 
 @connect(
     state => state.usergroup,
-    { getList, getRoleList }
+    { getList, getRoleList,getUserList }
 )
 @create({
     mapPropsToFields(props) {
@@ -24,7 +24,8 @@ const { Item, create } = Form
 })
 class SearchForm extends PureComponent {
     componentDidMount() {
-        //this.props.getRoleList()
+        this.props.getRoleList()
+        this.props.getUserList()
         var values = this.props.searchForm
         //配入分页条件
         values.pagenum = this.props.pagination.current

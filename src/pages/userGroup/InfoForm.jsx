@@ -111,12 +111,12 @@ class InfoForm extends PureComponent {
                     label='关联用户'
                     hasFeedback
                 >
-                    {getFieldDecorator('roleids')(
+                    {getFieldDecorator('userids')(
                         <Select
                             mode='multiple'
                         >
                             {
-                                this.props.roleList.map(v => {
+                                this.props.userList.map(v => {
                                     return (
                                         <Select.Option key={v.id} value={v.id}>
                                             {v.name}

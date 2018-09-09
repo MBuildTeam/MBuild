@@ -10,6 +10,7 @@ const USERGROUP_ADD_INFO = 'USERGROUP_ADD_INFO'
 const USERGROUP_EDIT_INFO = 'USERGROUP_EDIT_INFO'
 const USERGROUP_DELETE_INFO = 'USERGROUP_DELETE_INFO'
 const USERGROUP_SHOW_MSG = 'USERGROUP_SHOW_MSG'
+const USERGROUP_GET_USER_LIST = 'USERGROUP_GET_USER_LIST'
 const USERGROUP_GET_ROLE_LIST = 'USERGROUP_GET_ROLE_LIST'
 
 const initState = {
@@ -46,6 +47,9 @@ export function usergroup(state = initState, action) {
                 dataList: action.payload,
                 pagination: pagination
             }
+        }
+        case USERGROUP_GET_USER_LIST: {
+            return { ...state, userList: action.payload }
         }
         case USERGROUP_GET_ROLE_LIST: {
             return { ...state, roleList: action.payload }
@@ -122,12 +126,22 @@ export function getList(params) {
 }
 
 export function handleModalForm(formType, modalOpen, formData) {
+    if (modalOpen && formData) {
+        formData.roleids = []
+        formData.roles.forEach(item=>{
+            formData.roleids.push(item.id)
+        })
+        formData.userids = []
+        formData.users.forEach(item=>{
+            formData.userids.push(item.id)
+        })
+    }
     return { type: USERGROUP_HANDLE_MODAL_FORM, formType, modalOpen, formData }
 }
 
 export function addInfo(info) {
     return dispatch => {
-        axios.post('/api/usergroup/add', info)
+        axios.post('/api/usergroup/save', info)
             .then(response => {
                 const { code, msg, data } = response.data
                 if (code == 0) {
@@ -144,7 +158,7 @@ export function addInfo(info) {
 
 export function editInfo(info) {
     return dispatch => {
-        axios.post('/api/usergroup/update', info)
+        axios.post('/api/usergroup/save', info)
             .then(response => {
                 const { code, msg, data } = response.data
                 if (code == 0) {
@@ -166,6 +180,26 @@ export function deleteInfo(id) {
                 const { code, msg } = response.data
                 if (code == 0) {
                     dispatch({ type: USERGROUP_DELETE_INFO, msg, id })
+                } else {
+                    dispatch({ type: USERGROUP_SHOW_MSG, msg })
+                }
+            })
+            .catch(e => {
+
+            })
+    }
+}
+
+export function getUserList() {
+    return dispatch => {
+        axios.get('/api/userinfo/select')
+            .then(response => {
+                const { code, msg,  data } = response.data
+                if (code == 0) {
+                    dispatch({
+                        type: USERGROUP_GET_USER_LIST,
+                        payload: data,
+                    })
                 } else {
                     dispatch({ type: USERGROUP_SHOW_MSG, msg })
                 }

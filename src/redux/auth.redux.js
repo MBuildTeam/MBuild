@@ -79,8 +79,8 @@ export function login(formData) {
         axios.get(`/api/login/${loginname}/${password}`)
             .then(response => {
                 console.log(response.data)
-                const { res, msg, data } = response.data
-                if (res == 0) {
+                const { code, msg, data } = response.data
+                if (code == 0) {
                     //存入sessionStorage
                     sessionStorage.setItem('loginname', loginname)
                     sessionStorage.setItem('password', password)
@@ -103,8 +103,8 @@ export function authCheck(loginname, password) {
     return dispatch => {
         axios.get(`/api/login/${loginname}/${password}`)
             .then(response => {
-                const { res, msg, data  } = response.data
-                if (res == 0) {
+                const { code, msg, data  } = response.data
+                if (code == 0) {
                     dispatch(authSuccess(data))
                 } else {
                     dispatch({ type: LOGOUT })

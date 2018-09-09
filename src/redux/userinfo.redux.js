@@ -21,7 +21,7 @@ const initState = {
     dataList: [],
     msg: '',
     orgaList: [],
-    groupList:[],
+    groupList: [],
     pagination: {
         showSizeChanger: true,
         pageSize: 10,
@@ -107,7 +107,7 @@ export function getList(params) {
         axios.post(`/api/userinfo/select/${params.pagenum}/${params.pagesize}`, params)
             .then(response => {
                 const { code, msg, data } = response.data
-                const {Total, Items} = data
+                const { Total, Items } = data
                 if (code == 0) {
                     dispatch({
                         type: USERINFO_GET_LIST,
@@ -127,6 +127,9 @@ export function getList(params) {
 }
 
 export function handleModalForm(formType, modalOpen, formData) {
+    if (modalOpen && formData) {
+        formData.orgid = formData.orginfo.id
+    }
     return { type: USERINFO_HANDLE_MODAL_FORM, formType, modalOpen, formData }
 }
 
@@ -166,7 +169,7 @@ export function editInfo(info) {
 
 export function deleteInfo(id) {
     return dispatch => {
-        axios.get('/api/userinfo/delete',  { params: { id } })
+        axios.get('/api/userinfo/delete', { params: { id } })
             .then(response => {
                 const { code, msg } = response.data
                 if (code == 0) {
@@ -185,7 +188,7 @@ export function getOrgList() {
     return dispatch => {
         axios.get('/api/organization/select')
             .then(response => {
-                const { code, msg,  data } = response.data
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch({
                         type: USERINFO_GET_ORG_LIST,
@@ -205,7 +208,7 @@ export function getGroupList() {
     return dispatch => {
         axios.get('/api/usergroup/select')
             .then(response => {
-                const { code, msg,  data } = response.data
+                const { code, msg, data } = response.data
                 if (code == 0) {
                     dispatch({
                         type: USERINFO_GET_GROUP_LIST,

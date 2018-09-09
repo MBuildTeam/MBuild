@@ -4,6 +4,7 @@ import { message } from 'antd'
 //拦截请求
 axios.interceptors.request.use(function (config) {
     message.loading('加载中', 0)
+    config.url = 'http://54.223.186.188:8082'+config.url
     return config
 })
 

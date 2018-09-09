@@ -24,7 +24,7 @@ class App extends React.Component {
                             <Switch>
                                 <Route path='/login' component={Login} />
                                 <Route path='/home' component={Home} />
-                                <Route component={Home} />
+                                <Route component={Login} />
                             </Switch>
                         </React.Fragment>
                     </BrowserRouter>

@@ -16,13 +16,13 @@ config.devServer = {
     },
     open: true,
     historyApiFallback: true,
-    proxy: {
-        '/api': {
-            target: 'http://54.223.186.188:8082',
-            changeOrigin: true,
-            pathRewrite: { '^/api': '/api' }
-        }
-    }
+    // proxy: {
+    //     '/api': {
+    //         target: 'http://54.223.186.188:8082',
+    //         changeOrigin: true,
+    //         pathRewrite: { '^/api': '/api' }
+    //     }
+    // }
 }
 config.devtool = 'cheap-module-source-map'
 //样式热替换必须使用style-loader

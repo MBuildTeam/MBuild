@@ -1,7 +1,6 @@
 USE_MOCK && require('../mock/userinfo')
 
 import axios from 'axios'
-import { getMenuList } from './framework.redux'
 
 const ERROR_MSG = 'ERROR_MSG'
 const CLEAR_MSG = 'CLEAR_MSG'
@@ -63,8 +62,6 @@ export function auth(state = initState, action) {
 }
 
 function authSuccess(obj) {
-    //登录成功后获取菜单
-    getMenuList(obj.userinfo.userid)()
     return { type: AUTH_SUCCESS, payload: obj }
 }
 

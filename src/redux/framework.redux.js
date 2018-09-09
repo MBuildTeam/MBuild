@@ -97,6 +97,8 @@ function alasUrlToCode(data){
     return data
 }
 
+
+
 export function getMenuList(userid) {
     return dispatch => {
         axios.get(`/api/main/usermenulist/${userid}`)
@@ -104,7 +106,7 @@ export function getMenuList(userid) {
                 const { code, msg, data } = response.data
                 if (code == 0) {
                     //做一下转义，将服务器返回结果的url别名为code
-                    let aliasdata = alasUrlToCode(data.Menus)
+                    let aliasdata = alasUrlToCode(data.menus)
                     dispatch({ type: FW_MENU_LIST, payload: aliasdata })
                 } else {
                     dispatch({ type: FW_SHOW_MSG, msg })

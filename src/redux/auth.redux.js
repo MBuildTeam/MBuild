@@ -1,12 +1,12 @@
 USE_MOCK && require('../mock/userinfo')
 
 import axios from 'axios'
-import { getMenuList,alasUrlToCode ,FW_MENU_LIST,FW_SHOW_MSG} from './framework.redux'
+import { getMenuList, alasUrlToCode, FW_MENU_LIST, FW_SHOW_MSG } from './framework.redux'
 
 const ERROR_MSG = 'ERROR_MSG'
 const CLEAR_MSG = 'CLEAR_MSG'
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
-const LOGOUT = 'LOGOUT'
+export const LOGOUT = 'LOGOUT'
 const AUTO_FORM = 'AUTO_FORM'
 
 const initState = {
@@ -145,9 +145,7 @@ export function authCheck(loginname, password) {
 export function logout() {
     sessionStorage.removeItem('loginname')
     sessionStorage.removeItem('password')
-    //强制刷新，避免redux状态仍在，最后的return
-    location.reload()
-    // return { type: LOGOUT }
+    return { type: LOGOUT }
 }
 
 export function setForm(formData) {

@@ -2,6 +2,7 @@ USE_MOCK && require('../mock/organization')
 
 import axios from 'axios'
 import _ from 'lodash'
+import {LOGOUT} from './auth.redux'
 
 const ORG_SEARCH_FORM = 'ORG_SEARCH_FORM'
 const ORG_GET_LIST = 'ORG_GET_LIST'
@@ -85,6 +86,9 @@ export function organization(state = initState, action) {
                 dataList: dataList,
                 pagination: pagination
             }
+        }
+        case LOGOUT: {
+            return { ...initState }
         }
         default:
             return state

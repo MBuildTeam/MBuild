@@ -53,7 +53,7 @@ class DataTable extends PureComponent {
       key: 'createtime',
       align: 'center',
       render: text => {
-        return text.substr(0,10)
+        return text?text.substr(0,10):''
       }
     },
     {

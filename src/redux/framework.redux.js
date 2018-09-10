@@ -2,6 +2,7 @@ USE_MOCK && require('../mock/menu')
 
 import axios from 'axios'
 import _ from 'lodash'
+import {LOGOUT} from './auth.redux'
 
 export const FW_MENU_LIST = 'FW_MENU_LIST'
 const FW_OPEN_MENU = 'FW_OPEN_MENU'
@@ -80,6 +81,9 @@ export function framework(state = initState, action) {
                 ...state,
                 activeMenuCode: menuCode
             }
+        }
+        case LOGOUT: {
+            return { ...initState }
         }
         default:
             return state

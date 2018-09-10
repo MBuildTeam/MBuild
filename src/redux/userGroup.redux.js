@@ -3,6 +3,8 @@ USE_MOCK && require('../mock/usergroup')
 import axios from 'axios'
 import _ from 'lodash'
 
+import {LOGOUT} from './auth.redux'
+
 const USERGROUP_SEARCH_FORM = 'USERGROUP_SEARCH_FORM'
 const USERGROUP_GET_LIST = 'USERGROUP_GET_LIST'
 const USERGROUP_HANDLE_MODAL_FORM = 'USERGROUP_HANDLE_MODAL_FORM'
@@ -94,6 +96,9 @@ export function usergroup(state = initState, action) {
                 dataList: dataList,
                 pagination
             }
+        }
+        case LOGOUT: {
+            return { ...initState }
         }
         default:
             return state

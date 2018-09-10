@@ -58,6 +58,9 @@ class DataTable extends PureComponent {
       dataIndex: 'birthday',
       key: 'birthday',
       align: 'center',
+      render: text => {
+        return text?text.substr(0,10):''
+      }
     },
     {
       title: '岗位',
@@ -89,7 +92,7 @@ class DataTable extends PureComponent {
       key: 'createtime',
       align: 'center',
       render: text => {
-        return text.substr(0,10)
+        return text?text.substr(0,10):''
       }
     }, {
       title: (<div>操作<Divider type='vertical' />

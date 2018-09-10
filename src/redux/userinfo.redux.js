@@ -3,6 +3,8 @@ USE_MOCK && require('../mock/userinfo')
 import axios from 'axios'
 import _ from 'lodash'
 
+import {LOGOUT} from './auth.redux'
+
 const USERINFO_SEARCH_FORM = 'USERINFO_SEARCH_FORM'
 const USERINFO_GET_LIST = 'USERINFO_GET_LIST'
 const USERINFO_HANDLE_MODAL_FORM = 'USERINFO_HANDLE_MODAL_FORM'
@@ -95,6 +97,9 @@ export function userinfo(state = initState, action) {
                 dataList: dataList,
                 pagination
             }
+        }
+        case LOGOUT: {
+            return { ...initState }
         }
         default:
             return state

@@ -94,14 +94,15 @@ export function organization(state = initState, action) {
 export function getList(params) {
     return dispatch => {
         dispatch({ type: ORG_SEARCH_FORM, data: params })
-        axios.get('/api/organization/select', { params })
+        axios.post(`/api/organization/select/${params.pagenum}/${params.pagesize}`, params)
             .then(response => {
-                const { code, msg, resultcounts, data } = response.data
+                const { code, msg, data } = response.data
+                const {Total, Items} = data
                 if (code == 0) {
                     dispatch({
                         type: ORG_GET_LIST,
-                        payload: data,
-                        total: resultcounts,
+                        payload: Items,
+                        total: Total,
                         current: params.pagenum,
                         pageSize: params.pagesize
                     })
@@ -121,7 +122,7 @@ export function handleModalForm(formType, modalOpen, formData) {
 
 export function addInfo(info) {
     return dispatch => {
-        axios.post('/api/organization/add', info)
+        axios.post('/api/organization/save', info)
             .then(response => {
                 const { code, msg, data } = response.data
                 if (code == 0) {
@@ -138,7 +139,7 @@ export function addInfo(info) {
 
 export function editInfo(info) {
     return dispatch => {
-        axios.post('/api/organization/update', info)
+        axios.post('/api/organization/save', info)
             .then(response => {
                 const { code, msg, data } = response.data
                 if (code == 0) {

@@ -88,6 +88,9 @@ class DataTable extends PureComponent {
       dataIndex: 'createtime',
       key: 'createtime',
       align: 'center',
+      render: text => {
+        return text.substr(0,10)
+      }
     }, {
       title: (<div>操作<Divider type='vertical' />
         <a href='javascript:;' onClick={() => this.handleInfo('add', true)}>新增</a></div>),

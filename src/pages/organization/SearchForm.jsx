@@ -72,7 +72,7 @@ class SearchForm extends PureComponent {
                             )}
                         </Item>
                     </Col>
-                    <Col span={6}>
+                    {/* <Col span={6}>
                         <Item label='管理企业'>
                             {getFieldDecorator('ismanagerplatform')(
                                 <Radio.Group>
@@ -81,7 +81,7 @@ class SearchForm extends PureComponent {
                                 </Radio.Group>
                             )}
                         </Item>
-                    </Col>
+                    </Col> */}
                     <Col span={6}>
                         <Button type='primary' htmlType='submit'>查询</Button>
                         <Button style={{ marginLeft: 8 }} onClick={this.handleReset}>重置</Button>

@@ -73,14 +73,14 @@ class InfoForm extends PureComponent {
                     label='管理企业'
                     hasFeedback
                 >
-                    {getFieldDecorator('ismanagerplatform', {
+                    {getFieldDecorator('isplatform', {
                         rules: [{
                             required: true, message: '管理企业不能为空',
                         }],
                     })(
                         <RadioGroup>
-                            <Radio value={1}>是</Radio>
-                            <Radio value={0}>否</Radio>
+                            <Radio value={true}>是</Radio>
+                            <Radio value={false}>否</Radio>
                         </RadioGroup>
                     )}
                 </Item>

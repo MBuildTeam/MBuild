@@ -52,14 +52,17 @@ class DataTable extends PureComponent {
       dataIndex: 'createtime',
       key: 'createtime',
       align: 'center',
+      render: text => {
+        return text.substr(0,10)
+      }
     },
     {
       title: '管理企业',
-      dataIndex: 'ismanagerplatform',
-      key: 'ismanagerplatform',
+      dataIndex: 'isplatform',
+      key: 'isplatform',
       align: 'center',
       render: text => {
-        if (text === 1) {
+        if (text === true) {
           return (<div>是</div>)
         } else {
           return (<div>否</div>)
